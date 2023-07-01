@@ -1,5 +1,5 @@
 #test{
     width: fit-content;
-    border: solid 2px black;
+    border: solid 2px rgb(255, 0, 0);
     padding: 10px;
 }
