@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'App\Http\Controllers\UserController@index');
+Route::get('/carrinho', 'App\Http\Controllers\UserController@carrinho');
