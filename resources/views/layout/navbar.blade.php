@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+<nav class="navbar navbar-expand-lg fixed-top shadow-lg" id="navbar">
     <div class="container-fluid">
         <!-- Titulo do site no navbar -->
         <a class="navbar-brand text-light" href="{{url("/")}}">Cooperativas unidas</a>
@@ -12,10 +12,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Home</a>
+                    <a class="nav-link text-light" href="{{url("/")}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Carrinho</a>
+                    <a class="nav-link text-light" href="{{url("/carrinho")}}" onmouseover="offcanvasHoverCarrinho()">Carrinho</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="#">Favoritos</a>
@@ -27,13 +27,28 @@
 
             <!-- Formulário para a caixa de pesquisa -->
             <form class="d-flex" role="search">
-                <input class="form-control me-2" id="nav-input" type="search" placeholder="Procure por algum produto" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit"><img class="icons" src="{{asset("icons/search.svg")}}" alt="Pesquisa" style="fill: #FFFF;"></button>
+                <input class="form-control me-2" id="nav-input" type="search" placeholder="Procure por algum produto" aria-label="Search">                
+                <button class="btn btn-outline-light" type="submit">
+                    <img class="icons" src="{{asset("icons/search.svg")}}" alt="Pesquisa" style="fill: #FFFF;">
+                </button>
             </form>
         </div>
     </div>
 </nav>
 
+
+<script>
+    function offcanvasHoverCarrinho(){
+        let carrinhoOffcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasCarrinho'), {});
+        carrinhoOffcanvas.show();
+    }
+
+    var url = document.write(document.URL);
+    console.log(url)
+</script>
+
+
+@include('templates.offcanvas_carrinho')
 
 
 <style>
@@ -44,4 +59,9 @@
     #nav-input{
         width: 450px;
     }
+
+    .nav-link:hover {
+        text-decoration: underline;
+    }
+
 </style>

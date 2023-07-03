@@ -1,6 +1,6 @@
 <div class="card">
     <a href="#" class="text-light">
-        <h5 class="card-header text-center">Voltar para o início</h5>
+        <h5 class="card-header text-center">Voltar para o topo</h5>
     </a>
         <div class="card-body">
             <h5 class="card-title">Rodapé</h5>
