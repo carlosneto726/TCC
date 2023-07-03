@@ -48,11 +48,10 @@
 
         @for ($i = 0; $i < 10; $i++)
         
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <img class="categoria-img img-fluid" src="{{asset("images/square-placeholder.png")}}">
-        </div>
+            <div class="flex-categoria p-3 ms-1 me-1">
+                <img class="categoria-img img-fluid" src="{{asset("images/square-placeholder.png")}}">
+            </div>
         
-
         @endfor
 
     </div>
