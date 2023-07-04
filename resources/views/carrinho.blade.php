@@ -15,17 +15,20 @@
             
             @for ($i = 0; $i < 3; $i++)
                         
-                <div class="carrinho-item hstack">
-                    <div class="img-container m-1 p-2">
-                        <img class="item-img img-fluid" src="{{asset("images/square-placeholder.png")}}">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col">
+                        <img src="{{asset("images/square-placeholder.png")}}" class="img-fluid rounded-start">
                     </div>
-    
-                    <div class="d-flex w-100">
-                        <div class="flex-grow-1">produto</div> 
-                        <div class="me-3">quantidade</div> 
-                        <div class="me-3">preço</div> 
+                    <div class="col-md-8" >
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                        </div>
                     </div>
                 </div>
+            </div>
     
             @endfor
         </div>

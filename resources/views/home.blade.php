@@ -31,10 +31,16 @@
 
 <div class="ofertas mt-5">
     <h4 class="titulo-container mx-auto">Ofertas do dia</h4>
-    <div class="grid-container mx-auto p-3">
+    <div class="grid-container mx-auto mt-1">
 
-        @for ($i = 0; $i < 4; $i++)
-            @include('templates.home_produto')
+        @for ($i = 0; $i < 3; $i++)
+            <div class="grid-categoria container mt-1 p-3">
+        
+                @for ($j = 0; $j < 4; $j++)
+                    @include('templates.produto_card')
+                @endfor
+
+            </div>
         @endfor
     
     </div>
@@ -66,7 +72,13 @@
     <div class="grid-container mx-auto p-3">
 
         @for ($i = 0; $i < 16; $i++)
-            @include('templates.home_produto')
+            <div class="grid-categoria container p-1 mt-1 mb-1">
+        
+                @for ($j = 0; $j < 4; $j++)
+                    @include('templates.produto_card')
+                @endfor
+
+            </div>
         @endfor
     
     </div>
@@ -86,9 +98,15 @@
 
     .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
         width: 85%;
-        background-color: #B6B1B2;
+        background-color: var(--light-gray);
+    }
+
+    .grid-categoria {
+        background-color: var(--light-gray);
+        display: grid;
+        grid-template-columns: auto auto;
     }
 
     .titulo-container {
@@ -97,16 +115,13 @@
 
     .flex-container {
         width: 85%;
-        background-color: #B6B1B2;
+        background-color: var(--light-gray);
     }
 
     .flex-categoria {
-        background-color: #0A4400;        
+        background-color: var(--light-gray);        
     }
 
-    .categoria-img{
-        object-fit: contain;
-    }
 
 </style>
 

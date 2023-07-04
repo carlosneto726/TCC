@@ -21,13 +21,13 @@
                     <a class="nav-link text-light" href="#">Favoritos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Login/Cadastre-se</a>
+                    <a class="nav-link text-light" href="{{url("/login")}}">Login/Cadastre-se</a>
                 </li>
             </ul>
 
             <!-- Formulário para a caixa de pesquisa -->
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" id="nav-input" type="search" placeholder="Procure por algum produto" aria-label="Search">                
+            <form class="d-flex" role="search" method="GET" action="/pesquisa/?">
+                <input class="form-control me-2" id="nav-input" name="pesquisa" type="search" placeholder="Procure por algum produto" aria-label="Search">
                 <button class="btn btn-outline-light" type="submit">
                     <img class="icons" src="{{asset("icons/search.svg")}}" alt="Pesquisa" style="fill: #FFFF;">
                 </button>
@@ -42,9 +42,6 @@
         let carrinhoOffcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasCarrinho'), {});
         carrinhoOffcanvas.show();
     }
-
-    var url = document.write(document.URL);
-    console.log(url)
 </script>
 
 
