@@ -1,4 +1,13 @@
-
+:root {
+    --very-light-green: #deede5;
+    --light-green: #00FF33;
+    --green: #009241;
+    --dark-green: #0A4400;
+    --light-yellow: #FFFF61;
+    --dark-gray: #7E7E7E;
+    --gray: #B6B1B2;
+    --light-gray: #E6E6E6;
+  }
 
 /* Estilização do navbar */
 
