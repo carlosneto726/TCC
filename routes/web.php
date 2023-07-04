@@ -15,3 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\UserController@index');
 Route::get('/carrinho', 'App\Http\Controllers\UserController@carrinho');
+Route::get('/pesquisa', 'App\Http\Controllers\UserController@pesquisa');
+Route::get('/login', 'App\Http\Controllers\UserController@login');
+Route::get('/cadastro', 'App\Http\Controllers\UserController@cadastro');
+Route::get('/cadastro/usuario', 'App\Http\Controllers\UserController@cadastro_usuario');
+Route::get('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadastro_cooperativa');
+
