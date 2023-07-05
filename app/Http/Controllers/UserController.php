@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+session_start();
 
 class UserController extends Controller
 {
+
+    public function alert(string $mensagem, string $tipo){
+        $_SESSION["mensagem"] = $mensagem;
+        $_SESSION["tipo"] = $tipo;
+    }
+
     public function index(){
         return view('home');
     }
@@ -41,8 +48,17 @@ class UserController extends Controller
         $cpf = request("cpf");
         $senha = request("senha");
 
-        DB::insert('insert into tb_usuario (nome, email, endereco, CEP, senha, cpf) values (?, ?, ?, ?, ?, ?)', [$nome, $email, $endereco, $cep, $senha, $cpf]);
-        return redirect("/");
+        $usuarios = DB::select("select email, cpf from tb_usuarios where email = ? and cpf = ?;", [$email, $cpf]);
+
+        if(count($usuarios) > 0){
+            self::alert("E-mail ou CPF já cadastrado, tente novamente", "warning");
+            return redirect("/cadastro/usuario");
+        }else{
+            DB::insert('insert into tb_usuarios (nome, email, endereco, CEP, senha, cpf) values (?, ?, ?, ?, ?, ?);', 
+            [$nome, $email, $endereco, $cep, $senha, $cpf]);
+            self::alert("Usuário cadastrado com sucesso", "success");
+            return redirect("/login");
+        }
     }
 
 
@@ -52,6 +68,7 @@ class UserController extends Controller
         return view('login_cadastro.cadastro_cooperativa');
     }
 
+    // Função de que cadastra e valida a cooperativa
     public function cadastrar_cooperativa(){
         $nome = request("nome");
         $email = request("email");
@@ -68,9 +85,18 @@ class UserController extends Controller
         $descricao = request("descricao");
         $img = request("img");
 
-        DB::insert('insert into tb_cooperativa (nome, email, cep, endereco, tipo, cnpj, senha, tel1, tel2, whatsapp, instagram, facebook, descricao, img) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-        [$nome, $email, $cep, $endereco, $tipo, $cnpj, $senha, $tel1, $tel2, $whatsapp, $instagram, $facebook, $descricao , $img]);
-        return redirect("/");
+        $cooperativas = DB::select("select email, cnpj from tb_cooperativas where email = ? and cnpj = ?;", [$email, $cnpj]);
+
+        if(count($cooperativas) > 0){
+            self::alert("E-mail ou CNPJ já cadastrado, tente novamente", "warning");
+            return redirect("/cadastro/cooperativa");
+        }else{
+            DB::insert('insert into tb_cooperativas (nome, email, cep, endereco, tipo, cnpj, senha, tel1, tel2, whatsapp, instagram, facebook, descricao, img) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+            [$nome, $email, $cep, $endereco, $tipo, $cnpj, $senha, $tel1, $tel2, $whatsapp, $instagram, $facebook, $descricao , $img]);
+            self::alert("Cooperativa cadastrada com sucesso.", "success");
+            return redirect("/login");
+        }
+
     }
 
     public function pagina_produto(){
