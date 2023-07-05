@@ -11,13 +11,29 @@
     <title>Cooperativas Unidas</title>
 </head>
 <body>
-
     <header>
         @include('layout.navbar')
     </header>
 
     <section style="margin-top: 75px; margin-bottom: 55px;">
         @yield('content')
+
+        <!-- Botão que jsAlert que avisa quando um produto é adicionado ao carrinho -->
+        @if(@$_SESSION['mensagem'] != "")
+            <div class="position-fixed bottom-0 end-0 z-1 m-5">
+                <div id="alerta">
+                    <div class="alert alert-{{@$_SESSION['tipo']}} alert-dismissible" role="alert">
+                       <div>{{$_SESSION['mensagem']}}</div>
+                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            @php
+                @$_SESSION['mensagem'] = "";
+                @$_SESSION['tipo'] = "";
+            @endphp
+        @endif
+
     </section>
 
     <footer>
@@ -36,6 +52,6 @@
             deSVG('.icons', true);
         });
     </script>
-    
+
 </body>
 </html>
