@@ -24,8 +24,12 @@ Route::get('/cadastro', 'App\Http\Controllers\UserController@cadastro');
 Route::get('/cadastro/usuario', 'App\Http\Controllers\UserController@cadastro_usuario');
 Route::get('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadastro_cooperativa');
 
+Route::get('/sair', 'App\Http\Controllers\UserController@sair');
+
 Route::post('/cadastro/usuario', 'App\Http\Controllers\UserController@cadastrar_usuario');
 Route::post('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadastrar_cooperativa');
+
+Route::post('/login', 'App\Http\Controllers\UserController@validar_login');
 
 
 
