@@ -15,12 +15,6 @@
                     <a class="nav-link text-light" href="{{url("/")}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url("/carrinho")}}" onmouseover="offcanvasHoverCarrinho()">Carrinho</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Favoritos</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-light" href="{{url("/login")}}">Login/Cadastre-se</a>
                 </li>
             </ul>

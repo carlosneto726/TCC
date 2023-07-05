@@ -26,12 +26,11 @@
         </div>
 
         <hr>
-    
-        <a class="text-decoration-none text-dark" href="#">
-            <div>
-                <img class="cooperativa-img" src="{{asset("images/square-placeholder.png")}}">
-            </div>
-        </a>
+        
+        <div>
+            <img class="cooperativa-img" src="{{asset("images/square-placeholder.png")}}">
+        </div>
+        
     
         
     </div>

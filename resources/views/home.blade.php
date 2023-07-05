@@ -37,7 +37,10 @@
             <div class="grid-categoria container mt-1 p-3">
         
                 @for ($j = 0; $j < 4; $j++)
-                    @include('templates.produto_card')
+
+                    <a href="{{url("/produto?produto_id=$j")}}">
+                        @include('templates.produto_card')
+                    </a>
                 @endfor
 
             </div>
