@@ -31,6 +31,38 @@ class UserController extends Controller
         return view('login_cadastro.login');
     }
 
+    public function validar_login(){
+        $email = request("email");
+        $senha = request("senha");
+        $tipo_login = request("tipo_login");
+
+        if($tipo_login == "usuario"){
+            $usuarios = DB::select("select * from tb_usuarios where email = ? and senha = ?;", 
+            [$email, $senha]);
+
+            if(count($usuarios) == 0){
+                self::alert("E-mail ou senha incorreto(s)", "warning");
+                return redirect("/login");
+            }else{
+                setcookie("usuario", $usuarios[0]->nome, time() + (86400 * 30), "/");
+                self::alert("Login efetuado com sucesso!", "success");
+                return redirect("/");
+            }
+        }else if($tipo_login == "cooperativa"){
+            $cooperativas = DB::select("select * from tb_cooperativas where email = ? and senha = ?;", 
+            [$email, $senha]);
+
+            if(count($cooperativas) == 0){
+                self::alert("E-mail ou senha incorreto(s)", "warning");
+                return redirect("/login");
+            }else{
+                setcookie("cooperativa", $cooperativas[0]->nome, time() + (86400 * 30), "/");
+                self::alert("Login efetuado com sucesso!", "success");
+                return redirect("/");
+            }
+        }
+    }
+
     public function cadastro(){
         return view('login_cadastro.cadastro');
     }
@@ -107,6 +139,13 @@ class UserController extends Controller
     public function cooperativa(){
         $cooperativa_id = request("cooperativa_id");
         return view('cooperativa', compact('cooperativa_id'));
+    }
+
+
+    public function sair(){
+        setcookie("usuario", "", time() - 3600);
+        setcookie("cooperativa", "", time() - 3600);
+        return redirect("/");
     }
 
 }
