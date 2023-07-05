@@ -31,8 +31,6 @@
             <img class="cooperativa-img" src="{{asset("images/square-placeholder.png")}}">
         </div>
         
-    
-        
     </div>
 </div>
     

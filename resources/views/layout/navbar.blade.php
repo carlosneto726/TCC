@@ -11,12 +11,51 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                 <li class="nav-item">
                     <a class="nav-link text-light" href="{{url("/")}}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url("/login")}}">Login/Cadastre-se</a>
-                </li>
+                @if (isset($_COOKIE["usuario"]))
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Compras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Carrinho</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Favoritos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Sua conta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{url("/")}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{{url("/sair")}}">SAIR</a>
+                    </li>
+
+                @elseif (isset($_COOKIE["cooperativa"]))
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Caixa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Fórum</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Chats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{{url("/sair")}}">SAIR</a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{url("/login")}}">Login/Cadastre-se</a>
+                    </li>
+                @endif
             </ul>
 
             <!-- Formulário para a caixa de pesquisa -->
