@@ -4,7 +4,7 @@
     <h2 class="titulo-pagina mx-auto">Exibindo resultados para "<span class="fw-bold">{{$pesquisa}}"</span></h2>
 
     <div class="carrinho-container mx-auto">
-        <div class="horizontal-stack hstack mx-auto">
+        <div class="hstack mx-auto">
 
             <div class="resumo me-5 mb-auto p-3">
                 <h2>Ordernar por</h2>

@@ -26,7 +26,7 @@
                         <a class="nav-link text-light" href="#">Favoritos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Sua conta</a>
+                        <a class="nav-link text-light" href="#">Seu perfil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{{url("/")}}">Home</a>
@@ -47,6 +47,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="#">Chats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/cooperativa?cooperativa_id={{$_COOKIE['cooperativa']}}">Seu perfil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="{{url("/sair")}}">SAIR</a>
@@ -87,7 +90,7 @@
     }
 
     #nav-input{
-        width: 450px;
+        width: 280px;
     }
 
     .nav-link:hover {
