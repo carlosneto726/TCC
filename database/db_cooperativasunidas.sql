@@ -36,7 +36,7 @@ CREATE TABLE tb_usuarios
  UNIQUE (email,cpf)
 ); 
 
-CREATE TABLE tb_produto 
+CREATE TABLE tb_produtos
 ( 
  id INT PRIMARY KEY AUTO_INCREMENT,  
  id_cooperativa INT,  
@@ -53,7 +53,7 @@ CREATE TABLE tb_imagens_produto
  id INT PRIMARY KEY AUTO_INCREMENT,  
  url VARCHAR(255),  
  id_produto INT NOT NULL,  
- FOREIGN KEY(id_produto) REFERENCES tb_produto (id)
+ FOREIGN KEY(id_produto) REFERENCES tb_produtos (id)
 ); 
 
 CREATE TABLE tb_comentarioss_produto 
@@ -64,7 +64,7 @@ CREATE TABLE tb_comentarioss_produto
  id_produto INT,  
  id_usuario INT,  
  estrelas INT,  
- FOREIGN KEY(id_produto) REFERENCES tb_produto (id),
+ FOREIGN KEY(id_produto) REFERENCES tb_produtos (id),
  FOREIGN KEY(id_usuario) REFERENCES tb_usuarios (id)
 ); 
 
@@ -92,7 +92,7 @@ CREATE TABLE tb_itens_pedido
  id_produto INT,  
  id_pedido INT,  
  quantidade INT NOT NULL,  
- FOREIGN KEY(id_produto) REFERENCES tb_produto (id),
+ FOREIGN KEY(id_produto) REFERENCES tb_produtos (id),
  FOREIGN KEY(id_pedido) REFERENCES tb_pedidos (id)
 ); 
 
@@ -102,7 +102,7 @@ CREATE TABLE tb_carrinhos
  id_produto INT,  
  id_usuario INT NOT NULL,  
  quantidade INT,  
- FOREIGN KEY(id_produto) REFERENCES tb_produto (id),
+ FOREIGN KEY(id_produto) REFERENCES tb_produtos (id),
  FOREIGN KEY(id_usuario) REFERENCES tb_usuarios (id)
 ); 
 
@@ -112,7 +112,7 @@ CREATE TABLE tb_favoritos
  id_usuario INT NOT NULL,  
  id_produto INT,  
  FOREIGN KEY(id_usuario) REFERENCES tb_usuarios (id),
- FOREIGN KEY(id_produto) REFERENCES tb_produto (id)
+ FOREIGN KEY(id_produto) REFERENCES tb_produtos (id)
 ); 
 
 CREATE TABLE tb_caixa 
