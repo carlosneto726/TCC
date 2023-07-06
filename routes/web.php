@@ -31,5 +31,8 @@ Route::post('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadast
 
 Route::post('/login', 'App\Http\Controllers\UserController@validar_login');
 
+Route::post('/cadastrar/produto', 'App\Http\Controllers\UserController@cadastrar_produto');
+Route::post('/atualizar/produto', 'App\Http\Controllers\UserController@atualizar_produto');
+Route::post('/atualizar/cooperativa', 'App\Http\Controllers\UserController@atualizar_cooperativa');
 
 
