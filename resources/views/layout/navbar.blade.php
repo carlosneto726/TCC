@@ -43,7 +43,7 @@
                         <a class="nav-link text-light" href="#">Caixa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Fórum</a>
+                        <a class="nav-link text-light" href="{{url("/foruns")}}">Fórum</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="#">Chats</a>

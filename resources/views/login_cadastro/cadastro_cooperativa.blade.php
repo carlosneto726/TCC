@@ -5,7 +5,7 @@
 <h2 class="text-center">Cadastro de usuário comum</h2>
 
 <div class="login-container p-5 mx-auto">
-    <form class="hstack mx-auto" method="POST" action="/cadastro/cooperativa">
+    <form class="hstack mx-auto" method="POST" action="/cadastro/cooperativa" enctype="multipart/form-data">
         @csrf
         @method("POST")
 

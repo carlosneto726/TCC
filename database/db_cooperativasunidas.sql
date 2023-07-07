@@ -151,9 +151,11 @@ CREATE TABLE tb_comentarios
  comentario VARCHAR(255) NOT NULL,  
  id_forum INT NOT NULL,  
  id_cooperativa INT,  
+ id_parent INT,
  data DATE NOT NULL,  
  FOREIGN KEY(id_forum) REFERENCES tb_forum (id),
- FOREIGN KEY(id_cooperativa) REFERENCES tb_cooperativas (id)
+ FOREIGN KEY(id_cooperativa) REFERENCES tb_cooperativas (id),
+ FOREIGN KEY(id_parent) REFERENCES tb_comentarios (id)
 ); 
 
 CREATE TABLE tb_chat 
