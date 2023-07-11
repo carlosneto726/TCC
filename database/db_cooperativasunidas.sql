@@ -56,7 +56,7 @@ CREATE TABLE tb_imagens_produto
  FOREIGN KEY(id_produto) REFERENCES tb_produtos (id)
 ); 
 
-CREATE TABLE tb_comentarioss_produto 
+CREATE TABLE tb_comentarios_produto 
 ( 
  id INT PRIMARY KEY AUTO_INCREMENT,  
  titulo VARCHAR(255) NOT NULL,  

@@ -14,25 +14,29 @@ class Message implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $cooperativa_id;
+    //public $cooperativa_id;
     public $message;
-    public $data;
+    public $channel; 
+    public $event;
+    //public $data;
 
 
-    public function __construct($cooperativa_id, $message, $data)
+    public function __construct($message, $channel, $event)
     {
-        $this->cooperativa_id = $cooperativa_id;
+        //$this->cooperativa_id = $cooperativa_id;
         $this->message = $message;
-        $this->data = $data;
+        $this->channel = $channel;
+        $this->event = $event;
+        //$this->data = $data;
     }
   
     public function broadcastOn()
     {
-        return ['my-channel'];
+        return [$this->channel];
     }
   
     public function broadcastAs()
     {
-        return 'my-event';
+        return $this->event;
     }
 }
