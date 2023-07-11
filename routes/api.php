@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ForumController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('messages', [App\Http\Controllers\ChatController::class, 'message']);
-Route::post('coments', [App\Http\Controllers\Forum::class, 'addComment']);
+Route::post('messages', [ChatController::class, 'addMessage']);
+Route::post('coments', [ForumController::class, 'addComment']);
