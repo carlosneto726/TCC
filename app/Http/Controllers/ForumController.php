@@ -29,7 +29,7 @@ class Messages {
     }
 }
 
-class Forum extends Controller{
+class ForumController extends Controller{
     public $messages = array();
     public function addMessage($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId = null) {        
         $message = new Messages($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId);
@@ -103,6 +103,7 @@ class Forum extends Controller{
 
     public function viewForuns(){
         $orderby = request("orderby");
+        $pesquisa = request("pesquisa");
         $id_cooperativa = $_COOKIE['cooperativa'];
 
         if($orderby == "comentarios"){
@@ -120,8 +121,13 @@ class Forum extends Controller{
         }else if($orderby == "foruns_usuario"){
             $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id AND id_cooperativa = ?", [$id_cooperativa]);
 
+        }else if($pesquisa){
+            $foruns = DB::select("  SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao 
+                                    FROM tb_forum INNER JOIN tb_cooperativas 
+                                    WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+                                    AND titulo LIKE '%".$pesquisa."%'");
         }else{
-            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id");
+            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id ORDER BY tb_forum.data DESC");
         }        
         return view("cooperativa.foruns", compact('foruns', 'orderby'));
     }
@@ -151,7 +157,7 @@ class Forum extends Controller{
         DB::insert("INSERT INTO tb_comentarios (comentario, id_forum, id_cooperativa, id_parent, data) VALUES (?, ?, ?, ?, ?)",
         [$comentario, $id_forum, $id_cooperativa, $id_parent, $data]);
 
-        event(new Message($id_cooperativa, $comentario, $data));
+        //event(new Message($id_cooperativa, $comentario, $data));
 
         return redirect("/forum?forum=".$id_forum);
     }
