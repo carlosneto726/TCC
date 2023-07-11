@@ -6,15 +6,12 @@
         <div class="carousel-item active">
             <img src="{{asset("images/square-placeholder.png")}}" class="carrosel-img d-block w-50 mx-auto" alt="...">
         </div>
-
         <div class="carousel-item">
             <img src="{{asset("images/horizontal-placeholder.png")}}" class="carrosel-img d-block w-50 mx-auto" alt="...">
         </div>
-
         <div class="carousel-item">
             <img src="{{asset("images/vertical-placeholder.png")}}" class="carrosel-img d-block w-50 mx-auto" alt="...">
         </div>
-
     </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplaying" data-bs-slide="prev">
@@ -29,32 +26,64 @@
 </div>
 
 
-<div class="ofertas mt-5">
-    <h4 class="titulo-container mx-auto">Ofertas do dia</h4>
-    <div class="grid-container mx-auto mt-1">
 
-        @for ($i = 0; $i < 3; $i++)
-            <div class="grid-categoria container mt-1 p-3">
-        
-                @for ($j = 0; $j < 4; $j++)
 
-                    <a href="{{url("/produto?produto_id=$j")}}">
-                        @include('templates.produto_card')
-                    </a>
-                @endfor
 
-            </div>
-        @endfor
+
+
+<!-- Titulo -->
+<h3 class="mt-5 text-center">Produtos em destaque</h3>
+<!-- Container com todos os produtos da cooperativa -->
+<div class="grid-container rounded container mt-4 p-3" style="background-color: var(--light-gray);">
+    <!-- Listando os produtos do banco de dados -->
+    @foreach ($produtos as $produto)
+        <!-- Card dos produtos -->
+        <div class="card m-1 rounded">
+            <!-- Imagem do produto com o botão de editar -->
+            <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+
+            <div class="card-img-overlay" style="height: 200px;">
+
+                <div class="d-flex" style="height: 170px;">
+                    <div class="">
+                        @if (!isset($_COOKIE["cooperativa"]))
+                            <img class="me-1" src="{{asset("icons/heart-fill.svg")}}">        
+                        @endif
+                        <small class="text-dark bg-white p-1 rounded">QTD: {{$produto->quantidade}}</small>
+                    </div>
     
-    </div>
+
+                    <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
+                        <img src="{{asset("icons/thumbs-up.svg")}}">
+                        <span class="me-1">{{$produto->likes}}</span>
+                        <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
+                        <span>{{$produto->deslikes}}</span>
+                    </div>
+                </div>    
+            </div>
+
+            <a class="text-decoration-none text-dark" href="{{url("/produto?id_produto=".$produto->id)}}">
+                <div class="card-body p-2 rounded">
+                    <!-- Iformações do produto -->
+                    <div class="w-100 text-truncate">
+                        <span class="fs-3">{{$produto->nome}}</span>
+                    </div>
+                    <div class="w-100">
+                        <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
+                    </div>
+                    <div class="w-100 text-truncate">
+                        <span class="">{{$produto->descricao}}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    @endforeach
 </div>
 
 
-<div class="categorias-populares mt-5">
-    <h4 class="titulo-container mx-auto">Categorias populares</h4>
-
-    <div class="mx-auto flex-container d-flex justify-content-center p-3">
-
+<div class="mt-5">
+    <h3 class="mt-5 text-center">Categorias</h3>
+    <div class="container mx-auto d-flex justify-content-center p-3 mt-4 rounded" style="background-color: var(--light-gray);">
         @for ($i = 0; $i < 10; $i++)
         
             <div class="flex-categoria p-3 ms-1 me-1">
@@ -62,28 +91,6 @@
             </div>
         
         @endfor
-
-    </div>
-
-</div>
-
-
-
-
-<div class="produtos-mais-vendidos mt-5">
-    <h4 class="titulo-container mx-auto">Produtos mais vendidos</h4>
-    <div class="grid-container mx-auto p-3">
-
-        @for ($i = 0; $i < 16; $i++)
-            <div class="grid-categoria container p-1 mt-1 mb-1">
-        
-                @for ($j = 0; $j < 4; $j++)
-                    @include('templates.produto_card')
-                @endfor
-
-            </div>
-        @endfor
-    
     </div>
 </div>
 
@@ -101,30 +108,8 @@
 
     .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-        width: 85%;
-        background-color: var(--light-gray);
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
-
-    .grid-categoria {
-        background-color: var(--light-gray);
-        display: grid;
-        grid-template-columns: auto auto;
-    }
-
-    .titulo-container {
-        width: fit-content;
-    }
-
-    .flex-container {
-        width: 85%;
-        background-color: var(--light-gray);
-    }
-
-    .flex-categoria {
-        background-color: var(--light-gray);        
-    }
-
 
 </style>
 

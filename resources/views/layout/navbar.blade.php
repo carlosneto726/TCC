@@ -20,7 +20,7 @@
                         <a class="nav-link text-light" href="#">Compras</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Carrinho</a>
+                        <a class="nav-link text-light" href="{{url("/carrinho")}}">Carrinho</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="#">Favoritos</a>
@@ -29,7 +29,7 @@
                         <a class="nav-link text-light" href="#">Seu perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{url("/")}}">Home</a>
+                        <a class="nav-link text-light" href="{{url("/chats")}}">Chats</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="{{url("/sair")}}">SAIR</a>
@@ -37,7 +37,7 @@
 
                 @elseif (isset($_COOKIE["cooperativa"]))
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Pedidos</a>
+                        <a class="nav-link text-light" href="{{url("/pedidos")}}">Pedidos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="#">Caixa</a>
@@ -46,7 +46,7 @@
                         <a class="nav-link text-light" href="{{url("/foruns")}}">Fórum</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Chats</a>
+                        <a class="nav-link text-light" href="{{url("/chats")}}">Chats</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="/cooperativa?cooperativa_id={{$_COOKIE['cooperativa']}}">Seu perfil</a>
@@ -94,6 +94,10 @@
     }
 
     .nav-link:hover {
+        text-decoration: underline;
+    }
+
+    .a-link:hover {
         text-decoration: underline;
     }
 

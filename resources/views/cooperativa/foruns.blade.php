@@ -3,6 +3,10 @@
 
 <div class="container mb-3 p-3 rounded" style="background-color: var(--light-gray);">
     <h3 class="text-center">Fóruns</h3>
+    <form class="mt-3 d-flex" role="search" method="GET" action="/foruns">
+        <input class="form-control me-2" name="pesquisa" type="search" placeholder="Pesquise por um fórum" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
 
     <div class="hstack mx-auto">
 
@@ -40,7 +44,7 @@
                             <h1 class="modal-title fs-5" id="forumModalLabel">Criar um tópico</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="POST" action="forum/adicionar_forum">
+                        <form method="POST" action="{{url("/forum/adicionar_forum")}}">
                             @csrf
                             @method("POST")
                             <div class="modal-body">

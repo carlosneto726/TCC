@@ -1,12 +1,12 @@
 @extends('templates.template')
 @section('content')
 
-    <h2 class="titulo-pagina mx-auto">Exibindo resultados para "<span class="fw-bold">{{$pesquisa}}"</span></h2>
+    <h2 class="container">Exibindo resultados para "<span class="fw-bold">{{$pesquisa}}"</span></h2>
 
-    <div class="carrinho-container mx-auto">
+    <div class="container mt-5">
         <div class="hstack mx-auto">
 
-            <div class="resumo me-5 mb-auto p-3">
+            <div class="me-3 mb-auto p-3 rounded" style="width: 350px; background-color: var(--light-gray);">
                 <h2>Ordernar por</h2>
                 <div class="mt-4">
                     <span>preço</span> <br>
@@ -18,10 +18,51 @@
                 </div>
             </div>
             
-            <div class="grid-categoria container me-3 p-3 mb-auto">
-                @for ($i = 0; $i < 7; $i++)
-                    @include('templates.produto_card')
-                @endfor
+            <div class="grid-container container p-3 mb-auto rounded" style="background-color: var(--light-gray);">
+                @foreach ($produtos as $produto)
+                    <!-- Card dos produtos -->
+                    <div class="card m-1 rounded" style="max-width: 350px;">
+                        <!-- Imagem do produto com o botão de editar -->
+                        <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+            
+                        <div class="card-img-overlay" style="height: 200px;">
+            
+                            <div class="d-flex" style="height: 170px;">
+                                <div class="">
+                                    @if (!isset($_COOKIE["cooperativa"]))
+                                        <img class="me-1" src="{{asset("icons/heart-fill.svg")}}">        
+                                    @endif
+                                    <small class="text-dark bg-white p-1 rounded">QTD: {{$produto->quantidade}}</small>
+                                </div>
+                
+                                <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: var(--dark-gray);">
+                                    @for ($i = 0; $i < 5; $i++)
+                                        @if ($i >= $produto->estrelas)
+                                            <img src="{{asset("icons/star.svg")}}">
+                                        @else
+                                            <img src="{{asset("icons/star-fill.svg")}}">
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>    
+                        </div>
+            
+                        <a class="text-decoration-none text-dark" href="{{url("/produto?produto_id=".$produto->id)}}">
+                            <div class="card-body p-2 rounded">
+                                <!-- Iformações do produto -->
+                                <div class="w-100 text-truncate">
+                                    <span class="fs-3">{{$produto->nome}}</span>
+                                </div>
+                                <div class="w-100">
+                                    <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
+                                </div>
+                                <div class="w-100 text-truncate">
+                                    <span class="">{{$produto->descricao}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -29,47 +70,9 @@
 
 <style>
 
-    .titulo-pagina{
-        width: 85%;
-    }
-
-    .carrinho-container{
-        width: 85%;
-    }
-
-    .grid-categoria {
-        width: 95%;
-        background-color: var(--gray);
+    .grid-container {
         display: grid;
-        grid-template-columns: auto auto auto auto;
-    }
-
-    .carrinho-item{
-        width: 100%;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        background-color: #009241;
-        color: black;
-    }
-
-    .item-img{
-        object-fit: contain;
-        height: 100%;
-    }
-
-    .img-container{
-        height: 100%;
-        width: 500px;
-    }
-    
-    .item-info{
-        height: 100%;
-        width: 100%;
-    }
-
-    .resumo{
-        width: 400px;
-        background-color: #B6B1B2;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 
     #btn-comprar{

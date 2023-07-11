@@ -246,14 +246,11 @@
                         @if (!isset($_COOKIE["cooperativa"]))
                             <img class="me-1" src="{{asset("icons/heart-fill.svg")}}"> Favoritar <br>
                         @endif
-                        <div class="ms-auto">
-                            @for ($i = 0; $i < 5; $i++)
-                                @if ($i >= $produto->estrelas)
-                                    <img src="{{asset("icons/star.svg")}}">
-                                @else
-                                    <img src="{{asset("icons/star-fill.svg")}}">
-                                @endif
-                            @endfor
+                        <div class="ms-auto d-flex">
+                            <img src="{{asset("icons/thumbs-up.svg")}}">
+                            <span>{{$produto->likes}}</span>
+                            <img class="ms-auto" src="{{asset("icons/thumbs-down.svg")}}">
+                            <span>{{$produto->deslikes}}</span>
                         </div>
 
                         @if (isset($_COOKIE["cooperativa"]))
