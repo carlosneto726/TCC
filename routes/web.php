@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\RelatoriosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ChatController;
@@ -33,7 +34,7 @@ Route::get('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadastr
 Route::post('/cadastro/usuario', 'App\Http\Controllers\UserController@cadastrar_usuario');
 Route::post('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadastrar_cooperativa');
 // Rotas sobre forum
-Route::get('/forum/adicionar_forum', [ForumController::class, 'createTopic']);
+Route::post('/forum/adicionar_forum', [ForumController::class, 'createTopic']);
 Route::get('/forum', [ForumController::class, 'viewForum']);
 Route::get('/foruns', [ForumController::class, 'viewForuns']);
 // Rotas sobre o chat
@@ -51,11 +52,19 @@ Route::post('/carrinho/del', [CarrinhoController::class, 'delProduto']);
 Route::post('/carrinho/finalizar', [CarrinhoController::class, 'endCarrinho']);
 // Rotas sobre pedidos
 Route::get('/pedidos', [PedidosController::class, 'viewPedidos']);
-
+Route::get('/pedidos/concluir', [PedidosController::class, 'concluirPedido']);
+Route::get('/pedidos/cancelar', [PedidosController::class, 'cancelarPedido']);
+Route::get('/pedidos/chat', [PedidosController::class, 'chatCliente']);
+// Rotas sobre relatorios 
+Route::get('/relatorios', [RelatoriosController::class, 'viewRelatorios']);
 
 Route::get('/teste', [UserController::class, 'generateChart']);
 Route::post('/avaliar', [UserController::class, 'avaliarProduto']);
 Route::get('/teste', [UserController::class, 'generateChart']);
+
+
+
+
 
 
 

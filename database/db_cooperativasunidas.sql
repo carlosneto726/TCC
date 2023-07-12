@@ -76,21 +76,20 @@ CREATE TABLE tb_carrosel_cooperativa
  FOREIGN KEY(id_cooperativa) REFERENCES tb_cooperativas (id)
 ); 
 
-CREATE TABLE tb_pedidos 
-( 
- id INT PRIMARY KEY AUTO_INCREMENT,  
- id_usuario INT NOT NULL,  
- preco FLOAT NOT NULL,  
- data DATE NOT NULL,  
- status INT,  
- FOREIGN KEY(id_usuario) REFERENCES tb_usuarios (id)
-); 
+CREATE TABLE tb_pedidos
+(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    data DATE,
+    status char,
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id)
+);
 
 CREATE TABLE tb_itens_pedido 
 ( 
  id INT PRIMARY KEY AUTO_INCREMENT,  
- id_produto INT,  
- id_pedido INT,  
+ id_produto INT NOT NULL,  
+ id_pedido INT NOT NULL,  
  quantidade INT NOT NULL,  
  FOREIGN KEY(id_produto) REFERENCES tb_produtos (id),
  FOREIGN KEY(id_pedido) REFERENCES tb_pedidos (id)
