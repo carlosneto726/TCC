@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AlertController;
 
-
+session_start();
 class Messages {
     public $id;
     public $id_cooperativa;

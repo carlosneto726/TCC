@@ -41,8 +41,10 @@ class ChatController extends Controller
     }
 
 
-    public function viewChat(){
-        $id_chat = request("chat");
+    public function viewChat($id_chat = null){
+        if($id_chat == null){
+            $id_chat = request("chat");
+        }
 
         $query = "  SELECT *, tb_cooperativas.nome as cnome, tb_usuarios.nome as unome
                     FROM tb_chats 
@@ -81,4 +83,17 @@ class ChatController extends Controller
 
     }
 
+    public function createChat($id_cooperativa, $id_usuario){
+        $chats = DB::select("SELECT id FROM tb_chats WHERE id_cooperativa = ? AND id_usuario = ?",
+        [$id_cooperativa, $id_usuario]);
+
+        if(count($chats) == 0){
+            DB::insert("INSERT INTO tb_chats (id_cooperativa, id_usuario) VALUES (?, ?)", 
+            [$id_cooperativa, $id_usuario]);
+            $id_chat = DB::getPdo()->lastInsertId();
+            return $id_chat;
+        }else{
+            return $chats[0]->id;
+        }
+    }
 }

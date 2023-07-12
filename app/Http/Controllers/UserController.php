@@ -274,64 +274,6 @@ class UserController extends Controller
         AlertController::alert("Cooperativa atualizada com sucesso.", "success");
         return redirect("/cooperativa?cooperativa_id=".$_COOKIE["cooperativa"]);
     }
-
-
-
-
-
-    public function generateChart()
-    {
-
-
-
-
-
-        
-
-        // 1. Inserir o pedido na tabela tb_pedido
-        DB::insert("INSERT INTO tb_pedidos (id_usuario, data, status) VALUES (1, NOW(), 0);");
-
-        // 2. Recuperar o valor do id_pedido inserido
-        $idPedido = DB::getPdo()->lastInsertId();
-
-        error_log($idPedido);
-
-
-        
-
-        //DB::insert("INSERT INTO tb_pedidos (id_usuario, data, status) VALUES (1, NOW(), 0);");
-        //DB::statement("SET @id_pedido = LAST_INSERT_ID()");
-
-        //$chartUrl = DB::select("SELECT @id_pedido;");
-        //return view('teste', compact('chartUrl'));
-        
-
-        /*
-
-        $data = [
-            'type' => 'bar',
-            'data' => [
-                'labels' => ['Janeiro', 'Fevereiro', 'Março', 'Abril'],
-                'datasets' => [
-                    [
-                        'label' => 'Vendas',
-                        'data' => [120, 200, 150, 80],
-                        'backgroundColor' => 'rgba(75, 192, 192, 0.2)',
-                        'borderColor' => 'rgba(75, 192, 192, 1)',
-                        'borderWidth' => 1,
-                    ],
-                ],
-            ],
-        ];
-    
-        $chartUrl = 'https://quickchart.io/chart?' . http_build_query(['c' => json_encode($data)]);
-        return view('teste', compact('chartUrl'));
-
-        */
-    
-        // Use $chartUrl para exibir o gráfico em seu site ou salvá-lo em algum lugar
-        //return view('teste', compact('chartUrl'));
-    }
-    
+   
 
 }

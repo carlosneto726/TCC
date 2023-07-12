@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AlertController;
 
+session_start();
+
 class CarrinhoController extends Controller
 {
     public function viewCarrinho(){
@@ -74,21 +76,36 @@ class CarrinhoController extends Controller
 
     public function endCarrinho(){
         $id_usuario = $_COOKIE['usuario'];
-        $valor_total = 0;
-        $produtos = DB::select("    SELECT *, tb_carrinhos.quantidade as qtd, tb_carrinhos.id as carrinhoid, 
-                                    tb_produtos.id as pid FROM tb_carrinhos 
-                                    INNER JOIN tb_produtos ON tb_carrinhos.id_produto = tb_produtos.id
-                                    WHERE id_usuario = ?"
-        , [$id_usuario]);
 
-        DB::insert("INSERT INTO tb_pedidos (id_usuario, status, data) VALUES (?, ?, NOW())", 
-        [$id_usuario, 0]);
+        $id_cooperativas = DB::select(" SELECT tb_cooperativas.id
+                                        FROM tb_cooperativas
+                                        WHERE tb_cooperativas.id IN 
+                                            (SELECT tb_produtos.id_cooperativa 
+                                            FROM tb_produtos WHERE tb_produtos.id IN
+                                                (SELECT tb_carrinhos.id_produto 
+                                                FROM tb_carrinhos WHERE tb_carrinhos.id_usuario = ?)
+                                                );
+        ", [$id_usuario]);
 
-        $id_pedido = DB::getPdo()->lastInsertId();
+        foreach ($id_cooperativas as $id_cooperativa) {
+            $produtos = DB::select("    SELECT *, 
+                                        tb_carrinhos.quantidade as qtd, 
+                                        tb_carrinhos.id as carrinhoid, 
+                                        tb_produtos.id as pid 
+                                        FROM tb_carrinhos 
+                                        INNER JOIN tb_produtos ON tb_carrinhos.id_produto = tb_produtos.id
+                                        WHERE id_usuario = ? AND id_cooperativa = ?;", 
+            [$id_usuario, $id_cooperativa->id]);
 
-        foreach ($produtos as $produto) {
-            DB::insert("INSERT INTO tb_itens_pedido (id_produto, id_pedido, quantidade) VALUES (?, ?, ?)", 
-            [$produto->pid, $id_pedido, $produto->qtd]);
+            DB::insert("INSERT INTO tb_pedidos (id_usuario, status, data) VALUES (?, ?, NOW())", 
+            [$id_usuario, 0]);
+
+            $id_pedido = DB::getPdo()->lastInsertId();
+
+            foreach ($produtos as $produto) {
+                DB::insert("INSERT INTO tb_itens_pedido (id_produto, id_pedido, quantidade) VALUES (?, ?, ?)", 
+                [$produto->pid, $id_pedido, $produto->qtd]);
+            }
         }
 
         DB::delete("DELETE FROM tb_carrinhos WHERE id_usuario = ?", [$id_usuario]);
