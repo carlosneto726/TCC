@@ -80,9 +80,11 @@ CREATE TABLE tb_pedidos
 (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
+    id_cooperativa INT NOT NULL,
     data DATE,
     status char,
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id)
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id),
+    FOREIGN KEY (id_cooperativa) REFERENCES tb_cooperativas(id)
 );
 
 CREATE TABLE tb_itens_pedido 
@@ -141,6 +143,7 @@ CREATE TABLE tb_vendas
  id INT PRIMARY KEY AUTO_INCREMENT,  
  id_pedido INT NOT NULL,  
  data DATE NOT NULL,  
+ preco_total FLOAT NOT NULL,  
  FOREIGN KEY(id_pedido) REFERENCES tb_pedidos (id)
 ); 
 

@@ -32,9 +32,9 @@ class PedidosController extends Controller
             }else{
                 DB::update("UPDATE tb_produtos SET quantidade = ? WHERE id = ?", [($qtd - $qtd_pedido_produto), $produto[0]->id]);
                 DB::update("UPDATE tb_pedidos SET status = ? WHERE id = ?", [1, $id_pedido]);
-                DB::insert("INSERT INTO tb_vendas (id_pedido, data) VALUES (?, NOW());", [$id_pedido]);
             }
         }
+        DB::insert("INSERT INTO tb_vendas (id_pedido, data, preco_total) VALUES (?, NOW(), ?);", [$id_pedido, $pedido[0]->preco_total]);
         AlertController::alert("Pedido concluído.", "success");
         return redirect("/pedidos");
     }

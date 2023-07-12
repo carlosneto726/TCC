@@ -1,10 +1,9 @@
 @extends('templates.template')
 @section('content')
 
-<img src="{{$chartUrl}}">
-
-
-
+<div class="container">
+    <img class="mx-auto img-fluid" src="{{$chartUrl}}" style="border: solid 2px black;">
+</div>
 
 
 @endsection
