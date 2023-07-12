@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\CarrinhoController;
-use App\Http\Controllers\PedidosController;
-use App\Http\Controllers\RelatoriosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\RelatoriosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,11 +56,14 @@ Route::get('/pedidos/concluir', [PedidosController::class, 'concluirPedido']);
 Route::get('/pedidos/cancelar', [PedidosController::class, 'cancelarPedido']);
 Route::get('/pedidos/chat', [PedidosController::class, 'chatCliente']);
 // Rotas sobre relatorios 
-Route::get('/relatorios', [RelatoriosController::class, 'viewRelatorios']);
+Route::get('/relatorios', [RelatoriosController::class, 'viewVendas']);
+Route::get('/relatorios/vendas', [RelatoriosController::class, 'viewVendas']);
+Route::get('/relatorios/maisvendidos', [RelatoriosController::class, 'viewMaisVendidos']);
+Route::get('/relatorios/receita', [RelatoriosController::class, 'viewReceita']);
+Route::get('/relatorios/locaisvendidos', [RelatoriosController::class, 'viewLocaisVendidos']);
 
-Route::get('/teste', [UserController::class, 'generateChart']);
 Route::post('/avaliar', [UserController::class, 'avaliarProduto']);
-Route::get('/teste', [UserController::class, 'generateChart']);
+Route::get('/teste', [UserController::class, 'teste']);
 
 
 
