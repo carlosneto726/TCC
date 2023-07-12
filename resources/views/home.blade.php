@@ -40,7 +40,7 @@
         <!-- Card dos produtos -->
         <div class="card m-1 rounded">
             <!-- Imagem do produto com o botão de editar -->
-            <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+            <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: cover;">
 
             <div class="card-img-overlay" style="height: 200px;">
 
