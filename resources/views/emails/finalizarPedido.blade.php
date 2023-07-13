@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seu pedido foi {{$dados['status']}}</title>
+</head>
+<body>
+    <h1>Olá!</h1>
+    <p>O seu pedido foi {{$dados['status']}}</p>
+
+    <p>
+        Contate o vendedor por este <a href="{{$dados['chat']}}">link</a>
+    </p>
+
+    <h3>Seu pedido</h3>
+
+    @foreach ($dados['produtos_pedido'] as $produto)
+        <div style="margin-bottom: 50px;">
+            <h4>{{$produto->pnome}}</h4>
+            <img src="{{asset("http://127.0.0.1:8000/storage/".$produto->pimg)}}">
+            R$ {{number_format($produto->ppreco,2,",",".")}}
+            <br/>
+            QTD: {{$produto->pqtd}}
+        </div>
+    @endforeach
+
+    <ul>
+        <li>Nome: {{ $dados['nome'] }}</li>
+        <li>Email: {{ $dados['email'] }}</li>
+    </ul>
+    
+    <p>Obrigado por usar a Cooperativas Unidas Online!</p>
+
+    <small>Este email foi gerado e enviado automáticamente</small>
+</body>
+</html>

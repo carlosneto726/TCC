@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AlertController;
 use App\Http\Controllers\ChatController;
+use App\Mail\PedidoEmail;
+use Illuminate\Support\Facades\Mail;
 
 session_start();
 class PedidosController extends Controller
@@ -20,6 +22,7 @@ class PedidosController extends Controller
         $id_pedido = request("id_pedido");
         $query = "AND tb_pedidos.id =".$id_pedido;
         $pedido = $this->getPedidos("= 0", $query);
+        $id_cooperativa = $_COOKIE['cooperativa'];
 
         foreach ($pedido[0]->produtos as $pedido_produto) {
             $produto = DB::select("SELECT * FROM tb_produtos WHERE tb_produtos.id = ?", [$pedido_produto->pid]);
@@ -35,6 +38,36 @@ class PedidosController extends Controller
             }
         }
         DB::insert("INSERT INTO tb_vendas (id_pedido, data, preco_total) VALUES (?, NOW(), ?);", [$id_pedido, $pedido[0]->preco_total]);
+
+        $email_usuario = DB::select("   SELECT tb_usuarios.email 
+                                        FROM tb_usuarios
+                                        WHERE tb_usuarios.id IN 
+                                            (SELECT tb_pedidos.id_usuario
+                                            FROM tb_pedidos WHERE tb_pedidos.id = ?);", 
+        [$id_pedido]);
+
+        $produtos_pedido = DB::select(" SELECT tb_produtos.nome as pnome, 
+                                            tb_produtos.imagem as pimg, 
+                                            tb_produtos.preco as ppreco,
+                                            tb_produtos.id as pid,
+                                            tb_itens_pedido.quantidade as pqtd
+                                            FROM tb_itens_pedido
+                                            INNER JOIN tb_produtos ON tb_itens_pedido.id_produto = tb_produtos.id
+                                            WHERE tb_itens_pedido.id_pedido = ? AND tb_produtos.id_cooperativa = ?;", 
+        [$id_pedido, $id_cooperativa]);
+        $nome_cooperativa = DB::select("SELECT tb_cooperativas.nome FROM tb_cooperativas WHERE tb_cooperativas.id = ?", [$id_cooperativa]);
+
+        $dados = [
+            'nome' => $nome_cooperativa[0]->nome,
+            'email' => $email_usuario[0]->email,
+            'chat' => 'http://127.0.0.1:8000/pedidos/chat?id_pedido='.$id_pedido,
+            'status' => 'Concluído',
+            'produtos_pedido' => [],
+        ];
+
+        $dados['produtos_pedido'] = $produtos_pedido;
+    
+        Mail::to('carlosneto726@gmail.com')->send(new PedidoEmail($dados, 'finalizarPedido'));
         AlertController::alert("Pedido concluído.", "success");
         return redirect("/pedidos");
     }

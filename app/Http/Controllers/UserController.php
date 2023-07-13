@@ -12,6 +12,9 @@ use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\Storage;
 use View;
 
+use App\Mail\ExemploEmail;
+use Illuminate\Support\Facades\Mail;
+
 session_start();
 
 class UserController extends Controller
@@ -22,9 +25,6 @@ class UserController extends Controller
         $produtos = DB::select("SELECT * FROM tb_produtos WHERE quantidade > 100 ORDER BY likes DESC");
         return view('home', compact('produtos'));
     }
-
-
-
 
 
     public function pesquisa(){
@@ -274,25 +274,5 @@ class UserController extends Controller
         AlertController::alert("Cooperativa atualizada com sucesso.", "success");
         return redirect("/cooperativa?cooperativa_id=".$_COOKIE["cooperativa"]);
     }
-
-
-
-
-
-    public function teste(){
-        $opts = [
-            "http" => [
-                "method" => "GET",
-                "header" => "Accept: application/json"
-            ]
-        ];
-        
-        $context = stream_context_create($opts);
-        
-        $teste = file_get_contents('http://cep.la/73803130', false, $context);
-
-        return view("teste", compact('teste'));
-    }
-   
 
 }

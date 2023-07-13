@@ -6,6 +6,8 @@ use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AlertController;
+use App\Mail\PedidoEmail;
+use Illuminate\Support\Facades\Mail;
 
 session_start();
 
@@ -106,10 +108,45 @@ class CarrinhoController extends Controller
                 DB::insert("INSERT INTO tb_itens_pedido (id_produto, id_pedido, quantidade) VALUES (?, ?, ?)", 
                 [$produto->pid, $id_pedido, $produto->qtd]);
             }
+            
+            $this->enviarEmail($id_pedido);
         }
 
         DB::delete("DELETE FROM tb_carrinhos WHERE id_usuario = ?", [$id_usuario]);
-
         return redirect("/");
+    }
+
+
+    public function enviarEmail($id_pedido){
+        $cooperativa = DB::select(" SELECT * 
+                                    FROM tb_cooperativas
+                                    WHERE tb_cooperativas.id IN
+                                    (SELECT tb_produtos.id_cooperativa
+                                    FROM tb_produtos WHERE tb_produtos.id IN
+                                        (SELECT tb_itens_pedido.id_produto
+                                        FROM tb_itens_pedido WHERE tb_itens_pedido.id_pedido = ?))",
+        [$id_pedido]);
+
+        $nome_cooperativa = $cooperativa[0]->nome;
+        $email_cooperativa = $cooperativa[0]->email;
+
+        $produtos_pedido = DB::select(" SELECT tb_produtos.nome as pnome, 
+                                        tb_produtos.imagem as pimg, 
+                                        tb_produtos.preco as ppreco,
+                                        tb_produtos.id as pid,
+                                        tb_itens_pedido.quantidade as pqtd
+                                        FROM tb_itens_pedido
+                                        INNER JOIN tb_produtos ON tb_itens_pedido.id_produto = tb_produtos.id
+                                        WHERE tb_itens_pedido.id_pedido = ?", 
+        [$id_pedido]);
+
+        $dados = [
+            'nome' => $nome_cooperativa,
+            'email' => $email_cooperativa,
+            'chat' => 'http://127.0.0.1:8000/pedidos/chat?id_pedido='.$id_pedido,
+            'produtos_pedido' => [$produtos_pedido],
+        ];
+
+        Mail::to('carlosneto726@gmail.com')->send(new PedidoEmail($dados, 'enviarPedido'));
     }
 }
