@@ -37,7 +37,7 @@ class ChatController extends Controller
         ";
 
         $chats = DB::select($query, [$id]);
-        return view("cooperativa.chats", compact('chats', 'orderby'));
+        return view("chat.chats", compact('chats', 'orderby'));
     }
 
 
@@ -60,7 +60,7 @@ class ChatController extends Controller
 
         $mensagens = DB::select("SELECT * FROM tb_mensagens WHERE id_chat = ?", [$id_chat]);
 
-        return view("cooperativa.chat", compact('id_chat', 'chat', 'mensagens'));
+        return view("chat.chat", compact('id_chat', 'chat', 'mensagens'));
     }
 
     public function addMessage(){

@@ -15,7 +15,7 @@ class PedidosController extends Controller
     public function viewPedidos(){
         $pedidos_pendentes = $this->getPedidos("= 0");
         $pedidos_concluidos = $this->getPedidos("!= 0");
-        return view('cooperativa.pedidos', compact('pedidos_pendentes', 'pedidos_concluidos'));
+        return view('pedidos.pedidos', compact('pedidos_pendentes', 'pedidos_concluidos'));
     }
 
     public function concluirPedido(){

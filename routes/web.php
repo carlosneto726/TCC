@@ -1,12 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContaController;
+use App\Http\Controllers\PesquisaController;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\RelatoriosController;
+use App\Http\Controllers\CooperativaController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,59 +24,49 @@ use App\Http\Controllers\RelatoriosController;
 |
 */
 
-// Rotas básicas
-Route::get('/', 'App\Http\Controllers\UserController@index');
-Route::get('/pesquisa', 'App\Http\Controllers\UserController@pesquisa');
-Route::get('/produto', 'App\Http\Controllers\UserController@pagina_produto');
-Route::get('/cooperativa', 'App\Http\Controllers\UserController@cooperativa');
-// Rotas sobre cadastro e login
-Route::get('/sair', 'App\Http\Controllers\UserController@sair');
-Route::get('/login', 'App\Http\Controllers\UserController@login');
-Route::post('/login', 'App\Http\Controllers\UserController@validar_login');
-Route::get('/cadastro', 'App\Http\Controllers\UserController@cadastro');
-Route::get('/cadastro/usuario', 'App\Http\Controllers\UserController@cadastro_usuario');
-Route::get('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadastro_cooperativa');
-Route::post('/cadastro/usuario', 'App\Http\Controllers\UserController@cadastrar_usuario');
-Route::post('/cadastro/cooperativa', 'App\Http\Controllers\UserController@cadastrar_cooperativa');
-// Rotas sobre forum
+// HomeController
+Route::get('/', [HomeController::class, 'index']);
+// PesquisaController
+Route::get('/pesquisa', [PesquisaController::class, 'pesquisa']);
+// ProdutoController
+Route::get('/produto', [ProdutoController::class, 'viewProduto']);
+Route::post('/avaliar', [ProdutoController::class, 'avaliarProduto']);
+// CooperativaController
+Route::get('/cooperativa', [CooperativaController::class, 'viewCooperativa']);
+Route::post('/cadastrar/produto', [CooperativaController::class, 'addProduto']);
+Route::post('/atualizar/produto', [CooperativaController::class, 'updateProduto']);
+Route::post('/atualizar/cooperativa', [CooperativaController::class, 'updateCooperativa']);
+Route::post('/cadastrar/cooperativa', [CooperativaController::class, 'addCooperativa']);
+Route::get('/cadastrar/cooperativa', [CooperativaController::class, 'viewCadastroUsuario']);
+// ContaController
+Route::get('/sair', [ContaController::class, 'sair']);
+Route::get('/entrar', [ContaController::class, 'entrar']);
+Route::post('/entrar', [ContaController::class, 'validarLogin']);
+Route::get('/cadastrar', [ContaController::class, 'cadastrar']);
+// UsuarioController
+Route::get('/cadastrar/usuario', [UsuarioController::class, 'viewUsuarioCadastro']);
+Route::post('/cadastrar/usuario', [UsuarioController::class, 'addUsuario']);
+// ForumController
 Route::post('/forum/adicionar_forum', [ForumController::class, 'createTopic']);
 Route::get('/forum', [ForumController::class, 'viewForum']);
 Route::get('/foruns', [ForumController::class, 'viewForuns']);
-// Rotas sobre o chat
+// ChatController
 Route::get('/chats', [ChatController::class, 'viewChats']);
 Route::get('/chat', [ChatController::class, 'viewChat']);
-// Rotas sobre cadastro de produtos
-Route::post('/cadastrar/produto', 'App\Http\Controllers\UserController@cadastrar_produto');
-Route::post('/atualizar/produto', 'App\Http\Controllers\UserController@atualizar_produto');
-Route::post('/atualizar/cooperativa', 'App\Http\Controllers\UserController@atualizar_cooperativa');
-// Rotas sobre o carrinho
+// CarrinhoController
 Route::get('/carrinho/add', [CarrinhoController::class, 'addProduto']);
 Route::get('/carrinho', [CarrinhoController::class, 'viewCarrinho']);
 Route::post('/carrinho/update', [CarrinhoController::class, 'updateQuantidade']);
 Route::post('/carrinho/del', [CarrinhoController::class, 'delProduto']);
 Route::post('/carrinho/finalizar', [CarrinhoController::class, 'endCarrinho']);
-// Rotas sobre pedidos
+// PedidosController
 Route::get('/pedidos', [PedidosController::class, 'viewPedidos']);
 Route::get('/pedidos/concluir', [PedidosController::class, 'concluirPedido']);
 Route::get('/pedidos/cancelar', [PedidosController::class, 'cancelarPedido']);
 Route::get('/pedidos/chat', [PedidosController::class, 'chatCliente']);
-// Rotas sobre relatorios 
+// RelatoriosController
 Route::get('/relatorios', [RelatoriosController::class, 'viewVendas']);
 Route::get('/relatorios/vendas', [RelatoriosController::class, 'viewVendas']);
 Route::get('/relatorios/maisvendidos', [RelatoriosController::class, 'viewMaisVendidos']);
 Route::get('/relatorios/receita', [RelatoriosController::class, 'viewReceita']);
 Route::get('/relatorios/locaisvendidos', [RelatoriosController::class, 'viewLocaisVendidos']);
-
-Route::post('/avaliar', [UserController::class, 'avaliarProduto']);
-Route::get('/teste', [UserController::class, 'teste']);
-
-
-
-
-
-
-
-
-
-
-

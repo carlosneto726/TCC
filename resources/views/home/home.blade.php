@@ -40,16 +40,15 @@
         <!-- Card dos produtos -->
         <div class="card m-1 rounded">
             <!-- Imagem do produto com o botão de editar -->
-            <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: cover;">
+            <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
 
             <div class="card-img-overlay" style="height: 200px;">
 
                 <div class="d-flex" style="height: 170px;">
-                    <div class="">
+                    <div>
                         @if (!isset($_COOKIE["cooperativa"]))
                             <img class="me-1" src="{{asset("icons/heart-fill.svg")}}">        
                         @endif
-                        <small class="text-dark bg-white p-1 rounded">QTD: {{$produto->quantidade}}</small>
                     </div>
     
 

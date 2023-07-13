@@ -61,7 +61,7 @@ class RelatoriosController extends Controller
 
         $grafico = $this->gerarGrafico($labels, $data, 'Produtos mais vendidos', 'bar');
 
-        return view("cooperativa.relatorios", compact('grafico'));
+        return view("reports.relatorios", compact('grafico'));
     }
 
 
@@ -92,7 +92,7 @@ class RelatoriosController extends Controller
         }
        
         $grafico = $this->gerarGrafico($labels, $data, 'Vendas do ano', 'line');
-        return view("cooperativa.relatorios", compact('grafico'));
+        return view("reports.relatorios", compact('grafico'));
     }
 
     public function viewLocaisVendidos(){
@@ -137,7 +137,7 @@ class RelatoriosController extends Controller
             array_push($data, $vendas[0]->qtd);
         }
         $grafico = $this->gerarGrafico($labels, $data, 'Locais mais vendidos', 'bar');
-        return view("cooperativa.relatorios", compact('grafico'));
+        return view("reports.relatorios", compact('grafico'));
     }
 
 
@@ -169,6 +169,6 @@ class RelatoriosController extends Controller
         }
        
         $grafico = $this->gerarGrafico($labels, $data, 'Receita de vendas do ano', 'line');
-        return view("cooperativa.relatorios", compact('grafico'));
+        return view("reports.relatorios", compact('grafico'));
     }
 }

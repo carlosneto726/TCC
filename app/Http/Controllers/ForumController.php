@@ -97,7 +97,7 @@ class ForumController extends Controller{
             $this->addMessage($id, $comentario->id_cooperativa, $id_forum, $content, $author, $created, $id_parente);
         }
         $comments = $this->displayMessages();
-        return view("cooperativa.forum", compact('id_forum', 'comments', 'forum_info', 'nome_cooperativa'));
+        return view("forum.forum", compact('id_forum', 'comments', 'forum_info', 'nome_cooperativa'));
     }
 
 
@@ -129,7 +129,7 @@ class ForumController extends Controller{
         }else{
             $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id ORDER BY tb_forum.data DESC");
         }        
-        return view("cooperativa.foruns", compact('foruns', 'orderby'));
+        return view("forum.foruns", compact('foruns', 'orderby'));
     }
 
 
