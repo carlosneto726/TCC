@@ -4,7 +4,7 @@
     <title>Seu pedido foi {{$dados['status']}}</title>
 </head>
 <body>
-    <h1>Olá!</h1>
+    <h1>Olá {{ $dados['nome'] }}.</h1>
     <p>O seu pedido foi {{$dados['status']}}</p>
 
     <p>
@@ -22,11 +22,6 @@
             QTD: {{$produto->pqtd}}
         </div>
     @endforeach
-
-    <ul>
-        <li>Nome: {{ $dados['nome'] }}</li>
-        <li>Email: {{ $dados['email'] }}</li>
-    </ul>
     
     <p>Obrigado por usar a Cooperativas Unidas Online!</p>
 

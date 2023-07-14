@@ -13,7 +13,7 @@
     =========================== Disponibilização de informações sobre cooperativas ===========================
 -->
 <!-- Imagem do outdoor -->
-<img class="d-block container mx-auto m-5 img-fluid shadow-lg" src="{{asset("storage/".$cooperativa[0]->outdoor)}}">
+<img class="d-block container mx-auto m-5 img-fluid" src="{{asset("storage/".$cooperativa[0]->outdoor)}}">
 <!-- Titulo -->
 <h2 class="container text-center mt-5">Sobre a cooperativa</h2>
 <!-- Container que engloba as informações sobre a cooperativa -->

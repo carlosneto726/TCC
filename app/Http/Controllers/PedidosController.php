@@ -140,13 +140,12 @@ class PedidosController extends Controller
         
         $dados = [
         'nome' => $nome_cooperativa[0]->nome,
-        'email' => $email_usuario[0]->email,
         'chat' => 'http://127.0.0.1:8000/pedidos/chat?id_pedido='.$id_pedido,
         'status' => $status,
         'produtos_pedido' => $produtos_pedido,
         ];
         
-        Mail::to('carlosneto726@gmail.com')->send(new PedidoEmail($dados, $tipo));
+        Mail::to($email_usuario[0]->email)->send(new PedidoEmail($dados, $tipo));
     }
 }
 

@@ -21,33 +21,30 @@
             <div class="grid-container container p-3 mb-auto rounded" style="background-color: var(--light-gray);">
                 @foreach ($produtos as $produto)
                     <!-- Card dos produtos -->
-                    <div class="card m-1 rounded" style="max-width: 350px;">
+                    <div class="card m-1 rounded">
                         <!-- Imagem do produto com o botão de editar -->
                         <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
             
                         <div class="card-img-overlay" style="height: 200px;">
             
                             <div class="d-flex" style="height: 170px;">
-                                <div class="">
+                                <div>
                                     @if (!isset($_COOKIE["cooperativa"]))
                                         <img class="me-1" src="{{asset("icons/heart-fill.svg")}}">        
                                     @endif
-                                    <small class="text-dark bg-white p-1 rounded">QTD: {{$produto->quantidade}}</small>
                                 </div>
                 
-                                <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: var(--dark-gray);">
-                                    @for ($i = 0; $i < 5; $i++)
-                                        @if ($i >= $produto->estrelas)
-                                            <img src="{{asset("icons/star.svg")}}">
-                                        @else
-                                            <img src="{{asset("icons/star-fill.svg")}}">
-                                        @endif
-                                    @endfor
+            
+                                <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
+                                    <img src="{{asset("icons/thumbs-up.svg")}}">
+                                    <span class="me-1">{{$produto->likes}}</span>
+                                    <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
+                                    <span>{{$produto->deslikes}}</span>
                                 </div>
                             </div>    
                         </div>
             
-                        <a class="text-decoration-none text-dark" href="{{url("/produto?produto_id=".$produto->id)}}">
+                        <a class="text-decoration-none text-dark" href="{{url("/produto?id_produto=".$produto->id)}}">
                             <div class="card-body p-2 rounded">
                                 <!-- Iformações do produto -->
                                 <div class="w-100 text-truncate">

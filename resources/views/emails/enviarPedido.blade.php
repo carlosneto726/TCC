@@ -27,10 +27,6 @@
         </div>
     @endforeach
 
-    <ul>
-        <li>Email: {{ $dados['email'] }}</li>
-    </ul>
-    
     <p>Obrigado por usar a Cooperativas Unidas Online!</p>
 
     <small>Este email foi gerado e enviado automáticamente</small>

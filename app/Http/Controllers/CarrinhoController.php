@@ -144,11 +144,10 @@ class CarrinhoController extends Controller
 
         $dados = [
             'nome' => $nome_cooperativa,
-            'email' => $email_cooperativa,
-            'chat' => 'http://127.0.0.1:8000/pedidos/chat?id_pedido='.$id_pedido,
+            'chat' => 'http://cooperativasunidas.online/pedidos/chat?id_pedido='.$id_pedido,
             'produtos_pedido' => [$produtos_pedido],
         ];
 
-        Mail::to('carlosneto726@gmail.com')->send(new PedidoEmail($dados, 'enviarPedido'));
+        Mail::to($email_cooperativa)->send(new PedidoEmail($dados, 'enviarPedido'));
     }
 }
