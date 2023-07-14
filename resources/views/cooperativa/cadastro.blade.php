@@ -5,7 +5,7 @@
 <h2 class="text-center">Cadastro de usuário comum</h2>
 
 <div class="container p-5 mx-auto rounded" style="background-color: var(--light-gray); width: fit-content;">
-    <form class="hstack mx-auto" method="POST" action="/cadastro/cooperativa" enctype="multipart/form-data">
+    <form class="hstack mx-auto" method="POST" action="/cadastrar/cooperativa" enctype="multipart/form-data">
         @csrf
         @method("POST")
 
