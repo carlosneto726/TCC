@@ -15,8 +15,12 @@ class CarrinhoController extends Controller
 {
     public function viewCarrinho(){
         $id_usuario = $_COOKIE['usuario'];
-        $produtos = DB::select("    SELECT *, tb_carrinhos.quantidade as qtd, tb_carrinhos.id as carrinhoid, 
-                                    tb_produtos.id as pid FROM tb_carrinhos 
+        $produtos = DB::select("    SELECT *, 
+                                    tb_carrinhos.quantidade as qtd, 
+                                    tb_carrinhos.id as carrinhoid, 
+                                    tb_produtos.id as pid ,
+                                    tb_produtos.quantidade as pqtd 
+                                    FROM tb_carrinhos 
                                     INNER JOIN tb_produtos ON tb_carrinhos.id_produto = tb_produtos.id
                                     WHERE id_usuario = ?"
         , [$id_usuario]);
@@ -58,10 +62,9 @@ class CarrinhoController extends Controller
         $id_produto = request("id_produto");
         $id_usuario = $_COOKIE['usuario'];
         $quantidade = request("quantidade");
-
+            
         DB::update("UPDATE tb_carrinhos SET quantidade = ? WHERE id_produto = ? AND id_usuario = ?", 
         [$quantidade, $id_produto, $id_usuario]);
-
         return redirect("/carrinho");
 
     }
@@ -108,7 +111,6 @@ class CarrinhoController extends Controller
                 DB::insert("INSERT INTO tb_itens_pedido (id_produto, id_pedido, quantidade) VALUES (?, ?, ?)", 
                 [$produto->pid, $id_pedido, $produto->qtd]);
             }
-            
             $this->enviarEmail($id_pedido);
         }
 

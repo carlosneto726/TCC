@@ -8,7 +8,6 @@
     </div>
 
 
-
     <div class="mensagens p-3" id="mensagens-container" style="margin-top: 100px;">
         @foreach ($mensagens as $mensagem)
         <div class='rounded p-3 @if($mensagem->id_cooperativa == @$_COOKIE['cooperativa']) ms-auto @elseif($mensagem->id_usuario == @$_COOKIE['usuario']) ms-auto @endif' style='background-color: var(--light-green); width: fit-content;'>

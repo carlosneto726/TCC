@@ -20,7 +20,6 @@
     </div>
 </div>
 
-
 <div class="container d-flex align-itens-center">
     <img class="mx-auto img-fluid shadow-lg" src="{{$grafico}}">
 </div>

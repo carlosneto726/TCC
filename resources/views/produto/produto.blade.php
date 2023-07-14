@@ -20,11 +20,9 @@
                         <span>{{$produto[0]->deslikes}}</span>
                     </div>
                     (quantidade de avaliações)
-
                     <p class="mt-3">
                         {{$produto[0]->pdescricao}}
                     </p>
-
                     <hr>
 
                     <div class="hstack">
@@ -44,8 +42,17 @@
     
         <div class="ms-auto mb-auto p-3 rounded" style="background-color: var(--light-gray); width: 400px;">
             <h2>R$ {{number_format($produto[0]->preco,2,",",".")}}</h2>
+            <div class="ms-auto">
+                @if($produto[0]->quantidade <= 0)
+                    <span class="fw-bold text-danger"> INDISPONIVEL </span>
+                @else
+                    <span class="fw-bold text-success"> DISPONIVEL </span>
+                @endif
+            </div>
             <hr>
-            <a class="btn mt-4 w-100" id="btn-comprar" href="{{url("/carrinho/add?id_produto=".$id_produto)}}">Adicionar ao carrinho</a>
+            <a class="btn mt-4 w-100  @if($produto[0]->quantidade <= 0) d-none @endif" id="btn-comprar" href="{{url("/carrinho/add?id_produto=".$id_produto)}}">
+                Adicionar ao carrinho
+            </a>
         </div>
     </div>
 </div>

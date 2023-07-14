@@ -30,6 +30,8 @@
                                     <h5 class="card-title">{{$produto->pnome}}</h5>
                                     <div class="d-flex">
                                         QTD: {{$produto->pqtd}}
+                                        <br/>
+                                        QTD no estoque: {{$produto->pestoque}}
                                         <p class="card-text ms-auto">
                                             <small class="fw-bold">
                                                 R$ {{number_format($produto->ppreco,2,",",".")}}

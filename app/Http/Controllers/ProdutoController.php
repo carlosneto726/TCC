@@ -12,9 +12,12 @@ class ProdutoController extends Controller
 {
     public function viewProduto(){
         $id_produto = request("id_produto");
-        $produto = DB::select(" SELECT *, tb_cooperativas.nome as cnome, tb_cooperativas.id as cid, 
+        $produto = DB::select(" SELECT *, 
+                                tb_cooperativas.nome as cnome, 
+                                tb_cooperativas.id as cid, 
                                 tb_cooperativas.descricao as cdescricao,
-                                tb_produtos.nome as pnome, tb_produtos.id as pid, 
+                                tb_produtos.nome as pnome, 
+                                tb_produtos.id as pid, 
                                 tb_produtos.descricao as pdescricao
                                 FROM tb_produtos INNER JOIN tb_cooperativas
                                 ON tb_produtos.id_cooperativa = tb_cooperativas.id

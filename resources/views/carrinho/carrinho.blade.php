@@ -30,15 +30,16 @@
                                                 {{$produto->qtd}}
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="1">1</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="2">2</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="3">3</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="4">4</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="5">5</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="6">6</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="7">7</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="8">8</button></li>
-                                                <li><button class="dropdown-item" type="submit" name="quantidade" value="9">9</button></li>
+                                                @for ($i = 1; $i < $produto->pqtd; $i++)
+                                                    <li>
+                                                        <button class="dropdown-item" type="submit" name="quantidade" value="{{$i}}">
+                                                            {{$i}}
+                                                        </button>
+                                                    </li>
+                                                    @if($i == 9)
+                                                        @break
+                                                    @endif
+                                                @endfor
                                             </ul>
                                         </div>
                                     </form>
