@@ -15,7 +15,7 @@
             <div class="mb-5 p-1 rounded" style="background-color: var(--light-gray);">
                 <div class="d-flex m-2">
                     <span>ID: {{$pedido->id}}</span>
-                    <a class="btn btn btn-sm ms-auto" href="{{url("/pedidos/chat?id_pedido=".$pedido->id)}}" style="background-color: var(--light-green);">Conversar</a>
+                    <a class="btn btn btn-sm ms-auto" href="{{url("/pedidos/chat/".$pedido->id)}}" style="background-color: var(--light-green);">Conversar</a>
                     <a class="btn btn btn-sm ms-1" href="{{url("/pedidos/concluir?id_pedido=".$pedido->id)}}" style="background-color: var(--light-green);">Concluir pedido</a>
                     <a class="btn btn-danger btn-sm ms-1" href="{{url("/pedidos/cancelar?id_pedido=".$pedido->id)}}">Cancelar pedido</a>
                 </div>

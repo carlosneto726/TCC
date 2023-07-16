@@ -14,7 +14,7 @@
                     
                     <div class="mb-3">
                         <label for="inputNome" class="form-label">Nome do produto</label>
-                        <input type="text" class="form-control" name="nome" id="inputNome" placeholder="Digite o nome do seu produto / serviço">
+                        <input type="text" class="form-control" name="nome" id="inputNome" placeholder="Digite o nome do seu produto / serviço" required>
                     </div>
                     <div class="form-floating">
                         <textarea class="form-control" name="descricao" placeholder="Digite uma breve descrição do seu produto / serviço" id="descricaoTextarea" style="height: 100px"></textarea>
@@ -22,11 +22,11 @@
                       </div>
                     <div class="mb-3">
                         <label for="inputPreco" class="form-label">Preço</label>
-                        <input type="text" class="form-control" name="preco" id="inputPreco" placeholder="Digite o nome do seu produto / serviço">
+                        <input type="text" class="form-control" name="preco" id="inputPreco" placeholder="Digite o nome do seu produto / serviço" required>
                     </div>
                     <div class="mb-3">
                         <label for="inputQuantidade" class="form-label">Quantidade</label>
-                        <input type="text" class="form-control" name="quantidade" id="inputQuantidade" placeholder="Insira a quantidade do seu produto" aria-describedby="quantidadeHelp">
+                        <input type="text" class="form-control" name="quantidade" id="inputQuantidade" placeholder="Insira a quantidade do seu produto" aria-describedby="quantidadeHelp" required>
                         <div id="quantidadeHelp" class="form-text">Caso seja um serviço, pode deixar em branco.</div>
                     </div>
                     <div class="mb-3">

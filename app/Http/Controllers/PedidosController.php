@@ -102,14 +102,28 @@ class PedidosController extends Controller
 
     public function chatCliente(){
         $chat = new ChatController();
-        $id_cooperativa = $_COOKIE['cooperativa'];
         $id_pedido = request("id_pedido");
-        
-        $id_usuario = DB::select("SELECT tb_pedidos.id_usuario FROM tb_pedidos WHERE tb_pedidos.id = ?", 
-        [$id_pedido]);
-        $id_chat = $chat->createChat($id_cooperativa, $id_usuario[0]->id_usuario);
+        $id_cooperativa = "";
+        $id_usuario = "";
 
-        return redirect("/chat?chat=".$id_chat);
+        if(isset($_COOKIE['cooperativa'])){
+            $id_cooperativa = $_COOKIE['cooperativa'];
+            $usuario = DB::select("SELECT tb_pedidos.id_usuario FROM tb_pedidos WHERE tb_pedidos.id = ?", 
+            [$id_pedido]);
+            $id_usuario = $usuario[0]->id_usuario;
+        }else if(isset($_COOKIE['usuario'])){
+            $id_usuario = $_COOKIE['usuario'];
+            $cooperativa = DB::select(" SELECT * FROM tb_cooperativas WHERE tb_cooperativas.id IN
+                                            (SELECT tb_produtos.id_cooperativa FROM tb_produtos WHERE tb_produtos.id IN
+                                                (SELECT tb_itens_pedido.id_produto FROM tb_itens_pedido WHERE id_pedido = ?));",
+                                                [$id_pedido]);
+            $id_cooperativa = $cooperativa[0]->id;
+        }else{
+            AlertController::alert("Faça login.", "danger");
+            return redirect("/entrar");
+        }
+        $id_chat = $chat->createChat($id_cooperativa, $id_usuario);
+        return redirect("/chat/".$id_chat);
     }
 
 
@@ -140,7 +154,7 @@ class PedidosController extends Controller
         
         $dados = [
         'nome' => $nome_cooperativa[0]->nome,
-        'chat' => 'http://127.0.0.1:8000/pedidos/chat?id_pedido='.$id_pedido,
+        'chat' => 'https://cooperativasunidas.online/pedidos/chat/'.$id_pedido,
         'status' => $status,
         'produtos_pedido' => $produtos_pedido,
         ];

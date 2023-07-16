@@ -28,12 +28,13 @@ use App\Http\Controllers\CaixaController;
 // HomeController
 Route::get('/', [HomeController::class, 'index']);
 // PesquisaController
-Route::get('/pesquisa', [PesquisaController::class, 'pesquisa']);
+Route::get('/pesquisa', [PesquisaController::class, 'viewPesquisa']);
+Route::get('/pesquisa/{categoria}', [PesquisaController::class, 'viewPesquisaCategoria']);
 // ProdutoController
-Route::get('/produto', [ProdutoController::class, 'viewProduto']);
+Route::get('/produto/{produto}', [ProdutoController::class, 'viewProduto']);
 Route::post('/avaliar', [ProdutoController::class, 'avaliarProduto']);
 // CooperativaController
-Route::get('/cooperativa', [CooperativaController::class, 'viewCooperativa']);
+Route::get('/cooperativa/{cooperativa}', [CooperativaController::class, 'viewCooperativa']);
 Route::post('/cadastrar/produto', [CooperativaController::class, 'addProduto']);
 Route::post('/atualizar/produto', [CooperativaController::class, 'updateProduto']);
 Route::post('/atualizar/cooperativa', [CooperativaController::class, 'updateCooperativa']);
@@ -53,7 +54,7 @@ Route::get('/forum', [ForumController::class, 'viewForum']);
 Route::get('/foruns', [ForumController::class, 'viewForuns']);
 // ChatController
 Route::get('/chats', [ChatController::class, 'viewChats']);
-Route::get('/chat', [ChatController::class, 'viewChat']);
+Route::get('/chat/{chat}', [ChatController::class, 'viewChat']);
 // CarrinhoController
 Route::get('/carrinho/add', [CarrinhoController::class, 'addProduto']);
 Route::get('/carrinho', [CarrinhoController::class, 'viewCarrinho']);
@@ -64,7 +65,7 @@ Route::post('/carrinho/finalizar', [CarrinhoController::class, 'endCarrinho']);
 Route::get('/pedidos', [PedidosController::class, 'viewPedidos']);
 Route::get('/pedidos/concluir', [PedidosController::class, 'concluirPedido']);
 Route::get('/pedidos/cancelar', [PedidosController::class, 'cancelarPedido']);
-Route::get('/pedidos/chat', [PedidosController::class, 'chatCliente']);
+Route::get('/pedidos/chat/{id_pedido}', [PedidosController::class, 'chatCliente']);
 // RelatoriosController
 Route::get('/relatorios', [RelatoriosController::class, 'viewVendas']);
 Route::get('/relatorios/vendas', [RelatoriosController::class, 'viewVendas']);

@@ -2,7 +2,7 @@
 <div class="bg-light mb-2 rounded">
     <div class="p-5 container">
         <div class="d-flex flex-row align-items-end mb-3">
-            <img src="{{asset("storage/".$cooperativa[0]->perfil)}}" style="width: 64px;">
+            <img src="{{asset("storage/".$cooperativa[0]->perfil)}}" style="width: 128px;">
             <h3 class="ms-3">{{@$cooperativa[0]->nome}}</h3>
         </div>
         <h5>

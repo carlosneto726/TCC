@@ -16,9 +16,9 @@ class CooperativaController extends Controller
     }
 
     public function viewCooperativa(){
-        $cooperativa_id = request("cooperativa_id");
-        $produtos = DB::select("SELECT * FROM tb_produtos WHERE id_cooperativa = ?", [$cooperativa_id]);
-        $cooperativa = DB::select("SELECT * FROM tb_cooperativas WHERE id = ?", [$cooperativa_id]);
+        $nome_cooperativa = request("cooperativa");
+        $cooperativa = DB::select("SELECT * FROM tb_cooperativas WHERE nome = ?", [$nome_cooperativa]);
+        $produtos = DB::select("SELECT * FROM tb_produtos WHERE id_cooperativa = ?", [$cooperativa[0]->id]);
         return view('cooperativa.view.cooperativa', compact('cooperativa', 'produtos'));
     }
 
@@ -29,7 +29,11 @@ class CooperativaController extends Controller
         $descricao = request("descricao");
         $preco = request("preco");
         $quantidade = request("quantidade");
-        $path = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
+        if($request->file('imagem')){
+            $path = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
+        }else{
+            $path = "images/produtos/default_template.png";
+        }
 
         if($quantidade == 0){
             $status = 0;
@@ -43,12 +47,12 @@ class CooperativaController extends Controller
                     [$id_cooperativa, $nome, $descricao, $preco, $quantidade, $path, $status]);
 
         AlertController::alert("Produto cadastrado com sucesso.", "success");
-        return redirect("/cooperativa?cooperativa_id=".$_COOKIE["cooperativa"]);
+        return redirect("/cooperativa/".$_COOKIE["nome_cooperativa"]);
     }
-
 
     public function updateProduto(Request $request): string{
         $id = request("id");
+        $id_cooperativa = $_COOKIE["cooperativa"];
         $nome = request("nome");
         $descricao = request("descricao");
         $preco = request("preco");
@@ -62,15 +66,20 @@ class CooperativaController extends Controller
         }
 
         if($acao == "deletar"){
-            DB::delete("DELETE FROM tb_produtos WHERE id = ?", [$id]);
+            DB::delete("DELETE FROM tb_produtos WHERE id = ? AND id_cooperativa = ?", [$id, $id_cooperativa]);
             AlertController::alert("Produto deletado com sucesso.", "warning");
         }else if($acao == "atualizar"){
-            $path = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
-            DB::update("UPDATE tb_produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ?, imagem = ?, status = ? where id = ?;", 
-            [$nome, $descricao, $preco, $quantidade, $path, $status, $id]);
+            if($request->file('imagem')){
+                $path = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
+                DB::update("UPDATE tb_produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ?, imagem = ?, status = ? WHERE id = ? AND id_cooperativa = ?;", 
+                [$nome, $descricao, $preco, $quantidade, $path, $status, $id, $id_cooperativa]);
+            }else{
+                DB::update("UPDATE tb_produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ?, status = ? WHERE id = ? AND id_cooperativa = ?;", 
+                [$nome, $descricao, $preco, $quantidade, $status, $id, $id_cooperativa]);
+            }
             AlertController::alert("Produto atualizado com sucesso.", "success");
         }
-        return redirect("/cooperativa?cooperativa_id=".$_COOKIE["cooperativa"]);
+        return redirect("/cooperativa/".$_COOKIE["nome_cooperativa"]);
     }
 
 
@@ -89,14 +98,23 @@ class CooperativaController extends Controller
         $whatsapp = request("whatsapp");
         $instagram = request("instagram");
         $facebook = request("facebook");
-        $outdoor = $request->file('outdoor')->storeAs('images/'.$nome, "outdoor", 'public');
-        $perfil = $request->file('perfil')->storeAs('images/'.$nome, "perfil", 'public');
+        $cooperativa = DB::select("SELECT * FROM tb_cooperativas WHERE id = ?", [$id]);
+        $outdoor = $cooperativa[0]->outdoor;
+        $perfil = $cooperativa[0]->perfil;
 
-        DB::update("update tb_cooperativas set nome = ?, descricao = ?, historico = ?, missao = ?, visao = ?, valores = ?, endereco = ?, cep = ?, tel1 = ?, tel2 = ?, whatsapp = ?, instagram = ?, facebook = ?, outdoor = ?, perfil = ? where id = ?;", 
+        if($request->file('outdoor')){
+            $outdoor = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
+        }
+        if($request->file('perfil')){
+            $perfil = $request->file('perfil')->storeAs('images/'.$nome, "perfil", 'public');
+        }
+        
+
+        DB::update("UPDATE tb_cooperativas SET nome = ?, descricao = ?, historico = ?, missao = ?, visao = ?, valores = ?, endereco = ?, cep = ?, tel1 = ?, tel2 = ?, whatsapp = ?, instagram = ?, facebook = ?, outdoor = ?, perfil = ? WHERE id = ?;", 
         [$nome, $descricao, $historico, $missao, $visao, $valores, $endereco, $cep, $tel1, $tel2, $whatsapp, $instagram, $facebook, $outdoor, $perfil, $id]);
 
         AlertController::alert("Cooperativa atualizada com sucesso.", "success");
-        return redirect("/cooperativa?cooperativa_id=".$_COOKIE["cooperativa"]);
+        return redirect("/cooperativa/".$_COOKIE["nome_cooperativa"]);
     }
 
 
@@ -114,16 +132,25 @@ class CooperativaController extends Controller
         $instagram = request("instagram");
         $facebook = request("facebook");
         $descricao = request("descricao");
-        $perfil = $request->file('img')->storeAs('images/'.$nome, "perfil", 'public');
 
-        $cooperativas = DB::select("select email, cnpj from tb_cooperativas where email = ? and cnpj = ?;", [$email, $cnpj]);
+        if($request->file('outdoor') || $request->file('perfil')){
+            $outdoor = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
+            $perfil = $request->file('perfil')->storeAs('images/'.$nome, "perfil", 'public');
+        }else{
+            $outdoor = "images/produtos/default_template.png";
+            $perfil = "images/produtos/default_template.png";
+        }
+
+        $cooperativas = DB::select("SELECT email, cnpj FROM tb_cooperativas WHERE email = ? OR cnpj = ?;", [$email, $cnpj]);
 
         if(count($cooperativas) > 0){
             AlertController::alert("E-mail ou CNPJ já cadastrado, tente novamente", "warning");
-            return redirect("/cadastro/cooperativa");
+            return redirect("/cadastrar/cooperativa");
         }else{
-            DB::insert('insert into tb_cooperativas (nome, email, cep, endereco, tipo, cnpj, senha, tel1, tel2, whatsapp, instagram, facebook, descricao, perfil) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-            [$nome, $email, $cep, $endereco, $tipo, $cnpj, $senha, $tel1, $tel2, $whatsapp, $instagram, $facebook, $descricao , $perfil]);
+            DB::insert('INSERT INTO tb_cooperativas 
+            (nome, email, cep, endereco, tipo, cnpj, senha, tel1, tel2, whatsapp, instagram, facebook, descricao, perfil, outdoor)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+            [$nome, $email, $cep, $endereco, $tipo, $cnpj, $senha, $tel1, $tel2, $whatsapp, $instagram, $facebook, $descricao , $perfil, $outdoor]);
             AlertController::alert("Cooperativa cadastrada com sucesso.", "success");
             return redirect("/entrar");
         }

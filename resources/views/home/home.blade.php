@@ -3,15 +3,22 @@
 
 <div id="carouselAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-inner">
+
         <div class="carousel-item active">
-            <img src="{{asset("images/square-placeholder.png")}}" class="carrosel-img d-block w-50 mx-auto" alt="...">
+            <img src="{{asset("images/carrossel_active.png")}}" class="carrosel-img card-img d-block w-50 mx-auto">
         </div>
-        <div class="carousel-item">
-            <img src="{{asset("images/horizontal-placeholder.png")}}" class="carrosel-img d-block w-50 mx-auto" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="{{asset("images/vertical-placeholder.png")}}" class="carrosel-img d-block w-50 mx-auto" alt="...">
-        </div>
+
+        @foreach ($produtos_carrossel as $carrossel)
+            <div class="carousel-item">
+                <a class="text-decoration-none text-dark" href="{{url("/produto/".$carrossel->id)}}">                
+                    <img src="{{asset("storage/".$carrossel->imagem)}}" class="carrosel-img card-img d-block w-50 mx-auto" style="width: fit-content;">
+                    <div class="card-img-overlay mx-auto d-flex flex-column" style="width: fit-content;">
+                        <h3 class="card-title me-5">{{$carrossel->nome}}</h3>
+                        <p class="card-text mt-auto text-end fw-bold">R$ {{number_format($carrossel->preco,2,",",".")}}</p>
+                    </div>
+                </a>
+            </div>
+        @endforeach
     </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplaying" data-bs-slide="prev">
@@ -24,11 +31,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
-
-
-
-
 
 
 <!-- Titulo -->
@@ -61,7 +63,7 @@
                 </div>    
             </div>
 
-            <a class="text-decoration-none text-dark" href="{{url("/produto?id_produto=".$produto->id)}}">
+            <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
                 <div class="card-body p-2 rounded">
                     <!-- Iformações do produto -->
                     <div class="w-100 text-truncate">
@@ -83,13 +85,84 @@
 <div class="mt-5">
     <h3 class="mt-5 text-center">Categorias</h3>
     <div class="container mx-auto d-flex justify-content-center p-3 mt-4 rounded" style="background-color: var(--light-gray);">
-        @for ($i = 0; $i < 10; $i++)
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/agropecuaria")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/farming-tractor.svg")}}" title="Agropecuária">
+            </a>
+        </div>
         
-            <div class="flex-categoria p-3 ms-1 me-1">
-                <img class="categoria-img img-fluid" src="{{asset("images/square-placeholder.png")}}">
-            </div>
-        
-        @endfor
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/consumo")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/cup-straw.svg")}}" title="Consumo">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/credito")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/cash-coin.svg")}}" title="Crédito">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/educacao")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/book.svg")}}" title="Educação">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/especial")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/universal-access-circle.svg")}}" title="Especial">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/moradia")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/house-door.svg")}}" title="Moradia">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/minerios")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/minecart-loaded.svg")}}" title="Minérios">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/categoria/producao")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/factory.svg")}}" title="Produção">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/categoria/infraestrutura")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/building.svg")}}" title="Infraestrutura">
+            </a>            
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/trabalho")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/person-workspace.svg")}}" title="Trabalho">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/saude")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/bandaid.svg")}}" title="Saúde">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/transporte")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/bus-front.svg")}}" title="Transporte">
+            </a>
+        </div>
+
+        <div class="flex-categoria p-3 ms-1 me-1">
+            <a href="{{url("/pesquisa/turismo-e-lazer")}}">
+                <img class="categoria-img img-fluid" src="{{asset("icons/emoji-sunglasses.svg")}}" title="Turismo e lazer">
+            </a>
+        </div>
     </div>
 </div>
 

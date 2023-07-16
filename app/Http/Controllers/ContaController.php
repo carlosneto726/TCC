@@ -22,6 +22,7 @@ class ContaController extends Controller
     public function sair(){
         setcookie("usuario", "", time() - 3600);
         setcookie("cooperativa", "", time() - 3600);
+        setcookie("nome_cooperativa", "", time() - 3600);
         return redirect("/");
     }
 
@@ -57,6 +58,7 @@ class ContaController extends Controller
             if(count($cooperativas) > 0){    
                 if(Hash::check($senha, $cooperativas[0]->senha)){
                     setcookie("cooperativa", $cooperativas[0]->id, time() + (86400 * 30), "/");
+                    setcookie("nome_cooperativa", $cooperativas[0]->nome, time() + (86400 * 30), "/");
                     AlertController::alert("Login efetuado com sucesso!", "success");
                     return redirect("/");
                 }else{

@@ -6,6 +6,7 @@ use App\Events\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\AlertController;
 
 class ChatController extends Controller
 {    
@@ -14,9 +15,7 @@ class ChatController extends Controller
         @$id_usuario = $_COOKIE['usuario'];
         $id = null;
         $query_param = null;
-
         $orderby = request("orderby");
-        $pesquisa = request("pesquisa");
 
         if(isset($id_cooperativa)){
             $id = $id_cooperativa;
@@ -41,25 +40,37 @@ class ChatController extends Controller
     }
 
 
-    public function viewChat($id_chat = null){
-        if($id_chat == null){
-            $id_chat = request("chat");
+    public function viewChat(){
+        $id_chat = request("chat");
+        $query = "";
+        $id_cookie = "";
+        if(isset($_COOKIE['cooperativa'])){
+            $id_cookie = $_COOKIE['cooperativa'];
+            $query = "AND tb_cooperativas.id = ".$id_cookie;
+
+        }else if(isset($_COOKIE['usuario'])){
+            $id_cookie = $_COOKIE['usuario'];
+            $query = "AND tb_usuarios.id = ".$id_cookie;
+
+        }else{
+            AlertController::alert("Faça o login", "danger");
+            return redirect("/entrar");
         }
 
-        $query = "  SELECT *, tb_cooperativas.nome as cnome, tb_usuarios.nome as unome
-                    FROM tb_chats 
-                    INNER JOIN tb_cooperativas ON 
-                    tb_chats.id_cooperativa = tb_cooperativas.id 
-                    INNER JOIN tb_usuarios ON
-                    tb_chats.id_usuario = tb_usuarios.id 
-                    WHERE tb_chats.id = ?;
-        ";
-
-        $chat = DB::select($query, [$id_chat]);
-
-
+        $chat = DB::select("SELECT *, 
+                            tb_cooperativas.nome as cnome, 
+                            tb_usuarios.nome as unome
+                            FROM tb_chats 
+                            INNER JOIN tb_cooperativas ON tb_chats.id_cooperativa = tb_cooperativas.id 
+                            INNER JOIN tb_usuarios ON tb_chats.id_usuario = tb_usuarios.id 
+                            WHERE tb_chats.id = ? ".$query, 
+        [$id_chat]);
         $mensagens = DB::select("SELECT * FROM tb_mensagens WHERE id_chat = ?", [$id_chat]);
 
+        if(count($chat) == 0){
+            AlertController::alert("Acesso negado.", "danger");
+            return redirect("/");
+        }
         return view("chat.chat", compact('id_chat', 'chat', 'mensagens'));
     }
 

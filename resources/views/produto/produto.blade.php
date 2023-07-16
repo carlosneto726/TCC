@@ -26,7 +26,7 @@
                     <hr>
 
                     <div class="hstack">
-                        <a href="{{url("/cooperativa?cooperativa_id=".$produto[0]->id_cooperativa)}}" class="text-decoration-none text-dark">
+                        <a href="{{url("/cooperativa/".$produto[0]->cnome)}}" class="text-decoration-none text-dark">
                             <img class="img-cooperativa rounded" src="{{asset("storage/".$produto[0]->perfil)}}" alt="">
                             <span class="m-2">
                                 {{$produto[0]->cnome}}

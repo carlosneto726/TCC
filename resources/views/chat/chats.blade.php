@@ -24,7 +24,7 @@
 
         <div class="w-100">
             @foreach ($chats as $chat)
-                <a class="text-decoration-none" href="{{url("/chat/?chat=".$chat->chid)}}#footer">
+                <a class="text-decoration-none" href="{{url("/chat/".$chat->chid)}}#footer">
                     <div class="m-3 rounded p-2" style="background-color: var(--green); color: white;">
                         <span class="fs-4 fw-bold">@if(isset($_COOKIE['cooperativa'])) {{$chat->unome}} @elseif(isset($_COOKIE['usuario'])) {{$chat->cnome}} @endif</span>
 

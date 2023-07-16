@@ -33,7 +33,7 @@ class UsuarioController extends Controller
             DB::insert('insert into tb_usuarios (nome, email, endereco, CEP, senha, cpf) values (?, ?, ?, ?, ?, ?);', 
             [$nome, $email, $endereco, $cep, $senha, $cpf]);
             AlertController::alert("Usuário cadastrado com sucesso", "success");
-            return redirect("/login");
+            return redirect("/entrar");
         }
     }
 }

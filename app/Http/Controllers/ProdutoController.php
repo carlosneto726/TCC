@@ -11,7 +11,7 @@ session_start();
 class ProdutoController extends Controller
 {
     public function viewProduto(){
-        $id_produto = request("id_produto");
+        $id_produto = request("produto");
         $produto = DB::select(" SELECT *, 
                                 tb_cooperativas.nome as cnome, 
                                 tb_cooperativas.id as cid, 

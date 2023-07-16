@@ -14,7 +14,7 @@
     <a class="nav-link text-light" href="{{url("/chats")}}">Chats</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link text-light" href="{{url("/cooperativa?cooperativa_id=".$_COOKIE['cooperativa'])}}">Seu perfil</a>
+    <a class="nav-link text-light" href="{{url("/cooperativa/".$_COOKIE['nome_cooperativa'])}}">Seu perfil</a>
 </li>
 <li class="nav-item">
     <a class="nav-link text-danger" href="{{url("/sair")}}">SAIR</a>

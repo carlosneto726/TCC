@@ -144,7 +144,7 @@ class CarrinhoController extends Controller
 
         $dados = [
             'nome' => $nome_cooperativa,
-            'chat' => 'http://cooperativasunidas.online/pedidos/chat?id_pedido='.$id_pedido,
+            'chat' => 'http://cooperativasunidas.online/pedidos/chat/'.$id_pedido,
             'produtos_pedido' => [$produtos_pedido],
         ];
 
