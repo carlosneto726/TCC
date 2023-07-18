@@ -14,6 +14,8 @@ use App\Http\Controllers\CooperativaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CaixaController;
 
+use App\Http\Controllers\TestsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,8 +30,10 @@ use App\Http\Controllers\CaixaController;
 // HomeController
 Route::get('/', [HomeController::class, 'index']);
 // PesquisaController
-Route::get('/pesquisa', [PesquisaController::class, 'viewPesquisa']);
+Route::get('/pesquisa/{pesquisa}', [PesquisaController::class, 'viewPesquisa']);
+Route::get('/pesquisa/{pesquisa}/{filtro}', [PesquisaController::class, 'viewPesquisaFiltro']);
 Route::get('/pesquisa/{categoria}', [PesquisaController::class, 'viewPesquisaCategoria']);
+Route::post('/pesquisa/{pesquisa}', [PesquisaController::class, 'pesquisarPesquisa']);
 // ProdutoController
 Route::get('/produto/{produto}', [ProdutoController::class, 'viewProduto']);
 Route::post('/avaliar', [ProdutoController::class, 'avaliarProduto']);
@@ -78,3 +82,6 @@ Route::get('/caixa/total', [CaixaController::class, 'viewCaixaTotal']);
 Route::get('/caixa/ano', [CaixaController::class, 'viewCaixaAno']);
 Route::get('/caixa/mes', [CaixaController::class, 'viewCaixaMes']);
 Route::get('/caixa/dia', [CaixaController::class, 'viewCaixaDia']);
+
+
+Route::get('/teste', [TestsController::class, 'teste']);

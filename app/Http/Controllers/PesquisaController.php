@@ -16,6 +16,16 @@ class PesquisaController extends Controller
         return view('pesquisa.pesquisa', compact('pesquisa', 'produtos'));
     }
 
+    public function viewPesquisaFiltro(){
+        $filtro = request("filtro");
+        if($filtro == "preco"){}
+        if($filtro == "avaliacao-produto"){}
+        if($filtro == "avaliacao-cooperativa"){}
+        if($filtro == "cooperativa"){}
+        if($filtro == "categoria"){}
+        if($filtro == "localizacao"){}
+    }
+
     public function viewPesquisaCategoria(){
         $categoria = request("categoria");
         if($categoria == "agropecuaria"){ $pesquisa = 1; }
@@ -38,5 +48,9 @@ class PesquisaController extends Controller
         [$pesquisa]);
         $pesquisa = $categoria;
         return view('pesquisa.pesquisa', compact('pesquisa', 'produtos'));
+    }
+
+    public function pesquisarPesquisa(){
+        
     }
 }

@@ -8,14 +8,27 @@
 
             <div class="me-3 mb-auto p-3 rounded" style="width: 350px; background-color: var(--light-gray);">
                 <h2>Ordernar por</h2>
-                <div class="mt-4">
-                    <span>preço</span> <br>
-                    <span>avaliação do produto</span> <br> 
-                    <span>avaliação da cooperativa</span> <br>
-                    <span>cooperativa</span> <br>
-                    <span>categoria</span> <br>
-                    <span>localização</span> <br>
-                </div>
+
+                <ul class="list-group mt-4">
+                    <a href="{{url("/pesquisa/preco")}}" class="text-decoration-none">
+                        <li class="list-group-item-success rounded-top list-group-item active" aria-current='true'>Preço</li>
+                    </a>
+                    <a href="{{url("/pesquisa/avaliacao-produto")}}" class="text-decoration-none">
+                        <li class="list-group-item-success list-group-item active" aria-current='true'>Avaliação do produto</li>
+                    </a>
+                    <a href="{{url("/pesquisa/avaliacao-cooperativa")}}" class="text-decoration-none">
+                        <li class="list-group-item-success list-group-item active" aria-current='true'>Avaliação da cooperativa</li>
+                    </a>
+                    <a href="{{url("/pesquisa/coooperativa")}}" class="text-decoration-none">
+                        <li class="list-group-item-success list-group-item active" aria-current='true'>Cooperativa</li>
+                    </a>
+                    <a href="{{url("/pesquisa/categoria")}}" class="text-decoration-none">
+                        <li class="list-group-item-success list-group-item active" aria-current='true'>Categoria</li>
+                    </a>
+                    <a href="{{url("/pesquisa/localizacao")}}" class="text-decoration-none">
+                        <li class="list-group-item-success rounded-bottom list-group-item active" aria-current='true'>Localização</li>
+                    </a>
+                </ul>
             </div>
             
             <div class="grid-container container p-3 mb-auto rounded" style="background-color: var(--light-gray);">
@@ -44,7 +57,7 @@
                             </div>    
                         </div>
             
-                        <a class="text-decoration-none text-dark" href="{{url("/produto?id_produto=".$produto->id)}}">
+                        <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
                             <div class="card-body p-2 rounded">
                                 <!-- Iformações do produto -->
                                 <div class="w-100 text-truncate">
