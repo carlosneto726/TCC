@@ -16,7 +16,7 @@
     @foreach ($dados['produtos_pedido'] as $produto)
         <div style="margin-bottom: 50px;">
             <h4>{{$produto->pnome}}</h4>
-            <img src="{{asset("https://cooperativasunidas.online/storage/".$produto->pimg)}}">
+            <img src="cid:{{asset("storage/".$produto->pimg)}}">
             R$ {{number_format($produto->ppreco,2,",",".")}}
             <br/>
             QTD: {{$produto->pqtd}}

@@ -4,8 +4,13 @@
 <div class="container">
     <div class="hstack mx-auto">
         <div class="container me-3 p-3 mb-auto rounded" style="background-color: var(--light-gray);">
-
-            <img src="{{asset("icons/heart-fill.svg")}}"> Favoritar
+            <a href="{{url("/produto/".$id_produto."/favoritar/".$favorito)}}" class="text-decoration-none text-dark">
+                @if($favorito)
+                    <img src="{{asset("icons/heart-fill.svg")}}"> Favoritar
+                @else
+                    <img src="{{asset("icons/heart.svg")}}"> Favoritar
+                @endif
+            </a>
 
             <div class="d-flex align-items-center">
                 <div class="flex-shrink-0">
@@ -18,24 +23,28 @@
                         <span class="me-3">{{$produto[0]->likes}}</span>
                         <img src="{{asset("icons/thumbs-down.svg")}}">
                         <span>{{$produto[0]->deslikes}}</span>
+                        (quantidade de avaliações)
                     </div>
-                    (quantidade de avaliações)
                     <p class="mt-3">
                         {{$produto[0]->pdescricao}}
                     </p>
                     <hr>
 
-                    <div class="hstack">
-                        <a href="{{url("/cooperativa/".$produto[0]->cnome)}}" class="text-decoration-none text-dark">
-                            <img class="img-cooperativa rounded" src="{{asset("storage/".$produto[0]->perfil)}}" alt="">
-                            <span class="m-2">
+                    <a href="{{url("/cooperativa/".$produto[0]->cnome)}}" class="text-decoration-none text-dark">
+                        <div class="d-flex">
+                            <div>
+                                <img class="img-cooperativa rounded" src="{{asset("storage/".$produto[0]->perfil)}}">
+                                <br/>
                                 {{$produto[0]->cnome}}
-                                <br>
-                                {{$produto[0]->endereco}}
-                            </span>
-                        </a>
-                    </div>
-
+                            </div>
+                            <div class="m-2 ms-auto">
+                                <div style="font-size: 12px;">
+                                    @if($produto[0]->entrega) <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> @else <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> @endif
+                                </div>
+                                <div class="mt-auto">{{$produto[0]->endereco}}</div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -76,7 +85,6 @@
 
             </div>
         </div>
-
 
         <div class="container p-3 mb-auto rounded ms-3" style="background-color: var(--green);">
 

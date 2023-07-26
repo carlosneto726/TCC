@@ -13,15 +13,22 @@ session_start();
 class PedidosController extends Controller
 {
     public function viewPedidos(){
-        $pedidos_pendentes = $this->getPedidos("= 0");
-        $pedidos_concluidos = $this->getPedidos("!= 0");
-        return view('pedidos.pedidos', compact('pedidos_pendentes', 'pedidos_concluidos'));
+        if(isset($_COOKIE["cooperativa"])){
+            $pedidos_pendentes = $this->getPedidosCooperativa("= 0");
+            $pedidos_concluidos = $this->getPedidosCooperativa("!= 0");
+            return view('pedidos.pedidos', compact('pedidos_pendentes', 'pedidos_concluidos'));
+
+        }else if(isset($_COOKIE["usuario"])){
+            $id_usuario = $_COOKIE["usuario"];
+            $pedidos = $this->getPedidosUsuario($id_usuario);
+            return view("usuario.pedidos", compact("pedidos"));
+        }
     }
 
     public function concluirPedido(){
         $id_pedido = request("id_pedido");
         $query = "AND tb_pedidos.id =".$id_pedido;
-        $pedido = $this->getPedidos("= 0", $query);
+        $pedido = $this->getPedidosCooperativa("= 0", $query);
         $alerta = "";
         $tipo_alerta = "success";
 
@@ -59,7 +66,35 @@ class PedidosController extends Controller
         
     }
 
-    public function getPedidos($status_pedido, $id_pedido = null){
+    public function getPedidosUsuario($id_usuario){
+        $preco_total_pedido = 0;
+
+        $pedidos = DB::select(" SELECT * FROM tb_pedidos 
+                                WHERE tb_pedidos.id_usuario = ?;", 
+            [$id_usuario]);
+
+        foreach ($pedidos as $pedido) {
+            $produtos_pedido = DB::select(" SELECT tb_produtos.nome as pnome, 
+                                            tb_produtos.imagem as pimg, 
+                                            tb_produtos.preco as ppreco,
+                                            tb_produtos.id as pid,
+                                            tb_produtos.quantidade as pestoque,
+                                            tb_itens_pedido.quantidade as pqtd
+                                            FROM tb_itens_pedido
+                                            INNER JOIN tb_produtos ON tb_itens_pedido.id_produto = tb_produtos.id
+                                            WHERE tb_itens_pedido.id_pedido = ?;", 
+                [$pedido->id]);
+
+                foreach ($produtos_pedido as $produto) {
+                    $preco_total_pedido += ($produto->ppreco * $produto->pqtd);
+                }
+            $pedido->produtos = $produtos_pedido;
+            $pedido->preco_total = $preco_total_pedido;
+        }
+        return $pedidos;
+    }
+
+    public function getPedidosCooperativa($status_pedido, $id_pedido = null){
         $id_cooperativa = $_COOKIE['cooperativa'];
         $preco_total_pedido = 0;
 

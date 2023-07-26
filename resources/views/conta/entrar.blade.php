@@ -11,12 +11,12 @@
         @method("POST")
         <div class="mb-3">
             <label for="inputEmail" class="form-label">E-Mail</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="digite o seu e-mail">
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="digite o seu e-mail" required>
         </div>
 
         <div class="mb-3">
             <label for="inputSenha" class="form-label">Senha</label>
-            <input type="password" name="senha" class="form-control" id="inputSenha" placeholder="digite a sua senha">
+            <input type="password" name="senha" class="form-control" id="inputSenha" placeholder="digite a sua senha" required>
         </div>
         
         <button type="submit" class="btn btn-entrar" name="tipo_login" value="usuario">Entrar como usuário</button>

@@ -21,6 +21,7 @@ class ContaController extends Controller
 
     public function sair(){
         setcookie("usuario", "", time() - 3600);
+        setcookie("nome_usuario", "", time() - 3600);
         setcookie("cooperativa", "", time() - 3600);
         setcookie("nome_cooperativa", "", time() - 3600);
         return redirect("/");
@@ -32,12 +33,13 @@ class ContaController extends Controller
         $tipo_login = request("tipo_login");
 
         if($tipo_login == "usuario"){
-            $usuarios = DB::select("select * from tb_usuarios where email = ?;", 
+            $usuarios = DB::select("SELECT * FROM tb_usuarios WHERE email = ?;", 
             [$email]);
 
             if(count($usuarios) > 0){
                 if(Hash::check($senha, $usuarios[0]->senha)){
                     setcookie("usuario", $usuarios[0]->id, time() + (86400 * 30), "/");
+                    setcookie("nome_usuario", $usuarios[0]->nome, time() + (86400 * 30), "/");
                     AlertController::alert("Login efetuado com sucesso!", "success");
                     return redirect("/");
 
@@ -52,7 +54,7 @@ class ContaController extends Controller
             }
 
         }else if($tipo_login == "cooperativa"){
-            $cooperativas = DB::select("select * from tb_cooperativas where email = ?", 
+            $cooperativas = DB::select("SELECT * FROM tb_cooperativas WHERE email = ?", 
             [$email]);
 
             if(count($cooperativas) > 0){    

@@ -29,6 +29,8 @@ class CooperativaController extends Controller
         $descricao = request("descricao");
         $preco = request("preco");
         $quantidade = request("quantidade");
+        $entrega = request("entrega");
+
         if($request->file('imagem')){
             $path = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
         }else{
@@ -42,9 +44,9 @@ class CooperativaController extends Controller
         }
         
         DB::insert("INSERT INTO 
-                    tb_produtos (id_cooperativa, nome, descricao, preco, quantidade, imagem, status) 
-                    VALUES (?, ?, ? ,?, ?, ?, ?)", 
-                    [$id_cooperativa, $nome, $descricao, $preco, $quantidade, $path, $status]);
+                    tb_produtos (id_cooperativa, nome, descricao, preco, quantidade, imagem, status, entrega) 
+                    VALUES (?, ?, ? ,?, ?, ?, ?, ?)", 
+                    [$id_cooperativa, $nome, $descricao, $preco, $quantidade, $path, $status, $entrega]);
 
         AlertController::alert("Produto cadastrado com sucesso.", "success");
         return redirect("/cooperativa/".$_COOKIE["nome_cooperativa"]);
@@ -58,6 +60,7 @@ class CooperativaController extends Controller
         $preco = request("preco");
         $quantidade = request("quantidade");
         $acao = request("acao");
+        $entrega = request("entrega");
 
         if($quantidade == 0){
             $status = 0;
@@ -71,11 +74,11 @@ class CooperativaController extends Controller
         }else if($acao == "atualizar"){
             if($request->file('imagem')){
                 $path = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
-                DB::update("UPDATE tb_produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ?, imagem = ?, status = ? WHERE id = ? AND id_cooperativa = ?;", 
-                [$nome, $descricao, $preco, $quantidade, $path, $status, $id, $id_cooperativa]);
+                DB::update("UPDATE tb_produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ?, imagem = ?, status = ?, entrega = ? WHERE id = ? AND id_cooperativa = ?;", 
+                [$nome, $descricao, $preco, $quantidade, $path, $status, $entrega, $id, $id_cooperativa]);
             }else{
-                DB::update("UPDATE tb_produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ?, status = ? WHERE id = ? AND id_cooperativa = ?;", 
-                [$nome, $descricao, $preco, $quantidade, $status, $id, $id_cooperativa]);
+                DB::update("UPDATE tb_produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ?, status = ?, entrega = ? WHERE id = ? AND id_cooperativa = ?;", 
+                [$nome, $descricao, $preco, $quantidade, $status, $entrega, $id, $id_cooperativa]);
             }
             AlertController::alert("Produto atualizado com sucesso.", "success");
         }

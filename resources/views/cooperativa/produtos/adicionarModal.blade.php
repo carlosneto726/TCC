@@ -29,10 +29,23 @@
                         <input type="text" class="form-control" name="quantidade" id="inputQuantidade" placeholder="Insira a quantidade do seu produto" aria-describedby="quantidadeHelp" required>
                         <div id="quantidadeHelp" class="form-text">Caso seja um serviço, pode deixar em branco.</div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="formFile" class="form-label">Insira uma imagem do produto</label>
                         <input class="form-control" type="file" name="imagem" id="formFile">
                         <div class="form-text">Recomendamos uma imagem quadrada com fundo branco</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-check-label fw-bold" for="entrega">Você está disponivél para entregar este produto?</label>
+                        <br/>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="entrega" id="entrega" value="1">
+                            <label class="form-check-label" for="inlineRadio1">Sim</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="entrega" id="entrega" value="0">
+                            <label class="form-check-label" for="inlineRadio2">Não</label>
+                        </div>                        
                     </div>
 
                 </div>

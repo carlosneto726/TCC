@@ -37,6 +37,8 @@ Route::post('/pesquisa/{pesquisa}', [PesquisaController::class, 'pesquisarPesqui
 // ProdutoController
 Route::get('/produto/{produto}', [ProdutoController::class, 'viewProduto']);
 Route::post('/avaliar', [ProdutoController::class, 'avaliarProduto']);
+Route::get('/favoritos', [ProdutoController::class, 'viewFavoritos']);
+Route::get('/produto/{produto}/favoritar/{favorito}', [ProdutoController::class, 'favorito']);
 // CooperativaController
 Route::get('/cooperativa/{cooperativa}', [CooperativaController::class, 'viewCooperativa']);
 Route::post('/cadastrar/produto', [CooperativaController::class, 'addProduto']);
@@ -52,6 +54,8 @@ Route::get('/cadastrar', [ContaController::class, 'cadastrar']);
 // UsuarioController
 Route::get('/cadastrar/usuario', [UsuarioController::class, 'viewUsuarioCadastro']);
 Route::post('/cadastrar/usuario', [UsuarioController::class, 'addUsuario']);
+Route::get('/perfil', [UsuarioController::class, 'viewPerfil']);
+Route::post('/usuario/atualizar', [UsuarioController::class, 'updateUsuario']);
 // ForumController
 Route::post('/forum/adicionar_forum', [ForumController::class, 'createTopic']);
 Route::get('/forum', [ForumController::class, 'viewForum']);
@@ -66,6 +70,7 @@ Route::post('/carrinho/update', [CarrinhoController::class, 'updateQuantidade'])
 Route::post('/carrinho/del', [CarrinhoController::class, 'delProduto']);
 Route::post('/carrinho/finalizar', [CarrinhoController::class, 'endCarrinho']);
 // PedidosController
+Route::get('/pedidos', [PedidosController::class, 'viewPedidos']);
 Route::get('/pedidos', [PedidosController::class, 'viewPedidos']);
 Route::get('/pedidos/concluir', [PedidosController::class, 'concluirPedido']);
 Route::get('/pedidos/cancelar', [PedidosController::class, 'cancelarPedido']);

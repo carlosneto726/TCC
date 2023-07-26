@@ -3,12 +3,15 @@
     <img class="rounded card-img-top @if($produto->quantidade <= 0) opacity-50 @endif" src="{{asset("storage/".$produto->imagem)}}"  style="height: 200px; object-fit: cover;">
     <div class="card-img-overlay" style="height: 200px;">
         <div class="d-flex" style="height: 170px;">
-            <div>
-                @if (isset($_COOKIE["cooperativa"]))
+            @if (isset($_COOKIE["cooperativa"]))
+                <div>
                     <button type="button" class="btn btn-editar" data-bs-toggle="modal" data-bs-target="#produtoModal{{$produto->id}}">Editar</button>
                     <small class="p-1 rounded @if($produto->quantidade <= 10) bg-danger text-light @else bg-light text-dark @endif">QTD: {{$produto->quantidade}}</small>
-                @endif
-            </div>
+                    <span class="p-1 rounded" style="background-color: white; font-size: 9px;">
+                        @if($produto->entrega) <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> @else <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> @endif
+                    </span>
+                </div>
+            @endif
 
             <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
                 <img src="{{asset("icons/thumbs-up.svg")}}">

@@ -17,7 +17,7 @@ class Messages {
     public $created;
     public $parentId;
     public $children = array();
-    
+
     public function __construct($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId = null) {
         $this->id = $id;
         $this->id_cooperativa = $id_cooperativa;

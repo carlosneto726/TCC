@@ -40,30 +40,24 @@
     <!-- Listando os produtos do banco de dados -->
     @foreach ($produtos as $produto)
         <!-- Card dos produtos -->
-        <div class="card m-1 rounded">
-            <!-- Imagem do produto com o botão de editar -->
-            <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+            <div class="card m-1 rounded">
+                <!-- Imagem do produto com o botão de editar -->
+                <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
+                <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
 
-            <div class="card-img-overlay" style="height: 200px;">
+                <div class="card-img-overlay" style="height: 200px;">
 
-                <div class="d-flex" style="height: 170px;">
-                    <div>
-                        @if (!isset($_COOKIE["cooperativa"]))
-                            <img class="me-1" src="{{asset("icons/heart-fill.svg")}}">        
-                        @endif
-                    </div>
-    
+                    <div class="d-flex" style="height: 170px;">
+                        <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
+                            <img src="{{asset("icons/thumbs-up.svg")}}">
+                            <span class="me-1">{{$produto->likes}}</span>
+                            <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
+                            <span>{{$produto->deslikes}}</span>
+                        </div>
+                    </div>    
+                </div>
 
-                    <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
-                        <img src="{{asset("icons/thumbs-up.svg")}}">
-                        <span class="me-1">{{$produto->likes}}</span>
-                        <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
-                        <span>{{$produto->deslikes}}</span>
-                    </div>
-                </div>    
-            </div>
-
-            <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
+            
                 <div class="card-body p-2 rounded">
                     <!-- Iformações do produto -->
                     <div class="w-100 text-truncate">
