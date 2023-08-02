@@ -53,6 +53,10 @@ Route::post('/entrar', [ContaController::class, 'validarLogin']);
 Route::get('/cadastrar', [ContaController::class, 'cadastrar']);
 Route::get('/validar/usuario/{token}', [ContaController::class, 'validarEmailUsuario']);
 Route::get('/validar/cooperativa/{token}', [ContaController::class, 'validarEmailCooperativa']);
+Route::get('/redefinir-senha', [ContaController::class, 'viewRedefinirSenha']);
+Route::post('/redefinir-senha/{token}', [ContaController::class, 'redefinirSenha']);
+Route::get('/atualizar-senha/{token}', [ContaController::class, 'viewAtualizarSenha']);
+Route::post('/redefinir-senha', [ContaController::class, 'redefinirSenhaEmail']);
 // UsuarioController
 Route::get('/cadastrar/usuario', [UsuarioController::class, 'viewUsuarioCadastro']);
 Route::post('/cadastrar/usuario', [UsuarioController::class, 'addUsuario']);

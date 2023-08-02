@@ -40,7 +40,7 @@ class UsuarioController extends Controller
             AlertController::alert("E-mail ou CPF já cadastrado, tente novamente", "warning");
             return redirect("/cadastro/usuario");
         }else{
-            DB::insert('INSERT INTO tb_usuarios (nome, email, endereco, CEP, senha, cpf, token, status) 
+            DB::insert('INSERT INTO tb_usuarios (nome, email, endereco, CEP, senha, cpf, token, ativa) 
                         VALUES (?, ?, ?, ?, ?, ?, ?, 0);', 
             [$nome, $email, $endereco, $cep, $senha, $cpf, $token]);
 

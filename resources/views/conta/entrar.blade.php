@@ -17,6 +17,7 @@
         <div class="mb-3">
             <label for="inputSenha" class="form-label">Senha</label>
             <input type="password" name="senha" class="form-control" id="inputSenha" placeholder="digite a sua senha" required>
+            <div class="form-text"><a href="{{url("/redefinir-senha")}}">Esqueceu a senha?</a></div>
         </div>
         
         <button type="submit" class="btn btn-entrar" name="tipo_login" value="usuario">Entrar como usuário</button>
