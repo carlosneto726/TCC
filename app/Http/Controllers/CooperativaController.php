@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\PedidoEmail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 session_start();
 
@@ -135,6 +138,7 @@ class CooperativaController extends Controller
         $instagram = request("instagram");
         $facebook = request("facebook");
         $descricao = request("descricao");
+        $token = Str::random(60);
 
         if($request->file('outdoor') || $request->file('perfil')){
             $outdoor = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
@@ -151,12 +155,22 @@ class CooperativaController extends Controller
             return redirect("/cadastrar/cooperativa");
         }else{
             DB::insert('INSERT INTO tb_cooperativas 
-            (nome, email, cep, endereco, tipo, cnpj, senha, tel1, tel2, whatsapp, instagram, facebook, descricao, perfil, outdoor)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-            [$nome, $email, $cep, $endereco, $tipo, $cnpj, $senha, $tel1, $tel2, $whatsapp, $instagram, $facebook, $descricao , $perfil, $outdoor]);
-            AlertController::alert("Cooperativa cadastrada com sucesso.", "success");
+            (nome, email, cep, endereco, tipo, cnpj, senha, tel1, tel2, whatsapp, instagram, facebook, descricao, perfil, outdoor, token, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0);', 
+            [$nome, $email, $cep, $endereco, $tipo, $cnpj, $senha, $tel1, $tel2, $whatsapp, $instagram, $facebook, $descricao , $perfil, $outdoor, $token]);
+
+            $this->enviarEmail($email, $token);
+            AlertController::alert("Confirme o endereço de email para ultilizar a conta", "warning");
             return redirect("/entrar");
         }
 
+    }
+
+    public function enviarEmail($email, $token){
+        $dados = [
+        'link' => 'https://cooperativasunidas.online/validar/cooperativa/'.$token
+        ];
+        
+        Mail::to($email)->send(new PedidoEmail($dados, "confirmarEmail"));
     }
 }

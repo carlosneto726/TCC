@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Events\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\AlertController;
 
 class ChatController extends Controller
@@ -16,6 +15,22 @@ class ChatController extends Controller
         $id = null;
         $query_param = null;
         $orderby = request("orderby");
+        $pesquisa = request("pesquisa");
+        $orderbyQuery = "";
+        $searchQuery = "";
+
+        if($orderby == "ordem_alfabetica"){
+            $orderbyQuery = " ORDER BY cnome ASC, unome ASC ";
+        }else if($orderby == "data"){
+            $orderbyQuery = " ORDER BY tb_chats.id DESC";
+        }else if($pesquisa){
+            if(isset($_COOKIE['cooperativa'])){
+                $nome = "tb_usuarios.nome";
+            }else if(isset($_COOKIE['usuario'])){
+                $nome = "tb_cooperativas.nome";
+            }
+            $searchQuery = " AND ".$nome." LIKE '%".$pesquisa."%' ";
+        }
 
         if(isset($id_cooperativa)){
             $id = $id_cooperativa;
@@ -32,8 +47,7 @@ class ChatController extends Controller
                     FROM tb_chats INNER JOIN tb_cooperativas ON 
                     tb_chats.id_cooperativa = tb_cooperativas.id 
                     INNER JOIN tb_usuarios ON tb_usuarios.id = tb_chats.id_usuario
-                    AND tb_chats.".$query_param." = ?;
-        ";
+                    AND tb_chats.".$query_param." = ?".$searchQuery.$orderbyQuery;
 
         $chats = DB::select($query, [$id]);
         return view("chat.chats", compact('chats', 'orderby'));
@@ -89,8 +103,10 @@ class ChatController extends Controller
         ",
         [$id_chat, $id_cooperativa, $id_usuario, $mensagem, $data]);
 
-
         event(new Message($mensagem, $canal, $evento));
+        
+
+        return redirect("/chat/".$id_chat."#footer");
 
     }
 
@@ -107,4 +123,5 @@ class ChatController extends Controller
             return $chats[0]->id;
         }
     }
+
 }

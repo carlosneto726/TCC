@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\AlertController;
-
+use Illuminate\Support\Str;
+use App\Mail\PedidoEmail;
+use Illuminate\Support\Facades\Mail;
 
 session_start();
 
@@ -30,6 +32,7 @@ class UsuarioController extends Controller
         $cep = request("cep");
         $cpf = request("cpf");
         $senha = Hash::make(request("senha"));
+        $token = Str::random(60);
 
         $usuarios = DB::select("SELECT email, cpf FROM tb_usuarios WHERE email = ? AND cpf = ?;", [$email, $cpf]);
 
@@ -37,10 +40,12 @@ class UsuarioController extends Controller
             AlertController::alert("E-mail ou CPF já cadastrado, tente novamente", "warning");
             return redirect("/cadastro/usuario");
         }else{
-            DB::insert('INSERT INTO tb_usuarios (nome, email, endereco, CEP, senha, cpf) 
-                        VALUES (?, ?, ?, ?, ?, ?);', 
-            [$nome, $email, $endereco, $cep, $senha, $cpf]);
-            AlertController::alert("Usuário cadastrado com sucesso", "success");
+            DB::insert('INSERT INTO tb_usuarios (nome, email, endereco, CEP, senha, cpf, token, status) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, 0);', 
+            [$nome, $email, $endereco, $cep, $senha, $cpf, $token]);
+
+            $this->enviarEmail($email, $token);
+            AlertController::alert("Confirme o endereço de email para ultilizar a conta", "warning");
             return redirect("/entrar");
         }
     }
@@ -66,5 +71,13 @@ class UsuarioController extends Controller
         AlertController::alert("Usuário atualizado com sucesso", "success");
         return redirect("/perfil");
         
+    }
+
+    public function enviarEmail($email, $token){
+        $dados = [
+        'link' => 'https://cooperativasunidas.online/validar/usuario/'.$token
+        ];
+        
+        Mail::to($email)->send(new PedidoEmail($dados, "confirmarEmail"));
     }
 }

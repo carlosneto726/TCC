@@ -46,7 +46,8 @@ class RelatoriosController extends Controller
         [$id_cooperativa]);
 
         foreach ($produtos as $produto) {
-            $qtd_vendida = DB::select(" SELECT COUNT(tb_itens_pedido.quantidade) as qtd_produto
+            $qtd = 0;
+            $qtd_vendida = DB::select(" SELECT tb_itens_pedido.quantidade AS qtd_venda_produto
                                         FROM tb_itens_pedido
                                         WHERE tb_itens_pedido.id_produto = ? AND tb_itens_pedido.id_pedido IN
                                             (SELECT tb_pedidos.id 
@@ -54,9 +55,11 @@ class RelatoriosController extends Controller
                                                 (SELECT tb_vendas.id_pedido 
                                                 FROM tb_vendas))",
                                         [$produto->id]);
-                                        
+            foreach($qtd_vendida as $itens_pedido){
+                $qtd += $itens_pedido->qtd_venda_produto;
+            }
             array_push($labels, $produto->nome);
-            array_push($data, $qtd_vendida[0]->qtd_produto);
+            array_push($data, $qtd);
         }
 
         $grafico = $this->gerarGrafico($labels, $data, 'Produtos mais vendidos', 'bar');
@@ -168,7 +171,7 @@ class RelatoriosController extends Controller
             array_push($data, $preco_total);
         }
        
-        $grafico = $this->gerarGrafico($labels, $data, 'Receita de vendas do ano', 'line');
+        $grafico = $this->gerarGrafico($labels, $data, 'Receita de vendas do ano em R$', 'line');
         return view("reports.relatorios", compact('grafico'));
     }
 }

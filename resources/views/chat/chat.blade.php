@@ -19,7 +19,7 @@
     </div>
 
     <iframe name="enviar_mensagem" style="display:none;"></iframe>
-    <form class="container p-3 d-flex" action="{{url("/api/messages")}}" method="POST" target="enviar_mensagem">
+    <form class="container p-3 d-flex" action="{{url("/api/messages")}}" method="POST">
         @csrf
         @method("POST")
         

@@ -10,7 +10,7 @@
 
     <div class="hstack mx-auto">
 
-        <div class="resumo me-2 mb-auto p-3 w-25">
+        <div class="me-2 mb-auto p-3 w-25">
             <h4>Ordernar por</h4>
             <ul class="list-group mt-4">
                 <a href="/chats/?orderby=data" class="text-decoration-none">
@@ -25,12 +25,8 @@
         <div class="w-100">
             @foreach ($chats as $chat)
                 <a class="text-decoration-none" href="{{url("/chat/".$chat->chid)}}#footer">
-                    <div class="m-3 rounded p-2" style="background-color: var(--green); color: white;">
-                        <span class="fs-4 fw-bold">@if(isset($_COOKIE['cooperativa'])) {{$chat->unome}} @elseif(isset($_COOKIE['usuario'])) {{$chat->cnome}} @endif</span>
-
-                        <div class="d-flex flex-row mb-3">
-                            <div class="ms-auto" style="width: fit-content;">Data</div>
-                        </div>
+                    <div class="m-3 rounded p-2 position-relative" style="background-color: var(--green); color: white;">
+                        <span class="fs-3 fw-bold">@if(isset($_COOKIE['cooperativa'])) {{$chat->unome}} @elseif(isset($_COOKIE['usuario'])) {{$chat->cnome}} @endif</span>
                     </div>
                 </a>
             @endforeach

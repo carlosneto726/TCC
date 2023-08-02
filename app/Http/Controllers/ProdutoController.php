@@ -70,15 +70,28 @@ class ProdutoController extends Controller
     }
 
     public function viewFavoritos(){
+        $orderby = request("orderby");
+        $query = "";
+        if($orderby == "preco"){ $orderby = "preco ASC"; }
+        else if($orderby == "avaliacao-produto"){ $orderby = "likes DESC";}
+        else if($orderby == "cooperativa"){ $orderby = "id_cooperativa DESC";}
+        else if($orderby == "localizacao"){ $orderby = "likes DESC";
+            $cep = substr(DB::select("SELECT cep FROM tb_usuarios WHERE id = ?", [$_COOKIE['usuario']])[0]->cep, 0, 3);
+            $query = $query." tb_produtos.id_cooperativa IN 
+                            (SELECT tb_cooperativas.id 
+                            FROM tb_cooperativas 
+                            WHERE cep like'%".$cep."%') AND"; }
+        else{ $orderby = "likes DESC"; }
+
         $id_usuario = $_COOKIE['usuario'];
         $produtos = DB::select("SELECT *,
                                 tb_favoritos.id AS fid,
                                 tb_produtos.id  AS pid
                                 FROM tb_produtos 
                                 INNER JOIN tb_favoritos ON tb_favoritos.id_produto = tb_produtos.id
-                                WHERE  id_usuario = ?;", 
+                                WHERE ".$query." id_usuario = ? ORDER BY ".$orderby, 
         [$id_usuario]);
-        return view("produto.favoritos", compact("produtos"));
+        return view("produto.favoritos", compact("produtos", "orderby"));
     }
 
     public function favorito(){

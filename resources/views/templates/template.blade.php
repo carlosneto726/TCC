@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{asset("css\bootstrap.css")}}">
     <title>Cooperativas Unidas</title>
 </head>
-<body>
+<body id="body">
     <header>
         @include('layout.navbar')
     </header>

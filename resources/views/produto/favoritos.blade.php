@@ -1,77 +1,69 @@
 @extends('templates.template')
 @section('content')
+<div class="navbar navbar-expand-lg bg-body-tertiary w-100 mb-5" style="margin-top: -25px; background-color: var(--light-gray);">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <a href="{{url("/favoritos?orderby=preco")}}" class="text-decoration-none">
+                <li class="nav-link @if($orderby == 'preco') active" aria-current='true' @endif">Preço</li>
+            </a>
+            <a href="{{url("/favoritos?orderby=avaliacao-produto")}}" class="text-decoration-none">
+                <li class="nav-link @if($orderby == 'avaliacao-produto') active" aria-current='true' @endif">Avaliação do produto</li>
+            </a>
+            <a href="{{url("/favoritos?orderby=cooperativa")}}" class="text-decoration-none">
+                <li class="nav-link @if($orderby == 'cooperativa') active" aria-current='true' @endif">Cooperativa</li>
+            </a>
+            <a href="{{url("/favoritos?orderby=localizacao")}}" class="text-decoration-none">
+                <li class="nav-link @if($orderby == 'localizacao') active" aria-current='true' @endif">Localização</li>
+            </a>
+        </ul>
+    </div>
+</div>
 
 <h1 class="container">Favoritos</h1>
+<h3 class="container">@if(request("orderby")) Ordenado por <span class="fw-bold">"{{request("orderby")}}"</span> @endif</h3>
 <div class="container mt-5">
-    <div class="hstack mx-auto">
-
-        <div class="me-3 mb-auto p-3 rounded" style="width: 350px; background-color: var(--light-gray);">
-            <h2>Ordernar por</h2>
-
-            <ul class="list-group mt-4">
-                <a href="{{url("")}}" class="text-decoration-none">
-                    <li class="list-group-item-success rounded-top list-group-item active" aria-current='true'>Preço</li>
-                </a>
-                <a href="{{url("")}}" class="text-decoration-none">
-                    <li class="list-group-item-success list-group-item active" aria-current='true'>Avaliação do produto</li>
-                </a>
-                <a href="{{url("")}}" class="text-decoration-none">
-                    <li class="list-group-item-success list-group-item active" aria-current='true'>Avaliação da cooperativa</li>
-                </a>
-                <a href="{{url("")}}" class="text-decoration-none">
-                    <li class="list-group-item-success list-group-item active" aria-current='true'>Cooperativa</li>
-                </a>
-                <a href="{{url("")}}" class="text-decoration-none">
-                    <li class="list-group-item-success list-group-item active" aria-current='true'>Categoria</li>
-                </a>
-                <a href="{{url("")}}" class="text-decoration-none">
-                    <li class="list-group-item-success rounded-bottom list-group-item active" aria-current='true'>Localização</li>
-                </a>
-            </ul>
-        </div>
+    <div class="grid-container container p-3 mb-auto rounded" style="background-color: var(--light-gray);">
+        @foreach ($produtos as $produto)
+            <!-- Card dos produtos -->
+            <div class="card m-1 rounded">
+                <!-- Imagem do produto com o botão de editar -->
+                <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+    
+                <div class="card-img-overlay" style="height: 200px;">
+    
+                    <div class="d-flex" style="height: 170px;">
+                        <a href="{{url("/produto/".$produto->pid."/favoritar/".$produto->fid)}}" class="text-decoration-none text-dark">
+                            <img src="{{asset("icons/heart-fill.svg")}}">
+                        </a>
         
-        <div class="grid-container container p-3 mb-auto rounded" style="background-color: var(--light-gray);">
-            @foreach ($produtos as $produto)
-                <!-- Card dos produtos -->
-                <div class="card m-1 rounded">
-                    <!-- Imagem do produto com o botão de editar -->
-                    <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
-        
-                    <div class="card-img-overlay" style="height: 200px;">
-        
-                        <div class="d-flex" style="height: 170px;">
-                            <a href="{{url("/produto/".$produto->pid."/favoritar/".$produto->fid)}}" class="text-decoration-none text-dark">
-                                <img src="{{asset("icons/heart-fill.svg")}}">
-                            </a>
-            
-        
-                            <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
-                                <img src="{{asset("icons/thumbs-up.svg")}}">
-                                <span class="me-1">{{$produto->likes}}</span>
-                                <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
-                                <span>{{$produto->deslikes}}</span>
-                            </div>
-                        </div>    
-                    </div>
-        
-                    <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
-                        <div class="card-body p-2 rounded">
-                            <!-- Iformações do produto -->
-                            <div class="w-100 text-truncate">
-                                <span class="fs-3">{{$produto->nome}}</span>
-                            </div>
-                            <div class="w-100">
-                                <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
-                            </div>
-                            <div class="w-100 text-truncate">
-                                <span class="">{{$produto->descricao}}</span>
-                            </div>
+    
+                        <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
+                            <img src="{{asset("icons/thumbs-up.svg")}}">
+                            <span class="me-1">{{$produto->likes}}</span>
+                            <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
+                            <span>{{$produto->deslikes}}</span>
                         </div>
-                    </a>
+                    </div>    
                 </div>
-            @endforeach
-        </div>
+    
+                <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
+                    <div class="card-body p-2 rounded">
+                        <!-- Iformações do produto -->
+                        <div class="w-100 text-truncate">
+                            <span class="fs-3">{{$produto->nome}}</span>
+                        </div>
+                        <div class="w-100">
+                            <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
+                        </div>
+                        <div class="w-100 text-truncate">
+                            <span class="">{{$produto->descricao}}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        @endforeach
     </div>
+
 </div>
 
 

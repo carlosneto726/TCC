@@ -10,7 +10,8 @@
 <li class="nav-item">
     <a class="nav-link text-light" href="{{url("/foruns")}}">Fórum</a>
 </li>
-<li class="nav-item">
+
+<li class="nav-item position-relative">
     <a class="nav-link text-light" href="{{url("/chats")}}">Chats</a>
 </li>
 <li class="nav-item">

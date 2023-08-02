@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\AlertController;
+use App\Mail\PedidoEmail;
+use Illuminate\Support\Facades\Mail;
 
 
 session_start();
@@ -33,7 +35,7 @@ class ContaController extends Controller
         $tipo_login = request("tipo_login");
 
         if($tipo_login == "usuario"){
-            $usuarios = DB::select("SELECT * FROM tb_usuarios WHERE email = ?;", 
+            $usuarios = DB::select("SELECT * FROM tb_usuarios WHERE email = ? AND status = 1;", 
             [$email]);
 
             if(count($usuarios) > 0){
@@ -54,7 +56,7 @@ class ContaController extends Controller
             }
 
         }else if($tipo_login == "cooperativa"){
-            $cooperativas = DB::select("SELECT * FROM tb_cooperativas WHERE email = ?", 
+            $cooperativas = DB::select("SELECT * FROM tb_cooperativas WHERE email = ? AND status = 1", 
             [$email]);
 
             if(count($cooperativas) > 0){    
@@ -74,4 +76,18 @@ class ContaController extends Controller
         }
     }
 
+    public function validarEmailUsuario(){
+        $token = request("token");
+        DB::update("UPDATE tb_usuarios SET status = 1, token = '' WHERE token = ?", [$token]);
+        AlertController::alert("Conta validada com sucesso", "success");
+        return redirect("/entrar");
+    }
+
+    public function validarEmailCooperativa(){
+        $token = request("token");
+        DB::update("UPDATE tb_cooperativas SET status = 1, token = '' WHERE token = ?", [$token]);
+        AlertController::alert("Conta validada com sucesso", "success");
+        return redirect("/entrar");
+    }
+    
 }

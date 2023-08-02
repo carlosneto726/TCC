@@ -11,8 +11,11 @@
                     <img src="{{asset("icons/heart.svg")}}"> Favoritar
                 @endif
             </a>
+            <a href="{{url("/comparar/".$id_produto)}}" class="text-decoration-none text-dark ms-3">
+                <img src="{{asset("icons/sliders.svg")}}"> Comparar
+            </a>
 
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center mt-2">
                 <div class="flex-shrink-0">
                       <img class="item-img rounded" src="{{asset("storage/".$produto[0]->imagem)}}">
                 </div>
@@ -37,11 +40,13 @@
                                 <br/>
                                 {{$produto[0]->cnome}}
                             </div>
-                            <div class="m-2 ms-auto">
-                                <div style="font-size: 12px;">
+                            <div class="ms-auto">
+                                <div class="text-end" style="font-size: 12px;">
                                     @if($produto[0]->entrega) <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> @else <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> @endif
+                                    <br/>
+
                                 </div>
-                                <div class="mt-auto">{{$produto[0]->endereco}}</div>
+                                <div class="mt-auto ms-2">{{$produto[0]->endereco}}</div>
                             </div>
                         </div>
                     </a>

@@ -10,7 +10,7 @@
 
         @foreach ($produtos_carrossel as $carrossel)
             <div class="carousel-item">
-                <a class="text-decoration-none text-dark" href="{{url("/produto/".$carrossel->id)}}">                
+                <a class="text-decoration-none text-dark" href="{{url("/produto/".$carrossel->pid)}}">                
                     <img src="{{asset("storage/".$carrossel->imagem)}}" class="carrosel-img card-img d-block w-50 mx-auto" style="width: fit-content;">
                     <div class="card-img-overlay mx-auto d-flex flex-column" style="width: fit-content;">
                         <h3 class="card-title me-5">{{$carrossel->nome}}</h3>
@@ -42,36 +42,36 @@
         <!-- Card dos produtos -->
             <div class="card m-1 rounded">
                 <!-- Imagem do produto com o botão de editar -->
-                <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
-                <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+                <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
+                    <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
 
-                <div class="card-img-overlay" style="height: 200px;">
+                    <div class="card-img-overlay" style="height: 200px;">
 
-                    <div class="d-flex" style="height: 170px;">
-                        <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
-                            <img src="{{asset("icons/thumbs-up.svg")}}">
-                            <span class="me-1">{{$produto->likes}}</span>
-                            <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
-                            <span>{{$produto->deslikes}}</span>
+                        <div class="d-flex" style="height: 170px;">
+                            <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
+                                <img src="{{asset("icons/thumbs-up.svg")}}">
+                                <span class="me-1">{{$produto->likes}}</span>
+                                <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
+                                <span>{{$produto->deslikes}}</span>
+                            </div>
+                        </div>    
+                    </div>
+
+                
+                    <div class="card-body p-2 rounded">
+                        <!-- Iformações do produto -->
+                        <div class="w-100 text-truncate">
+                            <span class="fs-3">{{$produto->pnome}}</span>
                         </div>
-                    </div>    
-                </div>
-
-            
-                <div class="card-body p-2 rounded">
-                    <!-- Iformações do produto -->
-                    <div class="w-100 text-truncate">
-                        <span class="fs-3">{{$produto->nome}}</span>
+                        <div class="w-100">
+                            <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
+                        </div>
+                        <div class="w-100 text-truncate">
+                            <span class="">{{$produto->descricao}}</span>
+                        </div>
                     </div>
-                    <div class="w-100">
-                        <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
-                    </div>
-                    <div class="w-100 text-truncate">
-                        <span class="">{{$produto->descricao}}</span>
-                    </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
     @endforeach
 </div>
 
@@ -123,13 +123,13 @@
         </div>
 
         <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/categoria/producao")}}">
+            <a href="{{url("/pesquisa/producao")}}">
                 <img class="categoria-img img-fluid" src="{{asset("icons/factory.svg")}}" title="Produção">
             </a>
         </div>
 
         <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/categoria/infraestrutura")}}">
+            <a href="{{url("/pesquisa/infraestrutura")}}">
                 <img class="categoria-img img-fluid" src="{{asset("icons/building.svg")}}" title="Infraestrutura">
             </a>            
         </div>

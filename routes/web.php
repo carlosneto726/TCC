@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompararController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContaController;
 use App\Http\Controllers\PesquisaController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\RelatoriosController;
 use App\Http\Controllers\CooperativaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CaixaController;
+
 
 use App\Http\Controllers\TestsController;
 
@@ -30,10 +32,8 @@ use App\Http\Controllers\TestsController;
 // HomeController
 Route::get('/', [HomeController::class, 'index']);
 // PesquisaController
-Route::get('/pesquisa/{pesquisa}', [PesquisaController::class, 'viewPesquisa']);
-Route::get('/pesquisa/{pesquisa}/{filtro}', [PesquisaController::class, 'viewPesquisaFiltro']);
+Route::get('/pesquisa', [PesquisaController::class, 'viewPesquisa']);
 Route::get('/pesquisa/{categoria}', [PesquisaController::class, 'viewPesquisaCategoria']);
-Route::post('/pesquisa/{pesquisa}', [PesquisaController::class, 'pesquisarPesquisa']);
 // ProdutoController
 Route::get('/produto/{produto}', [ProdutoController::class, 'viewProduto']);
 Route::post('/avaliar', [ProdutoController::class, 'avaliarProduto']);
@@ -51,6 +51,8 @@ Route::get('/sair', [ContaController::class, 'sair']);
 Route::get('/entrar', [ContaController::class, 'entrar']);
 Route::post('/entrar', [ContaController::class, 'validarLogin']);
 Route::get('/cadastrar', [ContaController::class, 'cadastrar']);
+Route::get('/validar/usuario/{token}', [ContaController::class, 'validarEmailUsuario']);
+Route::get('/validar/cooperativa/{token}', [ContaController::class, 'validarEmailCooperativa']);
 // UsuarioController
 Route::get('/cadastrar/usuario', [UsuarioController::class, 'viewUsuarioCadastro']);
 Route::post('/cadastrar/usuario', [UsuarioController::class, 'addUsuario']);
@@ -87,6 +89,9 @@ Route::get('/caixa/total', [CaixaController::class, 'viewCaixaTotal']);
 Route::get('/caixa/ano', [CaixaController::class, 'viewCaixaAno']);
 Route::get('/caixa/mes', [CaixaController::class, 'viewCaixaMes']);
 Route::get('/caixa/dia', [CaixaController::class, 'viewCaixaDia']);
+// CompararController
+Route::get('/comparar', [CompararController::class, 'viewComparar']);
+Route::get('/comparar/{id_produto}', [CompararController::class, 'addComparacao']);
 
 
 Route::get('/teste', [TestsController::class, 'teste']);

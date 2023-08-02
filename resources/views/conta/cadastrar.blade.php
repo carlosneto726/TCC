@@ -9,22 +9,14 @@
 
     <h6 class="mt-5 text-center">Quero me cadastrar como usuário comum</h6>
     <div class="d-flex justify-content-center">
-        <form action="{{url("/cadastrar/usuario")}}" method="GET">
-            @csrf
-            @method("GET")
-            <button class="btn btn-cadastrar mt-2" type="submit">Cadastrar como usuário comum</button>
-        </form>
+        <a href="{{url("/cadastrar/usuario")}}" class="btn btn-cadastrar mt-2">Cadastrar como usuário comum</a>
     </div>
     
     <hr>
 
     <h6 class="text-center">Quero me cadastrar como cooperativa</h6>
     <div class="d-flex justify-content-center">
-        <form action="{{url("/cadastrar/cooperativa")}}" method="GET">
-            @csrf
-            @method("GET")
-            <button class="btn btn-cadastrar mt-2" type="submit">Cadastrar como cooperativa</button>
-        </form>
+        <a href="{{url("/cadastrar/cooperativa")}}" class="btn btn-cadastrar mt-2">Cadastrar como cooperativa</a>
     </div>
 </div>
 

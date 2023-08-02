@@ -25,12 +25,14 @@
             <div class="row mb-3">
                 <div class="col">
                     <label class="form-check-label" for="inputCEP">CEP</label>
-                    <input type="text" name="cep" class="form-control" id="inputCEP" placeholder="Digite o seu CEP" required>
+                    <input type="text" id="cep" name="cep" maxlength="9" class="form-control" placeholder="Digite o seu CEP" required>
                 </div>
+
                 <div class="col">
                     <label class="form-check-label" for="inputEndereco">Endereço</label>
-                    <input type="text" name="endereco" class="form-control" id="inputEndereco" placeholder="Digite o seu endereço" required>
+                    <input type="text" id="endereco" name="endereco" class="form-control" placeholder="Digite o seu endereço" required>
                 </div>
+
             </div>
 
             <div class="mb-3">
@@ -105,13 +107,14 @@
                 <input class="form-control" type="file" name="img" id="formFile">
             </div>
 
-            <button type="submit" class="btn btn-entrar mt-2">Cadastrar</button>
+            <button type="submit" id="submit" class="btn btn-entrar mt-2">Cadastrar</button>
         </div>
     </form>    
 
 </div>
 
-
+<script src="{{asset("js/app.js")}}"></script>
+  
 <style>
 .btn-entrar{
         background-color: #00FF33;

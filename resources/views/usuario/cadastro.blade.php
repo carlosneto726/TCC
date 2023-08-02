@@ -25,12 +25,13 @@
 
         <div class="mb-3">
             <label class="form-check-label" for="inputCEP">CEP</label>
-            <input type="text" name="cep" class="form-control" id="inputCEP" placeholder="Digite o seu CEP" required>
+            <input type="text" name="cep" id="cep" class="form-control" maxlength="9" placeholder="Digite o seu CEP" required>
+            <div class="form-text">Não sabe o seu CEP? descubra <a href="http://cep.la/" target="_blank">aqui</a>.</div>
         </div>
 
         <div class="mb-3">
             <label class="form-check-label" for="inputEndereco">Endereço</label>
-            <input type="text" name="endereco" class="form-control" id="inputEndereco" placeholder="Digite o seu endereço" required>
+            <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Digite o seu endereço completo" required>
         </div>
 
         <div class="mb-3">
@@ -38,8 +39,10 @@
             <input type="password" name="senha" class="form-control" id="inputSenha" placeholder="Digite a seu senha" required>
         </div>
         
-        <button type="submit" class="btn mt-2" style="background-color: var(--light-green);">Cadastrar</button>
+        <button type="submit" id="submit" class="btn mt-2" style="background-color: var(--light-green);">Cadastrar</button>
     </form>
 
 </div>
+
+<script src="{{asset("js/app.js")}}"></script>
 @endsection

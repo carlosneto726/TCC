@@ -28,14 +28,13 @@
             </ul>
 
             <!-- Formulário para a caixa de pesquisa -->
-            <form class="d-flex" role="search" method="POST" action="{{url("/pesquisa/")}}">
-                @csrf
-                @method("POST")
+            <form class="d-flex" role="search" method="GET" action="{{url("/pesquisa/".request("categoria"))}}">
                 <input class="form-control me-2" id="nav-input" name="pesquisa" type="search" placeholder="Procure por algum produto" aria-label="Search">
                 <button class="btn btn-outline-light" type="submit">
                     <img class="icons" src="{{asset("icons/search.svg")}}" alt="Pesquisa" style="fill: white;">
                 </button>
             </form>
+
         </div>
     </div>
 </nav>

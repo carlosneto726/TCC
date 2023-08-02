@@ -12,45 +12,61 @@ class PesquisaController extends Controller
 {
     public function viewPesquisa(){
         $pesquisa = request("pesquisa");
-        $produtos = DB::select("SELECT * FROM tb_produtos WHERE nome LIKE '%".$pesquisa."%' AND quantidade > 100 AND status = 1 ORDER BY likes DESC");
-        return view('pesquisa.pesquisa', compact('pesquisa', 'produtos'));
-    }
-
-    public function viewPesquisaFiltro(){
-        $filtro = request("filtro");
-        if($filtro == "preco"){}
-        if($filtro == "avaliacao-produto"){}
-        if($filtro == "avaliacao-cooperativa"){}
-        if($filtro == "cooperativa"){}
-        if($filtro == "categoria"){}
-        if($filtro == "localizacao"){}
+        $orderby = request("orderby");
+        $produtos = $this->pesquisa($pesquisa, $orderby);
+        return view('pesquisa.pesquisa', compact('produtos', 'orderby'));
     }
 
     public function viewPesquisaCategoria(){
         $categoria = request("categoria");
+        $orderby = request("orderby");
         if($categoria == "agropecuaria"){ $pesquisa = 1; }
-        if($categoria == "consumo"){ $pesquisa = 2; }
-        if($categoria == "credito"){ $pesquisa = 3; }
-        if($categoria == "educacao"){ $pesquisa = 4; }
-        if($categoria == "especial"){ $pesquisa = 5; }
-        if($categoria == "moradia"){ $pesquisa = 6; }
-        if($categoria == "minerios"){ $pesquisa = 7; }
-        if($categoria == "producao"){ $pesquisa = 8; }
-        if($categoria == "infraestrutura"){ $pesquisa = 9; }
-        if($categoria == "trabalho"){ $pesquisa = 10; }
-        if($categoria == "saude"){ $pesquisa = 11; }
-        if($categoria == "transporte"){ $pesquisa = 12; }
-        if($categoria == "turismo-e-lazer"){ $pesquisa = 13; }
+        else if($categoria == "consumo"){ $pesquisa = 2; }
+        else if($categoria == "credito"){ $pesquisa = 3; }
+        else if($categoria == "educacao"){ $pesquisa = 4; }
+        else if($categoria == "especial"){ $pesquisa = 5; }
+        else if($categoria == "moradia"){ $pesquisa = 6; }
+        else if($categoria == "minerios"){ $pesquisa = 7; }
+        else if($categoria == "producao"){ $pesquisa = 8; }
+        else if($categoria == "infraestrutura"){ $pesquisa = 9; }
+        else if($categoria == "trabalho"){ $pesquisa = 10; }
+        else if($categoria == "saude"){ $pesquisa = 11; }
+        else if($categoria == "transporte"){ $pesquisa = 12; }
+        else if($categoria == "turismo-e-lazer"){ $pesquisa = 13; }
 
-        $produtos = DB::select("SELECT * FROM tb_produtos WHERE tb_produtos.id_cooperativa IN 
-                                    (SELECT tb_cooperativas.id FROM tb_cooperativas WHERE tipo = ?)
-                                AND quantidade > 100 AND status = 1 ORDER BY likes DESC;", 
-        [$pesquisa]);
+        $query = " tb_produtos.id_cooperativa IN (SELECT tb_cooperativas.id FROM tb_cooperativas WHERE tipo = $pesquisa) AND ";
+        $produtos = $this->pesquisa(request("pesquisa"), $orderby, $query);
+
         $pesquisa = $categoria;
-        return view('pesquisa.pesquisa', compact('pesquisa', 'produtos'));
+        return view('pesquisa.pesquisa', compact('produtos', 'orderby'));
     }
 
-    public function pesquisarPesquisa(){
-        
+    public function pesquisa($pesquisa, $orderby, $query = ""){
+
+        if($orderby == "preco"){
+            $orderby = "preco ASC";
+        }else if($orderby == "avaliacao-produto"){
+            $orderby = "likes DESC";
+        }else if($orderby == "cooperativa"){
+            $orderby = "id_cooperativa DESC";
+        }else if($orderby == "localizacao"){
+            $orderby = "likes DESC";
+            $cep = substr(DB::select("SELECT cep FROM tb_usuarios WHERE id = ?", [$_COOKIE['usuario']])[0]->cep, 0, 3);
+            $query = $query." tb_produtos.id_cooperativa IN 
+                            (SELECT tb_cooperativas.id 
+                            FROM tb_cooperativas 
+                            WHERE cep like'%".$cep."%') AND";
+        }else{
+            $orderby = "likes DESC";
+        }
+
+        $produtos = DB::select("SELECT * 
+                                FROM tb_produtos 
+                                WHERE ".$query."
+                                quantidade > 100 
+                                AND status = 1 
+                                AND nome LIKE '%".$pesquisa."%' 
+                                ORDER BY ".$orderby);
+        return $produtos;
     }
 }
