@@ -79,7 +79,6 @@
 
         <div class="avaliacao mb-auto p-3 rounded" style="background-color: var(--green);">
             <button class="btn mt-1 mb-2 w-100" type="button" id="btn-comprar" data-bs-toggle="modal" data-bs-target="#avaliacaoModal">Avaliar produto</button>
-
             <div class="container nota p-2 rounded">
                 <div class="d-flex">
                     <img src="{{asset("icons/thumbs-up.svg")}}">
@@ -87,7 +86,6 @@
                     <img class="ms-auto" src="{{asset("icons/thumbs-down.svg")}}">
                     <span>{{$produto[0]->deslikes}}</span>
                 </div>
-
             </div>
         </div>
 
@@ -110,11 +108,6 @@
                             {{$comentario->comentario}}
                         </p>
                         <div class="d-flex">
-                            <img src="{{asset("icons/thumbs-up.svg")}}">
-                            <span class="me-3">{{$comentario->likes}}</span>
-                            <img src="{{asset("icons/thumbs-down.svg")}}">
-                            <span>{{$comentario->deslikes}}</span>
-
                             <span class="ms-auto">{{$comentario->nome}} | {{$comentario->data}}</|>
                         </div>
                     </div>
@@ -181,12 +174,7 @@
     </div>
 </div>
 
-
-
-
 <style>
-
-
     .item-img{
         object-fit: contain;
         height: 250px;

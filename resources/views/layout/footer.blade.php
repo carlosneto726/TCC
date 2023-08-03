@@ -2,11 +2,11 @@
     <a href="#" class="text-light">
         <h5 class="card-header footer-card-header text-center">Voltar para o topo</h5>
     </a>
-        <div class="card-body footer-card-body">
-            <h5 class="card-title">Rodapé</h5>
-            <p class="card-text">Algum texto sobre o projeto e informações adicionais.</p>
-        </div>
-  </div>
+    <div class="card-body footer-card-body">
+        <h5 class="card-title">Rodapé</h5>
+        <p class="card-text">Algum texto sobre o projeto e informações adicionais.</p>
+    </div>
+</div>
 
 <style>
     

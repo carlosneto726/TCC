@@ -7,9 +7,6 @@
                 <div>
                     <button type="button" class="btn btn-editar" data-bs-toggle="modal" data-bs-target="#produtoModal{{$produto->id}}">Editar</button>
                     <small class="p-1 rounded @if($produto->quantidade <= 10) bg-danger text-light @else bg-light text-dark @endif">QTD: {{$produto->quantidade}}</small>
-                    <span class="p-1 rounded" style="background-color: white; font-size: 9px;">
-                        @if($produto->entrega) <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> @else <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> @endif
-                    </span>
                 </div>
             @endif
 
@@ -33,6 +30,11 @@
             </div>
             <div class="w-100 text-truncate">
                 <span class="">{{$produto->descricao}}</span>
+            </div>
+            <div class="w-100 text-truncate">
+                <span class="p-1 rounded" style="background-color: white; font-size: 9px;">
+                    @if($produto->entrega) <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> @else <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> @endif
+                </span>
             </div>
         </div>
     </a>

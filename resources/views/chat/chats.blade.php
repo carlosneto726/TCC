@@ -4,7 +4,7 @@
 <div class="container mb-3 p-3 rounded" style="background-color: var(--light-gray);">
     <h3 class="text-center">Chats</h3>
     <form class="mt-3 d-flex" role="search" method="GET" action="/chats">
-        <input class="form-control me-2" name="pesquisa" type="search" placeholder="Pesquise por um fórum" aria-label="Search">
+        <input class="form-control me-2" name="pesquisa" type="search" placeholder="Pesquise por um chat" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Buscar</button>
     </form>
 

@@ -63,9 +63,7 @@
                 <label for="inputSenha" class="form-label">Senha</label>
                 <input type="password" name="senha" class="form-control" id="inputSenha" placeholder="Digite a seu senha" required>
             </div>
-
         </div>
-
 
         <div class="contato ms-3 mb-auto">
             <h4>Contato</h4>
