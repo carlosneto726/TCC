@@ -133,7 +133,7 @@ class ContaController extends Controller
             AlertController::alert("Senha atualizada com sucesso.","success");
             return redirect("/entrar");
         }else if(count($cooperativa) == 1){
-            DB::update("UPDATE tb_cooperativa SET senha = ?, token = 0 WHERE token = ?", [$senha, $token]);
+            DB::update("UPDATE tb_cooperativas SET senha = ?, token = 0 WHERE token = ?", [$senha, $token]);
             AlertController::alert("Senha atualizada com sucesso.","success");
             return redirect("/entrar");
         }else{
