@@ -1,66 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<a name="readme-top"></a>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<br />
+<div align="center">
+  <a href="https://github.com/carlosneto726/projeto-Incubadora">
+    <img src="logo-ifg-formosa.png" alt="Logo" width="35%">
+  </a>
 
-## About Laravel
+  <h3 align="center">Trabalho de conclusão de curso - Criação de uma plataforma web para cooperativas de Formosa-GO</h3>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+</div>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<!-- Tabela de conteudos -->
+<details>
+  <summary>Tabela de conteudos</summary>
+  <ol>
+    <li>
+      <a href="#sobre-o-projeto">Sobre o projeto</a>
+      <ul>
+        <li><a href="#feito-com">Feito com</a></li>
+      </ul>
+    </li>
+    <li><a href="#licença">Licença</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ol>
+</details>
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Sobre o projeto
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+[![Product Name Screen Shot][product-screenshot]](https://cooperativasunidas.online/)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+O objetivo geral deste projeto é desenvolver uma plataforma digital para viabilizar
+o fornecimento dos serviços e produtos provenientes de empreendimentos cooperativos da
+cidade de Formosa-GO para a população em geral.
+Você já pode acessar o site por este [link][CooperativasUnidas].
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+### Feito com
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+O projeto está sendo desenvolvido com essas tecnologias.
 
-## Contributing
+* [![PHP][PHP]][PHP-url]
+* [![Laravel][Laravel]][Laravel-url]
+* [![Bootstrap][Bootstrap]][Bootstrap-url]
+* [![MySql][MySql]][MySql-url]
+* [![HTML][HTML]][HTML-url]
+* [![CSS][CSS]][CSS-url]
+* [![Javascript][Javascript]][Javascript-url]
+* [![Composer][Composer]][Composer-url]
+* [![Github][Github]][Github-url]
+* [![Pusher][Pusher]][Pusher-url]
+* [![QuickChart][QuickChart]][QuickChart-url]
+* [![ViaCEP][ViaCEP]][ViaCEP-url]
+* [![Hostinger][Hostinger]][Hostinger-url]
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## Licença
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Distribuido sobre a Licença MIT. Veja `LICENSE` para mais informções.
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<!-- CONTACT -->
+## Contato
+
+* [Email][Email]
+* [Linkedin][Linkedin]
+* [Github][PerfilGithub]
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[product-screenshot]: screenshot.png
+
+[Email]: carlosneto726@gmail.com
+[Linkedin]: https://www.linkedin.com/in/carlosneto726/
+[PerfilGithub]: https://github.com/carlosneto726
+[CooperativasUnidas]: https://cooperativasunidas.online/
+
+
+[PHP]: https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white
+[PHP-url]: https://www.php.net/
+
+[Laravel]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com/
+
+[Bootstrap]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://laravel.com/
+
+[MySql]: https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white
+[MySql-url]: https://www.mysql.com/
+
+[HTML]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
+[HTML-url]: https://pt.wikipedia.org/wiki/HTML
+
+[CSS]: https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
+[CSS-url]: https://pt.wikipedia.org/wiki/Cascading_Style_Sheets
+
+[Javascript]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
+[Javascript-url]: https://pt.wikipedia.org/wiki/JavaScript
+
+[Composer]: https://img.shields.io/badge/Composer-white?style=for-the-badge&logo=Composer&logoColor=black
+[Composer-url]: https://getcomposer.org/
+
+[Pusher]: https://img.shields.io/badge/Pusher-white?style=for-the-badge&logo=Pusher&logoColor=300D4F
+[Pusher-url]: https://pusher.com/
+
+[QuickChart]: https://img.shields.io/badge/QuickChart-0B97D7?style=for-the-badge
+[QuickChart-url]: https://quickchart.io/
+
+[ViaCEP]: https://img.shields.io/badge/ViaCEP-008000?style=for-the-badge
+[ViaCEP-url]: https://viacep.com.br/
+
+[Github]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[Github-url]: https://github.com/
+
+[Hostinger]: https://img.shields.io/badge/Hostinger-673EE6?style=for-the-badge
+[Hostinger-url]: https://www.hostinger.com.br/
+
