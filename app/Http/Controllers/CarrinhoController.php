@@ -37,6 +37,10 @@ class CarrinhoController extends Controller
 
     public function addProduto(){
         $id_produto = request("id_produto");
+        if(isset($_COOKIE["cooperativa"])){
+            AlertController::alert("Por favor, entre como usuário comum para comprar o produto", "warning");
+            return redirect("/produto/".$id_produto);
+        }
         $id_usuario = $_COOKIE['usuario'];
         $flag = true;
 

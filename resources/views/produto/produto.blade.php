@@ -5,10 +5,12 @@
     <div class="hstack mx-auto">
         <div class="container me-3 p-3 mb-auto rounded" style="background-color: var(--light-gray);">
             <a href="{{url("/produto/".$id_produto."/favoritar/".$favorito)}}" class="text-decoration-none text-dark">
-                @if($favorito)
-                    <img src="{{asset("icons/heart-fill.svg")}}"> Favoritar
-                @else
-                    <img src="{{asset("icons/heart.svg")}}"> Favoritar
+                @if(isset($_COOKIE["usuario"]))
+                    @if($favorito)
+                        <img src="{{asset("icons/heart-fill.svg")}}"> Favoritar
+                    @else
+                        <img src="{{asset("icons/heart.svg")}}"> Favoritar
+                    @endif
                 @endif
             </a>
             <a href="{{url("/comparar/".$id_produto)}}" class="text-decoration-none text-dark ms-3">

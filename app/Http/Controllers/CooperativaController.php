@@ -131,6 +131,10 @@ class CooperativaController extends Controller
         $endereco = request("endereco");
         $tipo = request("tipo");
         $cnpj = request("cnpj");
+        if(!$this->validarCNPJ($cnpj)){
+            AlertController::alert("CNPJ Inválido", "danger");
+            return redirect("/cadastrar/cooperativa");
+        }
         $senha = Hash::make(request("senha"));
         $tel1 = request("tel1");
         $tel2 = request("tel2");
@@ -172,5 +176,48 @@ class CooperativaController extends Controller
         ];
         
         Mail::to($email)->send(new PedidoEmail($dados, "confirmarEmail"));
+    }
+
+
+    function validarCNPJ($cnpj) {
+    if ($cnpj == '00000000000000' || 
+        $cnpj == '11111111111111' || 
+        $cnpj == '22222222222222' || 
+        $cnpj == '33333333333333' || 
+        $cnpj == '44444444444444' || 
+        $cnpj == '55555555555555' || 
+        $cnpj == '66666666666666' || 
+        $cnpj == '77777777777777' || 
+        $cnpj == '88888888888888' || 
+        $cnpj == '99999999999999') {
+        return false;
+
+        } else {   
+         
+            $j = 5;
+            $k = 6;
+            $soma1 = 0;
+            $soma2 = 0;
+    
+            for ($i = 0; $i < 13; $i++) {
+    
+                $j = $j == 1 ? 9 : $j;
+                $k = $k == 1 ? 9 : $k;
+    
+                $soma2 += ($cnpj[$i] * $k);
+    
+                if ($i < 12) {
+                    $soma1 += ($cnpj[$i] * $j);
+                }
+                $k--;
+                $j--;
+            }
+    
+            $digito1 = $soma1 % 11 < 2 ? 0 : 11 - $soma1 % 11;
+            $digito2 = $soma2 % 11 < 2 ? 0 : 11 - $soma2 % 11;
+    
+            return (($cnpj[12] == $digito1) and ($cnpj[13] == $digito2));
+         
+        }
     }
 }

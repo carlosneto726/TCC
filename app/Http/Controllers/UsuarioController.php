@@ -31,6 +31,12 @@ class UsuarioController extends Controller
         $endereco = request("endereco");
         $cep = request("cep");
         $cpf = request("cpf");
+
+        if(!$this->validarCPF($cpf)){
+            AlertController::alert("CPF Inválido", "danger");
+            return redirect("/cadastrar/usuario");
+        }
+
         $senha = Hash::make(request("senha"));
         $token = Str::random(60);
 
@@ -79,5 +85,57 @@ class UsuarioController extends Controller
         ];
         
         Mail::to($email)->send(new PedidoEmail($dados, "confirmarEmail"));
+    }
+
+    public function validarCPF($cpf){
+        if ($cpf == '00000000000' || 
+            $cpf == '11111111111' || 
+            $cpf == '22222222222' || 
+            $cpf == '33333333333' || 
+            $cpf == '44444444444' || 
+            $cpf == '55555555555' || 
+            $cpf == '66666666666' || 
+            $cpf == '77777777777' || 
+            $cpf == '88888888888' || 
+            $cpf == '99999999999') {
+            return false;
+
+        }else{
+            $desc = 10;
+            $soma = 0;
+            for($i = 0; $i < 9; $i++){
+                $soma += $cpf[$i] * $desc;
+                $desc --;
+            }
+
+            $resto = (($soma * 10) % 11);
+            if($resto == 10){
+                $resto = 0;
+            }
+
+            if($resto == $cpf[9]){
+
+                $desc = 11;
+                $soma = 0;
+                for($i = 0; $i < 10; $i++){
+                    $soma += $cpf[$i] * $desc;
+                    $desc --;
+                }
+        
+                $resto = (($soma * 10) % 11);
+                if($resto == 10){
+                    $resto = 0;
+                }
+
+                if($resto == $cpf[10]){
+                    return true;
+                }else{
+                    return false;
+                }
+
+            }else{
+                return false;
+            }
+        }
     }
 }

@@ -46,6 +46,10 @@ class ProdutoController extends Controller
 
     public function avaliarProduto(){
         $id_produto = request("id_produto");
+        if(isset($_COOKIE["cooperativa"])){
+            AlertController::alert("Por favor, entre como usuário comum para avaliar o produto", "warning");
+            return redirect("/produto/".$id_produto);
+        }
         $id_usuario = $_COOKIE['usuario'];
         $titulo = request("titulo");
         $comentario = request("comentario");

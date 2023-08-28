@@ -25,7 +25,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label class="form-check-label" for="inputCEP">CEP</label>
-                    <input type="text" id="cep" name="cep" maxlength="9" class="form-control" placeholder="Digite o seu CEP" required>
+                    <input type="text" name="cep" id="cep" class="form-control" maxlength="8" placeholder="Digite o seu CEP" required onkeypress="return /[0-9]/i.test(event.key)" >
                 </div>
 
                 <div class="col">
@@ -56,7 +56,7 @@
 
             <div class="mb-3">
                 <label for="inputCNPJ" class="form-label">CNPJ</label>
-                <input type="text" name="cnpj" class="form-control" id="inputCNPJ" placeholder="Digite o seu CNPJ" required>
+                <input type="text" name="cnpj" class="form-control" maxlength="14" id="inputCNPJ" placeholder="Digite o seu CNPJ" required onkeypress="return /[0-9]/i.test(event.key)" >
             </div>
 
             <div class="mb-3">
@@ -71,7 +71,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label class="form-check-label" for="inputTel1">Telefone 1</label>
-                    <input type="text" name="tel1" class="form-control" id="inputTel1" placeholder="Digite o seu telefone principal" required>
+                    <input type="text" name="tel1" class="form-control" maxlength="20" id="inputTel1" placeholder="Digite o seu telefone principal" required onkeypress="return /[0-9]/i.test(event.key)" >
                 </div>
                 <div class="col">
                     <label class="form-check-label" for="inputTel2">Telefone 2</label>

@@ -1,7 +1,4 @@
 <li class="nav-item">
-    <a class="nav-link text-light" href="{{url("/pedidos")}}">Pedidos</a>
-</li>
-<li class="nav-item">
     <a class="nav-link text-light" href="{{url("/caixa")}}">Caixa</a>
 </li>
 <li class="nav-item">
