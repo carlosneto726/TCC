@@ -31,6 +31,7 @@ use App\Http\Controllers\TestsController;
 
 // HomeController
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/sobre', [HomeController::class, 'viewSobre']);
 // PesquisaController
 Route::get('/pesquisa', [PesquisaController::class, 'viewPesquisa']);
 Route::get('/pesquisa/{categoria}', [PesquisaController::class, 'viewPesquisaCategoria']);
@@ -96,6 +97,5 @@ Route::get('/caixa/dia', [CaixaController::class, 'viewCaixaDia']);
 // CompararController
 Route::get('/comparar', [CompararController::class, 'viewComparar']);
 Route::get('/comparar/{id_produto}', [CompararController::class, 'addComparacao']);
-
 
 Route::get('/teste', [TestsController::class, 'teste']);

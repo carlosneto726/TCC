@@ -56,4 +56,8 @@ class HomeController extends Controller
         
         return view('home.home', compact('produtos', 'produtos_carrossel'));
     }
+
+    public function viewSobre(){
+        return view("home.sobre");
+    }
 }

@@ -34,9 +34,9 @@
         @yield('content')
     </section>
 
-    <footer>
+    <div id="footer">
         @include('layout.footer')
-    </footer>
+    </div>
 
 
     <!-- Javascript -->

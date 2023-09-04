@@ -1,23 +1,21 @@
-<div class="card" id="footer">
-    <a href="#" class="text-light">
-        <h5 class="card-header footer-card-header text-center">Voltar para o topo</h5>
-    </a>
-    <div class="card-body footer-card-body">
-        <h5 class="card-title">Rodapé</h5>
-        <p class="card-text">Algum texto sobre o projeto e informações adicionais.</p>
-    </div>
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center p-5">
+        <p class="col-md-4 mb-0">&copy; 2023 Carlos Henrique Teixeira de Carvalho Neto</p>
+
+        <a href="#" class="btn btn-success">
+            <h5 class="text-center text-light">Voltar para o topo</h5>
+        </a>
+
+        <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="{{url("/")}}" class="nav-link px-2 text-light">Home</a></li>
+            <li class="nav-item"><a href="{{url("/sobre")}}" class="nav-link px-2 text-light">Sobre</a></li>
+        </ul>
+    </footer>
 </div>
 
 <style>
-    
-    .footer-card-header{
-        background-color: #0A4400;
-        color: white;
-    }
-
-    .footer-card-body{
+    #footer{
         background-color: #009241;
         color: white;
     }
-
 </style>
