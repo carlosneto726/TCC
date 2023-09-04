@@ -2,7 +2,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/carlosneto726/projeto-Incubadora">
+  <a href="https://www.ifg.edu.br/">
     <img src="logo-ifg-formosa.png" alt="Logo" width="35%">
   </a>
 
