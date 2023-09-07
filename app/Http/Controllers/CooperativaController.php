@@ -109,7 +109,7 @@ class CooperativaController extends Controller
         $perfil = $cooperativa[0]->perfil;
 
         if($request->file('outdoor')){
-            $outdoor = $request->file('imagem')->storeAs('images/produtos', "produto_img".$nome, 'public');
+            $outdoor = $request->file('outdoor')->storeAs('images/produtos', "produto_img".$nome, 'public');
         }
         if($request->file('perfil')){
             $perfil = $request->file('perfil')->storeAs('images/'.$nome, "perfil", 'public');
