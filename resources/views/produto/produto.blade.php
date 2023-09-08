@@ -66,7 +66,7 @@
                 @endif
             </div>
             <hr>
-            <a class="btn mt-4 w-100  @if($produto[0]->quantidade <= 0) d-none @endif" id="btn-comprar" href="{{url("/carrinho/add?id_produto=".$id_produto)}}">
+            <a class="btn mt-4 w-100  @if($produto[0]->quantidade <= 0) d-none @endif" id="btn-comprar" @if(!isset($_COOKIE['usuario'])) href="{{url("/entrar")}}" @else href="{{url("/carrinho/add?id_produto=".$id_produto)}}" @endif>
                 Adicionar ao carrinho
             </a>
         </div>
@@ -167,7 +167,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn" id="btn-comprar">Enviar</button>
+                    @if(!isset($_COOKIE['usuario']))
+                        <a href="{{url("/entrar")}}" class="btn" id="btn-comprar">Enviar</a>
+                    @else
+                        <button type="submit" class="btn" id="btn-comprar">Enviar</button>
+                    @endif
                 </div>
 
             </form>
