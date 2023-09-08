@@ -24,8 +24,7 @@ class HomeController extends Controller
                                     INNER JOIN tb_cooperativas ON tb_produtos.id_cooperativa = tb_cooperativas.id
                                     WHERE quantidade > 100 
                                     AND status = 1 
-                                    AND cep LIKE '%".$cep."%' 
-                                    ORDER BY likes DESC");
+                                    ORDER BY likes DESC, cep LIKE '%".$cep."%'");
 
             $produtos_carrossel = [];
             foreach ($produtos as $produto) {
