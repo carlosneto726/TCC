@@ -1,6 +1,6 @@
 <div class="card m-1 rounded">
     <!-- Imagem do produto com o botão de editar -->
-    <img class="rounded card-img-top @if($produto->quantidade <= 0) opacity-50 @endif" src="{{asset("storage/".$produto->imagem)}}"  style="height: 200px; object-fit: cover;">
+    <img class="rounded card-img-top p-2 @if($produto->quantidade <= 0) opacity-50 @endif" src="{{asset("storage/".$produto->imagem)}}"  style="height: 200px; object-fit: contain;">
     <div class="card-img-overlay" style="height: 200px;">
         <div class="d-flex" style="height: 170px;">
             @if (isset($_COOKIE["cooperativa"]))
