@@ -135,7 +135,7 @@ class RelatoriosController extends Controller
             [$id_cooperativa, $cep_venda->cep]);
 
             $context = stream_context_create($opts);
-            $endereco = json_decode(file_get_contents('http://cep.la/'.$cep_venda->cep, false, $context));
+            $endereco = json_decode(file_get_contents('https://viacep.com.br/ws/'.$cep_venda->cep.'/json/', false, $context));
             array_push($labels, $endereco->bairro);
             array_push($data, $vendas[0]->qtd);
         }
