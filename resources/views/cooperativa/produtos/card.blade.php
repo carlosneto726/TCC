@@ -19,7 +19,7 @@
         </div>    
     </div>
 
-    <a class="text-decoration-none text-dark @if($produto->quantidade <= 0) opacity-50 @endif" href="{{url("/produto?id_produto=".$produto->id)}}">
+    <a class="text-decoration-none text-dark @if($produto->quantidade <= 0) opacity-50 @endif" href="{{url("/produto/".$produto->id)}}">
         <div class="card-body p-2 rounded">
             <!-- Iformações do produto -->
             <div class="w-100 text-truncate">
