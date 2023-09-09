@@ -1,5 +1,5 @@
 <div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center p-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center p-5">
         <p class="col-md-4 mb-0">&copy; 2023 Carlos Henrique Teixeira de Carvalho Neto</p>
 
         <a href="#" class="btn btn-success">
@@ -10,11 +10,11 @@
             <li class="nav-item"><a href="{{url("/")}}" class="nav-link px-2 text-light">Home</a></li>
             <li class="nav-item"><a href="{{url("/sobre")}}" class="nav-link px-2 text-light">Sobre</a></li>
         </ul>
-    </footer>
+    </div>
 </div>
 
 <style>
-    #footer{
+    footer{
         background-color: #009241;
         color: white;
     }

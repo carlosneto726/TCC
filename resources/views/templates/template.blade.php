@@ -30,13 +30,13 @@
         @endphp
     @endif
 
-    <section style="margin-top: 75px; margin-bottom: 55px;">
+    <section class="flex-shrink-0" style="margin-top: 75px; margin-bottom: 55px;">
         @yield('content')
     </section>
 
-    <div id="footer">
+    <footer id="footer">
         @include('layout.footer')
-    </div>
+    </footer>
 
 
     <!-- Javascript -->
