@@ -37,11 +37,16 @@ class PedidosController extends Controller
             $qtd = $produto[0]->quantidade;
             $qtd_pedido_produto = $pedido_produto->pqtd;
 
-            if(($qtd - $qtd_pedido_produto) < 0){
+            if(($qtd - $qtd_pedido_produto) < 0 && $qtd == true){
                 AlertController::alert("Parece que você não possui estoque o suficiente.", "danger");
                 return redirect("/pedidos");
             }else{
-                DB::update("UPDATE tb_produtos SET quantidade = ? WHERE id = ?", [($qtd - $qtd_pedido_produto), $produto[0]->id]);
+                if($qtd == false){
+                    $new_qtd = NULL;
+                }else{
+                    $new_qtd = ($qtd - $qtd_pedido_produto);
+                }
+                DB::update("UPDATE tb_produtos SET quantidade = ? WHERE id = ?", [$new_qtd, $produto[0]->id]);
                 DB::update("UPDATE tb_pedidos SET status = ? WHERE id = ?", [1, $id_pedido]);
                 if(($qtd - $qtd_pedido_produto) <= 10){
                     $alerta = $alerta."\n".$produto[0]->nome." com estoque baixo!";
