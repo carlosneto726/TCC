@@ -1,14 +1,21 @@
 @extends('templates.template')
 @section('content')
 
-<h2 class="container">Seus pedidos</h2>
 
-<div class="container mt-5">
-    
+<div class="container">
+    <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
+        <div class="lh-1">
+            <h1 class="h4 mb-0 lh-1">Seus pedidos</h1>
+        </div>
+    </div>
+
+
     @foreach ($pedidos as $pedido)
-        <div class="container p-3 mb-5 rounded" style="background-color: var(--light-gray);">
-            <div class="d-flex m-2">
-                <span class="me-2">ID: {{$pedido->id}}</span>                
+
+        <div class="my-3 p-3 bg-body rounded shadow">
+            <h6 class="border-bottom pb-2 mb-0 d-flex">
+                ID: {{$pedido->id}}
+
                 <span class="ms-auto fw-bold mt-1">
                     @if($pedido->status == "1") 
                         <span class="text-success">CONCLUÍDO</span> 
@@ -19,47 +26,29 @@
                     @endif 
                 </span>
                 <a class="btn btn btn-sm ms-3" href="{{url("/pedidos/chat/".$pedido->id)}}" style="background-color: var(--light-green);">Conversar</a>
-            </div>
+            </h6>
+
             @foreach ($pedido->produtos as $produto)
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="{{asset("storage/".$produto->pimg)}}" class="img-fluid rounded" style="height: 150px; object-fit: contain;">
+                <div class="d-flex text-body-secondary border-bottom pt-3 pb-3">
+                    <img src="{{asset("storage/".$produto->pimg)}}" class="bd-placeholder-img flex-shrink-0 me-2 rounded object-fit-contain" width="64" height="64">
+                    <div class="pb-3 mb-0 small lh-sm w-100">
+                        <div class="d-flex justify-content-between">
+                            <a class="text-gray-dark fw-bold" href="{{url("/produto/".$produto->pid)}}">{{$produto->pnome}}</a>
+                            <span>{{$produto->pqtd}} X R$ {{number_format($produto->ppreco,2,",",".")}} (R$ {{number_format(($produto->ppreco * $produto->pqtd),2,",",".")}})</span>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$produto->pnome}}</h5>
-                                
-                                <div class="d-flex">                                        
-                                    {{$produto->pqtd}}
-                                    <p class="card-text ms-auto">
-                                        <small class="fw-bold">
-                                            R$ {{number_format($produto->ppreco,2,",",".")}}
-                                        </small>
-                                        <small>
-                                            (R$ {{number_format(($produto->ppreco * $produto->pqtd),2,",",".")}})
-                                        </small>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <a class="d-block" href="{{url("/cooperativa/".$produto->coopnome)}}">{{$produto->coopnome}}</a>
                     </div>
                 </div>
             @endforeach
-            <div class="d-flex">
-                <span class="me-auto">{{$pedido->data}}</span>
-                <span class="ms-auto">Preço total do pedido: R$ {{number_format($pedido->preco_total,2,",",".")}}</span>                
-            </div>
+
+            
+            <small class="d-flex justify-content-between mt-3">
+                <span>{{$pedido->data}}</span>
+                <strong>Preço total do pedido: R$ {{number_format($pedido->preco_total,2,",",".")}}</strong>
+            </small>
         </div>
+
     @endforeach
     
 </div>
-
-<style>
-    #btn-comprar{
-        background-color: #00FF33;
-    }
-</style>
-
-
 @endsection
