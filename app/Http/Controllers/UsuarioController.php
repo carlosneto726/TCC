@@ -16,7 +16,12 @@ class UsuarioController extends Controller
 {
 
     public function viewUsuarioCadastro(){
-        return view('usuario.cadastro');
+        if(isset($_COOKIE['usuario']) || isset($_COOKIE['cooperativa'])){
+            AlertController::alert("Você precisa sair da sua conta antes de cadastrar outra.", "danger");
+            return redirect("/");
+        }else{
+            return view('usuario.cadastro');
+        }
     }
 
     public function viewPerfil(){

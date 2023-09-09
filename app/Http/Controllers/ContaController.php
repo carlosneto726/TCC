@@ -15,10 +15,20 @@ session_start();
 class ContaController extends Controller
 {
     public function entrar(){
-        return view('conta.entrar');
+        if(isset($_COOKIE['usuario']) || isset($_COOKIE['cooperativa'])){
+            AlertController::alert("Você precisa sair da sua conta antes de entrar em outra.", "danger");
+            return redirect("/");
+        }else{
+            return view('conta.entrar');
+        }
     }
     public function cadastrar(){
-        return view('conta.cadastrar');
+        if(isset($_COOKIE['usuario']) || isset($_COOKIE['cooperativa'])){
+            AlertController::alert("Você precisa sair da sua conta antes de cadastrar outra.", "danger");
+            return redirect("/");
+        }else{
+            return view('conta.cadastrar');
+        }
     }
 
     public function sair(){

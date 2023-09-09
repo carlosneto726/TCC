@@ -15,7 +15,12 @@ class CooperativaController extends Controller
 {
 
     public function viewCadastroUsuario(){
-        return view('cooperativa.cadastro');
+        if(isset($_COOKIE['usuario']) || isset($_COOKIE['cooperativa'])){
+            AlertController::alert("Você precisa sair da sua conta antes de cadastrar outra.", "danger");
+            return redirect("/");
+        }else{
+            return view('cooperativa.cadastro');
+        }
     }
 
     public function viewCooperativa(){
