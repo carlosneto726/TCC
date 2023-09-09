@@ -1,6 +1,6 @@
 @extends('templates.template')
 @section('content')
-<div class="navbar navbar-expand-lg bg-body-tertiary w-100 mb-5" style="margin-top: -25px; background-color: var(--light-gray);">
+<div class="navbar navbar-expand-lg bg-body-tertiary w-100" style="margin-top: -25px; background-color: var(--light-gray);">
     <div class="container-fluid">
         <ul class="navbar-nav">
             <a href="{{url("/favoritos?orderby=preco")}}" class="text-decoration-none">
@@ -19,13 +19,19 @@
     </div>
 </div>
 
-<h1 class="container">Favoritos</h1>
-<h3 class="container">@if(request("orderby")) Ordenado por <span class="fw-bold">"{{request("orderby")}}"</span> @endif</h3>
-<div class="container mt-5">
-    <div class="grid-container container p-3 mb-auto rounded" style="background-color: var(--light-gray);">
+<div class="container">
+    <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
+        <img class="me-3" src="{{asset("icons/heart-fill.svg")}}" width="48" height="38">
+        <div class="lh-1">
+            <h1 class="h4 mb-0 lh-1">Seus favoritos</h1>
+            <small>@if(request("orderby")) Ordenado por <span class="fw-bold">"{{request("orderby")}}"</span> @endif</small>
+        </div>
+    </div>
+
+    <div class="grid-container">
         @foreach ($produtos as $produto)
             <!-- Card dos produtos -->
-            <div class="card m-1 rounded">
+            <div class="card m-1 rounded border-0 shadow">
                 <!-- Imagem do produto com o botão de editar -->
                 <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
     
@@ -63,22 +69,13 @@
             </div>
         @endforeach
     </div>
-
 </div>
 
-
 <style>
-
     .grid-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
-
-    #btn-comprar{
-        background-color: #00FF33;
-    }
-
 </style>
-
 
 @endsection

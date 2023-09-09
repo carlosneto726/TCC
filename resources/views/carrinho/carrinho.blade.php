@@ -2,9 +2,11 @@
 @section('content')
 
 <div class="container">
-    <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="{{asset("icons/cart.svg")}}" width="72" height="57">
-        <h2>Seu Carrinho</h2>
+    <div class="d-flex align-items-center p-3 my-5 rounded shadow-lg">
+        <img class="me-3" src="{{asset("icons/cart.svg")}}" width="48" height="38">
+        <div class="lh-1">
+            <h1 class="h4 mb-0 lh-1">Seu Carrinho</h1>
+        </div>
     </div>
 
     <div class="row g-5">
@@ -13,7 +15,7 @@
                 <span class="text-success">Resumo do pedido</span>
                 <span class="badge bg-success rounded-pill">{{$quantidade_produtos}}</span>
             </h4>
-            <ul class="list-group mb-3">
+            <ul class="list-group mb-3 shadow">
                 @foreach ($produtos as $produto)
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
@@ -29,7 +31,7 @@
                 </li>
             </ul>
 
-            <form class="card p-2" action="{{url("/carrinho/finalizar")}}" method="POST">
+            <form class="card p-2 shadow" action="{{url("/carrinho/finalizar")}}" method="POST">
                 @csrf
                 @method("POST")
                 <button class="btn w-100" type="submit" style="background-color: var(--light-green);">Fazer Pedido</button>
@@ -44,7 +46,7 @@
             <div class="row g-3">
                 <div class="col-12">
                     @foreach ($produtos as $produto)
-                        <div class="card mb-3" style="max-width: 1200px;">
+                        <div class="card mb-3 border-0 shadow" style="max-width: 1200px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <img src="{{asset("storage/".$produto->imagem)}}" class="img-fluid rounded" style="height: 150px; object-fit: contain;">
