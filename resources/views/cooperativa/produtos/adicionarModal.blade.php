@@ -26,7 +26,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="inputQuantidade" class="form-label">Quantidade</label>
-                        <input type="text" class="form-control" name="quantidade" id="inputQuantidade" placeholder="Insira a quantidade do seu produto" aria-describedby="quantidadeHelp" required>
+                        <input type="text" class="form-control" name="quantidade" id="inputQuantidade" placeholder="Insira a quantidade do seu produto" aria-describedby="quantidadeHelp">
                         <div id="quantidadeHelp" class="form-text">Caso seja um serviço, pode deixar em branco.</div>
                     </div>
                     <div class="mb-4">

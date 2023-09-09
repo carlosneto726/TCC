@@ -59,14 +59,14 @@
         <div class="ms-auto mb-auto p-3 rounded" style="background-color: var(--light-gray); width: 400px;">
             <h2>R$ {{number_format($produto[0]->preco,2,",",".")}}</h2>
             <div class="ms-auto">
-                @if($produto[0]->quantidade <= 0)
+                @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false)
                     <span class="fw-bold text-danger"> INDISPONIVEL </span>
                 @else
                     <span class="fw-bold text-success"> DISPONIVEL </span>
                 @endif
             </div>
             <hr>
-            <a class="btn mt-4 w-100  @if($produto[0]->quantidade <= 0) d-none @endif" id="btn-comprar" @if(!isset($_COOKIE['usuario'])) href="{{url("/entrar")}}" @else href="{{url("/carrinho/add?id_produto=".$id_produto)}}" @endif>
+            <a class="btn mt-4 w-100  @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false) d-none @endif" id="btn-comprar" @if(!isset($_COOKIE['usuario'])) href="{{url("/entrar")}}" @else href="{{url("/carrinho/add?id_produto=".$id_produto)}}" @endif>
                 Adicionar ao carrinho
             </a>
         </div>
