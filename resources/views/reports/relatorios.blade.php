@@ -17,7 +17,7 @@
 @endif
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
-<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -20px; background-color: var(--light-gray);">
+<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -20px;">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{url("/cooperativa/".$_COOKIE['nome_cooperativa'])}}">{{$_COOKIE['nome_cooperativa']}}</a>
     <ul class="navbar-nav flex-row d-md-none">
         <li class="nav-item text-nowrap">
@@ -28,15 +28,12 @@
     </ul>
 </div>
 
-
-
-
 <div class="container-fluid">
     <div class="row">
         <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
             <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+                    <h5 class="offcanvas-title" id="sidebarMenuLabel">{{$_COOKIE['nome_cooperativa']}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
@@ -103,7 +100,7 @@
             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Planilha</h1>
+                <h1 class="h2 mb-2"><img class="me-3" src="{{asset("icons/table.svg")}}" width="48" height="38"> Planilha</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <button type="button" class="btn btn-sm btn-outline-success" onclick="exportTableToExcel('{{$tipo}}')">
                         <img src="{{asset("icons/download.svg")}}" title="Baixar planilha">

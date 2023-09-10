@@ -1,9 +1,9 @@
 @extends('templates.template')
 @section('content')
 
-<div class="container mb-3 p-3" style="background-color: var(--light-gray);">
+<div class="container mb-3 p-3 rounded" style="background-color: var(--light-gray);">
 
-    <div class="forum-info container p-3">
+    <div class="forum-info container p-3 rounded bg-light">
         <h1>{{$forum_info[0]->titulo}}</h1>
         <div class="descricao">
             <p>
@@ -11,7 +11,7 @@
             </p>
         </div>
         <div class="ms-auto" style="width: fit-content;">
-            <a href="/cooperativa?cooperativa_id={{$forum_info[0]->id_cooperativa}}">{{$nome_cooperativa}}</a>
+            <a href="/cooperativa/{{$nome_cooperativa}}">{{$nome_cooperativa}}</a>
             <div class="vr"></div>
             {{$forum_info[0]->data}}
         </div>
@@ -29,7 +29,7 @@
                             <a class='mt-2' href='#modal".$message['id']."' data-bs-toggle='modal' role='button' aria-controls='modal".$message['id']."'>Responder</a>
                             <div class='ms-auto' style='width: fit-content;'>
                                 <div class='ms-auto' style='width: fit-content;'>
-                                    <span style='font-size: 12px;'><a href='/cooperativa?cooperativa_id=".$message['id_cooperativa']."'>".$message['author']."</a></span>
+                                    <span style='font-size: 12px;'><a href='/cooperativa/".$message['author']."'>".$message['author']."</a></span>
                                     <div class='vr'></div>
                                     <span style='font-size: 12px;'>".$message['created']."</span>
                                 </div>

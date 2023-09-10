@@ -1,6 +1,6 @@
 @extends('templates.template')
 @section('content')
-<div class="navbar navbar-expand-lg bg-body-tertiary w-100" style="margin-top: -25px; background-color: var(--light-gray);">
+<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
     <div class="container-fluid">
         <ul class="navbar-nav">
             <a href="/chats/?orderby=data" class="text-decoration-none">
@@ -23,8 +23,8 @@
     </div>
 
     <form class="mt-3 d-flex" role="search" method="GET" action="/chats">
-        <input class="form-control me-2" name="pesquisa" type="search" placeholder="Pesquise por um chat" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
+        <input class="form-control me-2 shadow" name="pesquisa" type="search" placeholder="Pesquise por um chat" aria-label="Search">
+        <button class="btn btn-outline-success shadow" type="submit">Buscar</button>
     </form>
     
     @foreach ($chats as $chat)
