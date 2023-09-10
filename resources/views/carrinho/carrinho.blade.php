@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$produto->nome}}</h5>
+                                        <h5 class="card-title"><a href="{{url("/produto/".$produto->id)}}">{{$produto->nome}}</a></h5>
                                         <p class="card-text text-truncate">{{$produto->descricao}}</p>
                                         <div class="d-flex">
                                             <form action="{{url("/carrinho/update")}}" method="POST">

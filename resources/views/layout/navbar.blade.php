@@ -1,45 +1,27 @@
+<nav class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{{url("/")}}" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none navbar-brand text-light fw-bold">
+            Cooperativas Unidas
+        </a>
 
-<nav class="navbar navbar-expand-lg fixed-top shadow-lg" style="background-color: var(--green);">
-    <div class="container-fluid">
-        <!-- Titulo do site no navbar -->
-        <a class="navbar-brand text-light" href="{{url("/")}}">Cooperativas unidas</a>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{{url("/")}}" class="nav-link text-light px-2">Home</a></li>
+        </ul>
 
-        <!-- botão hamburger para responsividade -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="GET" action="{{url("/pesquisa/".request("categoria"))}}">
+            <input type="search" class="form-control" placeholder="Procurar..." aria-label="Search">
+        </form>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        @if (isset($_COOKIE["usuario"]))
+            @include('layout.nav_itens.usuario')
 
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url("/")}}">Home</a>
-                </li>
-                @if (isset($_COOKIE["usuario"]))
-                    @include('layout.nav_itens.usuario')
-
-                @elseif (isset($_COOKIE["cooperativa"]))
-                    @include('layout.nav_itens.cooperativa')
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{{url("/entrar")}}">Login/Cadastre-se</a>
-                    </li>
-                @endif
-            </ul>
-
-            <!-- Formulário para a caixa de pesquisa -->
-            <form class="d-flex" role="search" method="GET" action="{{url("/pesquisa/".request("categoria"))}}">
-                <input class="form-control me-2" id="nav-input" name="pesquisa" type="search" placeholder="Procurar" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">
-                    <img class="icons" src="{{asset("icons/search.svg")}}" alt="Pesquisa" style="fill: white;">
-                </button>
-            </form>
-
-        </div>
+        @elseif (isset($_COOKIE["cooperativa"]))
+            @include('layout.nav_itens.cooperativa')
+        @else
+            <a class="nav-link text-light ms-2" href="{{url("/entrar")}}">Login/Cadastre-se</a>
+        @endif
     </div>
 </nav>
-
-
 
 <style>
     .nav-link:hover {

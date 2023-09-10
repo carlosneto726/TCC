@@ -3,7 +3,7 @@
 
 <div class="container mb-3 p-3 rounded position-relative" style="background-color: var(--light-gray);">
 
-    <div class="chat-info p-3 rounded position-fixed" style="background-color: var(--gray);">
+    <div class="chat-info p-3 rounded position-fixed bg-light">
         <h1>@if(isset($_COOKIE['cooperativa'])) {{$chat[0]->unome}} @elseif(isset($_COOKIE['usuario'])) {{$chat[0]->cnome}} @endif</h1>
     </div>
 

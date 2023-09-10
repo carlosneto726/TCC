@@ -67,9 +67,9 @@ class ProdutoController extends Controller
 
         DB::update("UPDATE tb_produtos SET likes = ?, deslikes = ? WHERE id = ?;",
             [$likes, $deslikes, $id_produto]);
-
-        DB::insert("    INSERT INTO tb_comentarios_produto (titulo, comentario, id_produto, id_usuario, data) 
-                        VALUES (?, ?, ?, ?, ?)", [$titulo, $comentario, $id_produto, $id_usuario, $data]);
+            
+        DB::insert("    INSERT INTO tb_comentarios_produto (titulo, comentario, id_produto, id_usuario, data, avaliacao) 
+                        VALUES (?, ?, ?, ?, ?, ?)", [$titulo, $comentario, $id_produto, $id_usuario, $data, $avaliacao]);
         return redirect("produto/".$id_produto);
     }
 

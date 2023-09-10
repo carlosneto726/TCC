@@ -2,201 +2,106 @@
 @section('content')
 
 <div class="container">
-    <div class="hstack mx-auto">
-        <div class="container me-3 p-3 mb-auto rounded" style="background-color: var(--light-gray);">
-            <a href="{{url("/produto/".$id_produto."/favoritar/".$favorito)}}" class="text-decoration-none text-dark">
-                @if(isset($_COOKIE["usuario"]))
-                    @if($favorito)
-                        <img src="{{asset("icons/heart-fill.svg")}}"> Favoritar
-                    @else
-                        <img src="{{asset("icons/heart.svg")}}"> Favoritar
-                    @endif
-                @endif
-            </a>
-            <a href="{{url("/comparar/".$id_produto)}}" class="text-decoration-none text-dark ms-3">
-                <img src="{{asset("icons/sliders.svg")}}"> Comparar
-            </a>
-
-            <div class="d-flex align-items-center mt-2">
-                <div class="flex-shrink-0">
-                      <img class="item-img rounded" src="{{asset("storage/".$produto[0]->imagem)}}">
-                </div>
-                <div class="flex-grow-1 ms-3 mb-auto">
-                    <h3>{{$produto[0]->pnome}}</h3>
-                    <div class="d-flex">
-                        <img src="{{asset("icons/thumbs-up.svg")}}">
-                        <span class="me-3">{{$produto[0]->likes}}</span>
-                        <img src="{{asset("icons/thumbs-down.svg")}}">
-                        <span>{{$produto[0]->deslikes}}</span>
-                        (quantidade de avaliações)
+    <!-- Parte de detalhes sobre o produto / cooperativa -->
+    <div class="row g-5">
+        <!-- Div com as informações mais detalhadas do produto -->
+        <div class="col-md-7 col-lg-8">
+            <div class="me-3 p-3 mb-auto rounded shadow">
+                <div class="row g-5">
+                    <!-- Botões superiores e imagem do produto -->
+                    <div class="col-md-5 col-lg-4 order-md-first">
+                        <a href="{{url("/produto/".$id_produto."/favoritar/".$favorito)}}" class="text-decoration-none text-dark">
+                            @if(isset($_COOKIE["usuario"]))
+                                @if($favorito)
+                                    <img src="{{asset("icons/heart-fill.svg")}}"> Favoritar
+                                @else
+                                    <img src="{{asset("icons/heart.svg")}}"> Favoritar
+                                @endif
+                            @endif
+                        </a>
+                        <a href="{{url("/comparar/".$id_produto)}}" class="text-decoration-none text-dark ms-3">
+                            <img src="{{asset("icons/sliders.svg")}}"> Comparar
+                        </a>
+                        <div class="flex-shrink-0 mt-1">
+                            <img class="item-img img-fluid rounded object-fit-contain" src="{{asset("storage/".$produto[0]->imagem)}}">
+                        </div>
                     </div>
-                    <p class="mt-3">
-                        {{$produto[0]->pdescricao}}
-                    </p>
-                    <hr>
-
-                    <a href="{{url("/cooperativa/".$produto[0]->cnome)}}" class="text-decoration-none text-dark">
-                        <div class="d-flex">
-                            <div>
-                                <img class="img-cooperativa rounded" src="{{asset("storage/".$produto[0]->perfil)}}">
-                                <br/>
-                                {{$produto[0]->cnome}}
+                    <!-- Informações do produto e da cooperativa -->
+                    <div class="col-md-7 col-lg-8">
+                        <div class="flex-grow-1 ms-3 mb-auto">
+                            <h4>{{$produto[0]->pnome}}</h4>
+                            <small>
+                                {{$produto[0]->pdescricao}}
+                            </small>
+                            <div class="d-flex my-3">
+                                <img src="{{asset("icons/thumbs-up-fill.svg")}}">
+                                <span class="ms-1 me-3">{{$produto[0]->likes}}</span>
+                                <img src="{{asset("icons/thumbs-down-fill.svg")}}">
+                                <span class="ms-1 me-3">{{$produto[0]->deslikes}}</span>
+                                ({{$produto[0]->deslikes + $produto[0]->likes}} avaliações)
                             </div>
-                            <div class="ms-auto">
-                                <div class="text-end" style="font-size: 12px;">
-                                    @if($produto[0]->entrega) <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> @else <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> @endif
-                                    <br/>
-
-                                </div>
-                                <div class="mt-auto ms-2">{{$produto[0]->endereco}}</div>
+                            <hr>
+                            <div class="list-group">
+                                <a href="{{url("/cooperativa/".$produto[0]->cnome)}}" class="list-group-item list-group-item-action d-flex gap-3 py-1 border-0" aria-current="true">
+                                    <img class="rounded-circle flex-shrink-0 object-fit-cover" src="{{asset("storage/".$produto[0]->perfil)}}" width="64" height="64">
+                                    <div class="d-flex gap-2 w-100 justify-content-between">
+                                        <div>
+                                            <h6 class="mb-0">{{$produto[0]->cnome}}</h6>
+                                            <p class="mb-0 opacity-75">{{$produto[0]->endereco}}</p>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </a>
+                    </div>
+
                 </div>
             </div>
         </div>
-    
-        <div class="ms-auto mb-auto p-3 rounded" style="background-color: var(--light-gray); width: 400px;">
-            <h2>R$ {{number_format($produto[0]->preco,2,",",".")}}</h2>
-            <div class="ms-auto">
-                @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false)
-                    <span class="fw-bold text-danger"> INDISPONIVEL </span>
-                @else
-                    <span class="fw-bold text-success"> DISPONIVEL </span>
-                @endif
-            </div>
-            <hr>
-            <a class="btn mt-4 w-100  @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false) d-none @endif" id="btn-comprar" @if(!isset($_COOKIE['usuario'])) href="{{url("/entrar")}}" @else href="{{url("/carrinho/add?id_produto=".$id_produto)}}" @endif>
-                Adicionar ao carrinho
-            </a>
-        </div>
-    </div>
-</div>
+        <!-- Div com o preço do produto e o botão de comprar -->
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <ul class="list-group mb-3 shadow">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <h1 class="my-0">R$ {{number_format($produto[0]->preco,2,",",".")}}</h1>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>
+                        @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false)
+                            <span class="fw-bold text-danger">indisponível para compra</span>
+                        @else
+                            <span class="fw-bold text-success">disponível para compra</span>
+                        @endif
+                    </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>
+                        @if($produto[0]->entrega) 
+                            <span class="text-success">entrega disponível</span> 
+                        @else 
+                            <span class="text-danger">entrega indisponível</span> 
+                        @endif
+                    </span>
+                </li>
+            </ul>
 
-
-<div class="container p-2 mt-5 rounded" style="background-color: var(--light-gray);">
-
-    <h3 class="container">Avaliações</h3>
-    <div class="hstack mx-auto p-3">
-
-        <div class="avaliacao mb-auto p-3 rounded" style="background-color: var(--green);">
-            <button class="btn mt-1 mb-2 w-100" type="button" id="btn-comprar" data-bs-toggle="modal" data-bs-target="#avaliacaoModal">Avaliar produto</button>
-            <div class="container nota p-2 rounded">
-                <div class="d-flex">
-                    <img src="{{asset("icons/thumbs-up.svg")}}">
-                    <span>{{$produto[0]->likes}}</span>
-                    <img class="ms-auto" src="{{asset("icons/thumbs-down.svg")}}">
-                    <span>{{$produto[0]->deslikes}}</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="container p-3 mb-auto rounded ms-3" style="background-color: var(--green);">
-
-            <div class="mt-2">
-                <span class="fw-bold fs-5">Comentários</span>
-            </div>
-
-            @if (count($comentarios) == 0)
-                <h5 class="m-2 p-2 rounded" style="background-color: var(--light-gray); color: black !important;">
-                    Parece que este produto ainda não tem avaliações. Seja o primerio a 
-                    <a href="#avaliacaoModal" data-bs-toggle="modal">avaliar.</a>
-                </h5>
-            @else
-                @foreach ($comentarios as $comentario)
-                    <div class="m-2 p-2 rounded" style="background-color: var(--light-gray); color: black !important;">
-                        <h5>{{$comentario->titulo}}</h5>
-                        <p>
-                            {{$comentario->comentario}}
-                        </p>
-                        <div class="d-flex">
-                            <span class="ms-auto">{{$comentario->nome}} | {{$comentario->data}}</|>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-    
-    </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="avaliacaoModal" tabindex="-1" aria-labelledby="avaliacaoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <form action="{{url("/avaliar")}}" method="POST">
-                @csrf
-                @method("POST")
-
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="avaliacaoModalLabel">Avalie este produto / serviço</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-flex">
-                        <div class="flex-shrink-0">
-                            <img class="img-cooperativa" src="{{asset("storage/".$produto[0]->imagem)}}">
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h5>{{$produto[0]->pnome}} ({{$produto[0]->cnome}})</h5>
-                        </div>
-                    </div>
-                    <div>
-                        <input type="text" name="id_produto" value="{{$id_produto}}" hidden>
-                        <div class="mt-2 form-check">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="avaliacao" id="inlineRadio1" value="like">
-                                <label class="form-check-label" for="inlineRadio1">Like</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="avaliacao" id="inlineRadio2" value="deslike">
-                                <label class="form-check-label" for="inlineRadio2">Deslike</label>
-                            </div>
-                        </div>
-                        <div class="mt-2">
-                            <label for="titulo">Escreva um título</label>
-                            <input class="form-control" id="titulo" name="titulo" placeholder="Escreva um título sobre o seu comentário" required>
-                        </div>
-                        <div class="form-floating mt-2">
-                            <textarea class="form-control" name="comentario" id="comentarioTextarea" style="height: 100px" required></textarea>
-                            <label for="comentarioTextarea">Escreva um comentário</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    @if(!isset($_COOKIE['usuario']))
-                        <a href="{{url("/entrar")}}" class="btn" id="btn-comprar">Enviar</a>
-                    @else
-                        <button type="submit" class="btn" id="btn-comprar">Enviar</button>
-                    @endif
-                </div>
-
+            <span class="card p-2 shadow">
+                <a class="btn w-100  @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false) d-none @endif" id="btn-comprar" @if(!isset($_COOKIE['usuario'])) href="{{url("/entrar")}}" @else href="{{url("/carrinho/add?id_produto=".$id_produto)}}" @endif
+                    style="background-color: var(--light-green);">
+                    Adicionar ao carrinho
+                </a>
             </form>
-
         </div>
+
     </div>
+
+    @include('produto.avaliacoes')
 </div>
 
 <style>
     .item-img{
-        object-fit: contain;
         height: 250px;
     }
-
-    .img-cooperativa{
-        object-fit: contain;
-        height: 75px;
-    }
-
-    #btn-comprar{
-        background-color: #00FF33;
-    }
-
 </style>
-
 
 @endsection
 

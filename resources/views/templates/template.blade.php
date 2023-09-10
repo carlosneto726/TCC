@@ -11,7 +11,7 @@
     <title>Cooperativas Unidas</title>
 </head>
 <body id="body">
-    <header>
+    <header class="p-2 border-bottom fixed-top shadow-lg" style="background-color: var(--green);">
         @include('layout.navbar')
     </header>
 

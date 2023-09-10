@@ -44,20 +44,6 @@
                 <!-- Imagem do produto com o botão de editar -->
                 <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
                     <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
-
-                    <div class="card-img-overlay" style="height: 200px;">
-
-                        <div class="d-flex" style="height: 170px;">
-                            <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
-                                <img src="{{asset("icons/thumbs-up.svg")}}">
-                                <span class="me-1">{{$produto->likes}}</span>
-                                <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
-                                <span>{{$produto->deslikes}}</span>
-                            </div>
-                        </div>    
-                    </div>
-
-                
                     <div class="card-body p-2 rounded">
                         <!-- Iformações do produto -->
                         <div class="w-100 text-truncate">

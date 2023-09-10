@@ -7,31 +7,42 @@ use Illuminate\Support\Facades\DB;
 
 class RelatoriosController extends Controller
 {
-    public function gerarGrafico($labels, $data, $titulo, $tipo){
-        $data = [
-            'type' => $tipo,
-            'data' => [
-                'labels' => $labels,
-                'datasets' => [
-                    [
-                        'label' => $titulo,
-                        'data' => $data,
-                        'backgroundColor' => 'rgba(75, 192, 192, 0.2)',
-                        'borderColor' => 'rgba(75, 192, 192, 1)',
-                        'borderWidth' => 1,
-                    ],
-                ],
-            ],
-        ];        
-        $grafico = 'https://quickchart.io/chart?' . http_build_query(['c' => json_encode($data)]);
-        return $grafico;
+    public function viewVendas(){
+        $id_cooperativa = $_COOKIE['cooperativa'];
+        $labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        $data = [];
+        $tipo = "Vendas";
 
+        for ($i=1; $i < 13; $i++) { 
+            
+            $vendas = DB::select("  SELECT *,
+                                    tb_vendas.id as vid,
+                                    tb_vendas.data as vdata,
+                                    tb_pedidos.id as pid,
+                                    tb_pedidos.data as pdata
+                                    FROM tb_vendas 
+                                    INNER JOIN tb_pedidos ON tb_vendas.id_pedido = tb_pedidos.id
+                                    WHERE tb_pedidos.id IN 
+                                        (SELECT tb_itens_pedido.id_pedido 
+                                        FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN
+                                            (SELECT tb_produtos.id 
+                                            FROM tb_produtos 
+                                            WHERE tb_produtos.id_cooperativa = ?)) AND MONTH(tb_vendas.data) = ?;
+                        ", [$id_cooperativa, $i]);
+
+            array_push($data, count($vendas));
+        }
+        json_encode($labels);
+        json_encode($data);
+        return view("reports.relatorios", compact('labels', 'data', 'tipo'));
     }
+
 
     public function viewMaisVendidos(){
         $id_cooperativa = $_COOKIE['cooperativa'];
         $labels = [];
         $data = [];
+        $tipo = "Produtos Mais Vendidos";
 
         $produtos = DB::select("SELECT * 
                                 FROM tb_produtos
@@ -62,25 +73,22 @@ class RelatoriosController extends Controller
             array_push($data, $qtd);
         }
 
-        $grafico = $this->gerarGrafico($labels, $data, 'Produtos mais vendidos', 'bar');
-
-        return view("reports.relatorios", compact('grafico'));
+        json_encode($labels);
+        json_encode($data);
+        return view("reports.relatorios", compact('labels', 'data', 'tipo'));
     }
 
 
 
-    public function viewVendas(){
+    public function viewReceita(){
         $id_cooperativa = $_COOKIE['cooperativa'];
         $labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         $data = [];
+        $tipo = "Receita";
 
         for ($i=1; $i < 13; $i++) { 
-            
-            $vendas = DB::select("  SELECT *,
-                                    tb_vendas.id as vid,
-                                    tb_vendas.data as vdata,
-                                    tb_pedidos.id as pid,
-                                    tb_pedidos.data as pdata
+            $preco_total = 0;
+            $vendas = DB::select("  SELECT *
                                     FROM tb_vendas 
                                     INNER JOIN tb_pedidos ON tb_vendas.id_pedido = tb_pedidos.id
                                     WHERE tb_pedidos.id IN 
@@ -88,20 +96,29 @@ class RelatoriosController extends Controller
                                         FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN
                                             (SELECT tb_produtos.id 
                                             FROM tb_produtos 
-                                            WHERE tb_produtos.id_cooperativa = ?)) AND MONTH(tb_vendas.data) = ?;
+                                            WHERE tb_produtos.id_cooperativa = ?)) 
+                                            AND MONTH(tb_vendas.data) = ? 
+                                            AND YEAR(tb_vendas.data) = YEAR(NOW());
                         ", [$id_cooperativa, $i]);
 
-            array_push($data, count($vendas));
+            foreach ($vendas as $venda) {
+                $preco_total += $venda->preco_total;
+            }
+            array_push($data, $preco_total);
         }
        
-        $grafico = $this->gerarGrafico($labels, $data, 'Vendas do ano', 'line');
-        return view("reports.relatorios", compact('grafico'));
+        json_encode($labels);
+        json_encode($data);
+        return view("reports.relatorios", compact('labels', 'data', 'tipo'));
     }
+
+
 
     public function viewLocaisVendidos(){
         $id_cooperativa = $_COOKIE['cooperativa'];
         $labels = [];
         $data = [];
+        $tipo = "Locais Mais Vendidos";
         $opts = [
             "http" => [
                 "method" => "GET",
@@ -139,39 +156,12 @@ class RelatoriosController extends Controller
             array_push($labels, $endereco->bairro);
             array_push($data, $vendas[0]->qtd);
         }
-        $grafico = $this->gerarGrafico($labels, $data, 'Locais mais vendidos', 'bar');
-        return view("reports.relatorios", compact('grafico'));
+        json_encode($labels);
+        json_encode($data);
+        return view("reports.relatorios", compact('labels', 'data', 'tipo'));
     }
 
 
 
-    public function viewReceita(){
-        $id_cooperativa = $_COOKIE['cooperativa'];
-        $labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-        $data = [];
 
-        for ($i=1; $i < 13; $i++) { 
-            $preco_total = 0;
-            $vendas = DB::select("  SELECT *
-                                    FROM tb_vendas 
-                                    INNER JOIN tb_pedidos ON tb_vendas.id_pedido = tb_pedidos.id
-                                    WHERE tb_pedidos.id IN 
-                                        (SELECT tb_itens_pedido.id_pedido 
-                                        FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN
-                                            (SELECT tb_produtos.id 
-                                            FROM tb_produtos 
-                                            WHERE tb_produtos.id_cooperativa = ?)) 
-                                            AND MONTH(tb_vendas.data) = ? 
-                                            AND YEAR(tb_vendas.data) = YEAR(NOW());
-                        ", [$id_cooperativa, $i]);
-
-            foreach ($vendas as $venda) {
-                $preco_total += $venda->preco_total;
-            }
-            array_push($data, $preco_total);
-        }
-       
-        $grafico = $this->gerarGrafico($labels, $data, 'Receita de vendas do ano em R$', 'line');
-        return view("reports.relatorios", compact('grafico'));
-    }
 }
