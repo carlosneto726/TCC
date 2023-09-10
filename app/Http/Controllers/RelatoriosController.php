@@ -69,7 +69,7 @@ class RelatoriosController extends Controller
             foreach($qtd_vendida as $itens_pedido){
                 $qtd += $itens_pedido->qtd_venda_produto;
             }
-            array_push($labels, $produto->nome);
+            array_push($labels, $produto);
             array_push($data, $qtd);
         }
 

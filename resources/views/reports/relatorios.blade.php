@@ -20,7 +20,7 @@
 <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Company name</a>  
 </header>
-  
+
 <div class="container-fluid">
     <div class="row">
         <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
@@ -77,7 +77,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2"><img class="me-3" src="{{asset("icons/graph-up.svg")}}" width="48" height="38"> {{$tipo}}</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button type="button" class="btn btn-sm btn-outline-success">
+                    <button type="button" class="btn btn-sm btn-outline-success" onclick="exportTableToExcel('{{$tipo}}')">
                         <img src="{{asset("icons/download.svg")}}" title="Baixar planilha">
                     </button>
                 </div>
@@ -87,23 +87,13 @@
     
             <h2>Section title</h2>
             <div class="table-responsive small">
-                <table class="table table-striped table-sm">
+                <table class="table table-striped table-sm" id="tabela">
                     <thead>
-                        <tr>
+                        <tr id="labels">
                             <th scope="col">#</th>
-
-                            <th scope="col">1</th>
-                            <th scope="col">2</th>
-                            <th scope="col">3</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>qtd</td>
-                            <td>a</td>
-                            <td>b</td>
-                            <td>c</td>
-                        </tr>
+                    <tbody id="data">
                     </tbody>
                 </table>
             </div>  
