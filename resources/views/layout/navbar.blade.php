@@ -9,7 +9,7 @@
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="GET" action="{{url("/pesquisa/".request("categoria"))}}">
-            <input type="search" class="form-control" placeholder="Procurar..." aria-label="Search">
+            <input type="search" name="pesquisa" class="form-control" placeholder="Procurar..." aria-label="Search">
         </form>
 
         @if (isset($_COOKIE["usuario"]))

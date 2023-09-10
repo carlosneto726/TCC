@@ -88,12 +88,6 @@ Route::get('/relatorios/vendas', [RelatoriosController::class, 'viewVendas']);
 Route::get('/relatorios/maisvendidos', [RelatoriosController::class, 'viewMaisVendidos']);
 Route::get('/relatorios/locaisvendidos', [RelatoriosController::class, 'viewLocaisVendidos']);
 Route::get('/relatorios/receita', [RelatoriosController::class, 'viewReceita']);
-// CaixaController
-Route::get('/caixa', [CaixaController::class, 'viewCaixaTotal']);
-Route::get('/caixa/total', [CaixaController::class, 'viewCaixaTotal']);
-Route::get('/caixa/ano', [CaixaController::class, 'viewCaixaAno']);
-Route::get('/caixa/mes', [CaixaController::class, 'viewCaixaMes']);
-Route::get('/caixa/dia', [CaixaController::class, 'viewCaixaDia']);
 // CompararController
 Route::get('/comparar', [CompararController::class, 'viewComparar']);
 Route::get('/comparar/{id_produto}', [CompararController::class, 'addComparacao']);
