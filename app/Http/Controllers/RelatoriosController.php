@@ -8,32 +8,26 @@ use Illuminate\Support\Facades\DB;
 class RelatoriosController extends Controller
 {
     public function viewVendas(){
+        
         $id_cooperativa = $_COOKIE['cooperativa'];
-        $labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-        $data = [];
         $tipo = "Vendas";
+    
+        $labels = DB::select("  SELECT tb_vendas.data as vdata,
+                                COUNT(tb_vendas.data) AS dataduplicada
+                                FROM tb_vendas
+                                INNER JOIN tb_pedidos ON tb_vendas.id_pedido = tb_pedidos.id
+                                WHERE tb_pedidos.id IN 
+                                    (SELECT tb_itens_pedido.id_pedido 
+                                    FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN
+                                        (SELECT tb_produtos.id 
+                                        FROM tb_produtos 
+                                        WHERE tb_produtos.id_cooperativa = ?))
+                                GROUP BY tb_vendas.data
+                                HAVING COUNT(tb_vendas.data)>0;
+                    ", [$id_cooperativa]);
 
-        for ($i=1; $i < 13; $i++) { 
-            
-            $vendas = DB::select("  SELECT *,
-                                    tb_vendas.id as vid,
-                                    tb_vendas.data as vdata,
-                                    tb_pedidos.id as pid,
-                                    tb_pedidos.data as pdata
-                                    FROM tb_vendas 
-                                    INNER JOIN tb_pedidos ON tb_vendas.id_pedido = tb_pedidos.id
-                                    WHERE tb_pedidos.id IN 
-                                        (SELECT tb_itens_pedido.id_pedido 
-                                        FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN
-                                            (SELECT tb_produtos.id 
-                                            FROM tb_produtos 
-                                            WHERE tb_produtos.id_cooperativa = ?)) AND MONTH(tb_vendas.data) = ?;
-                        ", [$id_cooperativa, $i]);
-
-            array_push($data, count($vendas));
-        }
+        $data = count($labels);
         json_encode($labels);
-        json_encode($data);
         return view("reports.relatorios", compact('labels', 'data', 'tipo'));
     }
 
