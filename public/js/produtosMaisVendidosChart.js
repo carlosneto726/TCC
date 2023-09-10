@@ -1,9 +1,10 @@
 /*
  * Arquivo javascript que renderiza o 
- * gráfico, formata os dados, renderiza 
+ * gráfico da quantidade de produto que venderam, 
+ * formata os dados, renderiza 
  * a planilha e exporta em Excel.
+ * https://canvasjs.com/javascript-charts/
  */
-
 // Função executada assim que a página carrega
 window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer", {
@@ -16,17 +17,15 @@ window.onload = function () {
             title: "Quantidade"
         },
         data: [ // Todos os dados referentes ao gráfico
-                { 
-                    type: "column", // Tipo do gráfio
-                    dataPoints: getData() // Inserindo os dados
-                }
-            ]
-        }
-     );
+            { 
+                type: "column", // Tipo do gráfio
+                dataPoints: getData() // Inserindo os dados
+            }
+        ]
+    });
     chart.render(); // Renderizando o gráfico
     renderPlanilha(); // Rederizando a Planilha
 }
-
 // Retorna um Json onde labels é o nome do 
 // produto e data é a quantidade de produtos vendidos
 function getData(){
@@ -36,7 +35,6 @@ function getData(){
     }
     return dp;
 }
-
 // A função define as colunas e as linhas da 
 // tabela que fica embaixo do gráfico
 function renderPlanilha(){
@@ -62,7 +60,6 @@ function renderPlanilha(){
                         "</tr>";
     }
 }
-
 // Função chamada pelo o botão de baixar a planilha
 function exportTableToExcel(nomeArquivo) {
     var a = document.createElement('a');
