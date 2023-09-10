@@ -86,8 +86,8 @@ Route::get('/pedidos/chat/{id_pedido}', [PedidosController::class, 'chatCliente'
 Route::get('/relatorios', [RelatoriosController::class, 'viewVendas']);
 Route::get('/relatorios/vendas', [RelatoriosController::class, 'viewVendas']);
 Route::get('/relatorios/maisvendidos', [RelatoriosController::class, 'viewMaisVendidos']);
-Route::get('/relatorios/receita', [RelatoriosController::class, 'viewReceita']);
 Route::get('/relatorios/locaisvendidos', [RelatoriosController::class, 'viewLocaisVendidos']);
+Route::get('/relatorios/receita', [RelatoriosController::class, 'viewReceita']);
 // CaixaController
 Route::get('/caixa', [CaixaController::class, 'viewCaixaTotal']);
 Route::get('/caixa/total', [CaixaController::class, 'viewCaixaTotal']);

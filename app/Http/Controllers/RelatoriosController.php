@@ -79,41 +79,6 @@ class RelatoriosController extends Controller
     }
 
 
-
-    public function viewReceita(){
-        $id_cooperativa = $_COOKIE['cooperativa'];
-        $labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-        $data = [];
-        $tipo = "Receita";
-
-        for ($i=1; $i < 13; $i++) { 
-            $preco_total = 0;
-            $vendas = DB::select("  SELECT *
-                                    FROM tb_vendas 
-                                    INNER JOIN tb_pedidos ON tb_vendas.id_pedido = tb_pedidos.id
-                                    WHERE tb_pedidos.id IN 
-                                        (SELECT tb_itens_pedido.id_pedido 
-                                        FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN
-                                            (SELECT tb_produtos.id 
-                                            FROM tb_produtos 
-                                            WHERE tb_produtos.id_cooperativa = ?)) 
-                                            AND MONTH(tb_vendas.data) = ? 
-                                            AND YEAR(tb_vendas.data) = YEAR(NOW());
-                        ", [$id_cooperativa, $i]);
-
-            foreach ($vendas as $venda) {
-                $preco_total += $venda->preco_total;
-            }
-            array_push($data, $preco_total);
-        }
-       
-        json_encode($labels);
-        json_encode($data);
-        return view("reports.relatorios", compact('labels', 'data', 'tipo'));
-    }
-
-
-
     public function viewLocaisVendidos(){
         $id_cooperativa = $_COOKIE['cooperativa'];
         $labels = [];
@@ -137,7 +102,8 @@ class RelatoriosController extends Controller
         [$id_cooperativa]);
 
         foreach ($cep_vendas as $cep_venda) {
-            $vendas = DB::select("  SELECT COUNT(*) as qtd
+            $vendas = DB::select("  SELECT tb_vendas.preco_total as venda_pt,
+                                        tb_vendas.data as venda_data
                                         FROM tb_vendas
                                         WHERE tb_vendas.id_pedido IN
                                             (SELECT tb_pedidos.id 
@@ -153,8 +119,8 @@ class RelatoriosController extends Controller
 
             $context = stream_context_create($opts);
             $endereco = json_decode(file_get_contents('https://viacep.com.br/ws/'.$cep_venda->cep.'/json/', false, $context));
-            array_push($labels, $endereco->bairro);
-            array_push($data, $vendas[0]->qtd);
+            array_push($labels, $endereco);
+            array_push($data, $vendas);
         }
         json_encode($labels);
         json_encode($data);
@@ -162,6 +128,24 @@ class RelatoriosController extends Controller
     }
 
 
+    public function viewReceita(){
+        $id_cooperativa = $_COOKIE["cooperativa"];
+        $tipo = "Receita";
+        $data = 0;
+        $labels = DB::select("  SELECT * 
+                                FROM tb_vendas
+                                WHERE tb_vendas.id_pedido IN 
+                                (SELECT tb_pedidos.id FROM tb_pedidos WHERE tb_pedidos.id IN 
+                                    (SELECT tb_itens_pedido.id_pedido FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN 
+                                        (SELECT tb_produtos.id FROM tb_produtos WHERE tb_produtos.id_cooperativa = ?)))
+                                ORDER BY tb_vendas.data DESC;",
+                                        [$id_cooperativa]);
+        foreach($labels as $venda){
+            $data += $venda->preco_total;
+        }
 
-
+        json_encode($labels);
+        json_encode($data);
+        return view("reports.relatorios", compact('labels', 'data', 'tipo'));
+    }
 }

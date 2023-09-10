@@ -75,17 +75,19 @@
   
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><img class="me-3" src="{{asset("icons/graph-up.svg")}}" width="48" height="38"> {{$tipo}}</h1>
+                <h1 class="h2 mb-2"><img class="me-3" src="{{asset("icons/graph-up.svg")}}" width="48" height="38"> {{$tipo}}</h1>
+            </div>
+    
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Planilha</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <button type="button" class="btn btn-sm btn-outline-success" onclick="exportTableToExcel('{{$tipo}}')">
                         <img src="{{asset("icons/download.svg")}}" title="Baixar planilha">
                     </button>
                 </div>
             </div>
-    
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    
-            <h2>Section title</h2>
             <div class="table-responsive small">
                 <table class="table table-striped table-sm" id="tabela">
                     <thead>
