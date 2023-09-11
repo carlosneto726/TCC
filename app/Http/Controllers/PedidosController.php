@@ -139,6 +139,7 @@ class PedidosController extends Controller
             $pedido->produtos = $produtos_pedido;
             $pedido->preco_total = $preco_total_pedido;
             $pedido->nome_usuario = $nome_usuario[0]->nome;
+            $preco_total_pedido = 0;
         }
 
         return $pedidos;

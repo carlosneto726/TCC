@@ -16,7 +16,7 @@
                     <img src="{{asset("storage/".$produto1[0]->imagem)}}" width="128" height="128" class="rounded-circle flex-shrink-0 object-fit-contain">
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
-                            <h2 class="mb-0">{{$produto1[0]->pnome}}</h2>
+                            <h2 class="mb-0"><a href="{{url("/produto/".$produto1[0]->pid)}}">{{$produto1[0]->pnome}}</a></h2>
                             <p class="mb-0 opacity-75">{{$produto1[0]->pdesc}}</p>
                         </div>
                         <small class="text-nowrap fw-bold">R$ {{number_format($produto1[0]->preco,2,",",".")}}</small>
@@ -64,7 +64,7 @@
                     <img src="{{asset("storage/".$produto2[0]->imagem)}}" width="128" height="128" class="rounded-circle flex-shrink-0 object-fit-contain">
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
-                            <h2 class="mb-0">{{$produto2[0]->pnome}}</h2>
+                            <h2 class="mb-0"><a href="{{url("/produto/".$produto2[0]->pid)}}">{{$produto2[0]->pnome}}</a></h2>
                             <p class="mb-0 opacity-75">{{$produto2[0]->pdesc}}</p>
                         </div>
                         <small class="text-nowrap fw-bold">R$ {{number_format($produto2[0]->preco,2,",",".")}}</small>
