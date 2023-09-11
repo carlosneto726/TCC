@@ -32,15 +32,12 @@
     </button>
 </div>
 
-
-<!-- Titulo -->
-<h3 class="mt-5 text-center">Produtos em destaque</h3>
 <!-- Container com todos os produtos da cooperativa -->
-<div class="grid-container rounded container mt-4 p-3" style="background-color: var(--light-gray);">
+<div class="grid-container rounded container mt-4">
     <!-- Listando os produtos do banco de dados -->
     @foreach ($produtos as $produto)
         <!-- Card dos produtos -->
-            <div class="card m-1 rounded">
+            <div class="card m-1 rounded border-0 shadow">
                 <!-- Imagem do produto com o botão de editar -->
                 <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
                     <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
@@ -64,7 +61,7 @@
 
 <div class="mt-5">
     <h3 class="mt-5 text-center">Categorias</h3>
-    <div class="container mx-auto d-flex justify-content-center p-3 mt-4 rounded" style="background-color: var(--light-gray);">
+    <div class="container mx-auto d-flex justify-content-center p-3 mt-4 rounded shadow">
 
         <div class="flex-categoria p-3 ms-1 me-1">
             <a href="{{url("/pesquisa/agropecuaria")}}">

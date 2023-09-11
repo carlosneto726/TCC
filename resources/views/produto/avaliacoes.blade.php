@@ -21,9 +21,9 @@
         @foreach ($comentarios as $comentario)
             <div class="d-flex text-body-secondary pt-3 border-bottom">
                 @if($comentario->avaliacao == "like")
-                    <img src="{{asset("icons/thumbs-up.svg")}}" class="bd-placeholder-img flex-shrink-0 me-2 rounded bg-success p-1" width="32" height="32">
+                    <img src="{{asset("icons/thumbs-up-fill.svg")}}" class="bd-placeholder-img flex-shrink-0 me-2 rounded bg-success p-1" width="32" height="32">
                 @else
-                    <img src="{{asset("icons/thumbs-down.svg")}}" class="bd-placeholder-img flex-shrink-0 me-2 rounded bg-danger p-1" width="32" height="32">
+                    <img src="{{asset("icons/thumbs-down-fill.svg")}}" class="bd-placeholder-img flex-shrink-0 me-2 rounded bg-danger p-1" width="32" height="32">
                 @endif
                 <p class="pb-3 mb-0 small lh-sm">
                     <strong class="d-block text-gray-dark">{{$comentario->titulo}}</strong>

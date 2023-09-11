@@ -16,7 +16,7 @@
                         <input type="text" class="form-control" value="{{@$cooperativa[0]->nome}}" name="nome" id="inputNome" placeholder="Digite o nome da sua cooperativa">
                     </div>
                     <div class="mb-3 form-floating">
-                        <textarea class="form-control" value="{{@$cooperativa[0]->descricao}}" name="descricao" placeholder="descricao" id="descricaoTextarea" style="height: 100px"></textarea>
+                        <textarea class="form-control" name="descricao" placeholder="descricao" id="descricaoTextarea" style="height: 100px">{{@$cooperativa[0]->descricao}}</textarea>
                         <label for="descricaoTextarea">Descrição</label>
                     </div>
                     <div class="mb-3 form-floating">

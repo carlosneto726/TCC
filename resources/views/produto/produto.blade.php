@@ -34,9 +34,9 @@
                                 {{$produto[0]->pdescricao}}
                             </small>
                             <div class="d-flex my-3">
-                                <img src="{{asset("icons/thumbs-up-fill.svg")}}">
+                                <img src="{{asset("icons/thumbs-up.svg")}}">
                                 <span class="ms-1 me-3">{{$produto[0]->likes}}</span>
-                                <img src="{{asset("icons/thumbs-down-fill.svg")}}">
+                                <img src="{{asset("icons/thumbs-down.svg")}}">
                                 <span class="ms-1 me-3">{{$produto[0]->deslikes}}</span>
                                 ({{$produto[0]->deslikes + $produto[0]->likes}} avaliações)
                             </div>
