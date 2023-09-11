@@ -51,7 +51,7 @@ class CooperativaController extends Controller
 
     public function viewProdutos(){
         $produtos = DB::select("SELECT * FROM tb_produtos WHERE id_cooperativa = ? ORDER BY id DESC;", [$_COOKIE['cooperativa']]);
-        return view('cooperativa.produtos.editarProdutos', compact('produtos'));
+        return view('cooperativa.produtos.meusprodutos', compact('produtos'));
     }
 
     public function addProduto(Request $request): string{
@@ -184,8 +184,8 @@ class CooperativaController extends Controller
             $outdoor = $request->file('imagem')->storeAs('images/coopertivas', "outdoor".$nome, 'public');
             $perfil = $request->file('perfil')->storeAs('images/coopertivas', "perfil".$nome, 'public');
         }else{
-            $outdoor = "images/produtos/default_template.png";
-            $perfil = "images/produtos/default_template.png";
+            $outdoor = NULL;
+            $perfil = "images/produtos/default_template.jpg";
         }
 
         $cooperativas = DB::select("SELECT email, cnpj FROM tb_cooperativas WHERE email = ? OR cnpj = ?;", [$email, $cnpj]);
