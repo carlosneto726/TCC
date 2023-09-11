@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="{{asset("css\app.css")}}">
-    <link rel="stylesheet" href="{{asset("css\bootstrap.css")}}">
+    <link rel="stylesheet" href="{{asset("css\bootstrap\bootstrap.css")}}">
     <title>Cooperativas Unidas</title>
 </head>
 <body>

@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
             <div class="d-flex">
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" method="GET" action="{{url("/pesquisa/".request("categoria"))}}">
                     <input class="form-control me-2" type="search" name="pesquisa" placeholder="Procurar..." aria-label="Search">
                     <button class="btn btn-outline-light" type="submit"><img src="{{asset("icons/search.svg")}}"></button>
                 </form>
