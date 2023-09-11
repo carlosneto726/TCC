@@ -107,19 +107,46 @@ class ForumController extends Controller{
         $id_cooperativa = $_COOKIE['cooperativa'];
 
         if($orderby == "comentarios"){
-            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao, COUNT(tb_comentarios.id_forum) AS total_mensagens FROM tb_forum INNER JOIN tb_cooperativas ON tb_forum.id_cooperativa = tb_cooperativas.id INNER JOIN tb_comentarios ON tb_forum.id = tb_comentarios.id_forum GROUP BY tb_forum.id, tb_forum.titulo ORDER BY total_mensagens ASC;");
+            $foruns = DB::select("  SELECT *, 
+                                    tb_forum.id as fid, 
+                                    tb_forum.descricao as fdescricao, 
+                                    COUNT(tb_comentarios.id_forum) AS total_mensagens 
+                                    FROM tb_forum 
+                                    INNER JOIN tb_cooperativas ON tb_forum.id_cooperativa = tb_cooperativas.id 
+                                    INNER JOIN tb_comentarios ON tb_forum.id = tb_comentarios.id_forum 
+                                    GROUP BY tb_forum.id, tb_forum.titulo ORDER BY total_mensagens ASC;");
 
         }else if($orderby == "cooperativas"){
-            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id ORDER BY tb_forum.id_cooperativa");
+            $foruns = DB::select("  SELECT *, 
+                                    tb_forum.id as fid, 
+                                    tb_forum.descricao as fdescricao 
+                                    FROM tb_forum 
+                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+                                    ORDER BY tb_forum.id_cooperativa");
 
         }else if($orderby == "data"){
-            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id ORDER BY tb_forum.data");
+            $foruns = DB::select("  SELECT *, 
+                                    tb_forum.id as fid, 
+                                    tb_forum.descricao as fdescricao 
+                                    FROM tb_forum 
+                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+                                    ORDER BY tb_forum.data");
 
         }else if($orderby == "ordem_alfabetica"){
-            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id ORDER BY tb_forum.titulo ASC");
+            $foruns = DB::select("  SELECT *, 
+                                    tb_forum.id as fid, 
+                                    tb_forum.descricao as fdescricao 
+                                    FROM tb_forum 
+                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+                                    ORDER BY tb_forum.titulo ASC");
 
         }else if($orderby == "foruns_usuario"){
-            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id AND id_cooperativa = ?", [$id_cooperativa]);
+            $foruns = DB::select("  SELECT *, 
+                                    tb_forum.id as fid, 
+                                    tb_forum.descricao as fdescricao 
+                                    FROM tb_forum 
+                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+                                    AND id_cooperativa = ?", [$id_cooperativa]);
 
         }else if($pesquisa){
             $foruns = DB::select("  SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao 
@@ -127,7 +154,12 @@ class ForumController extends Controller{
                                     WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
                                     AND titulo LIKE '%".$pesquisa."%'");
         }else{
-            $foruns = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id ORDER BY tb_forum.data DESC");
+            $foruns = DB::select("  SELECT *, 
+                                    tb_forum.id as fid, 
+                                    tb_forum.descricao as fdescricao 
+                                    FROM tb_forum 
+                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+                                    ORDER BY tb_forum.data DESC");
         }        
         return view("forum.foruns", compact('foruns', 'orderby'));
     }
@@ -156,9 +188,6 @@ class ForumController extends Controller{
 
         DB::insert("INSERT INTO tb_comentarios (comentario, id_forum, id_cooperativa, id_parent, data) VALUES (?, ?, ?, ?, ?)",
         [$comentario, $id_forum, $id_cooperativa, $id_parent, $data]);
-
-        //event(new Message($id_cooperativa, $comentario, $data));
-
         return redirect("/forum?forum=".$id_forum);
     }
 

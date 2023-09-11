@@ -95,7 +95,7 @@ class ProdutoController extends Controller
                                 INNER JOIN tb_favoritos ON tb_favoritos.id_produto = tb_produtos.id
                                 WHERE ".$query." id_usuario = ? ORDER BY ".$orderby, 
         [$id_usuario]);
-        return view("produto.favoritos", compact("produtos", "orderby"));
+        return view("produto.favoritos", compact("produtos"));
     }
 
     public function favorito(){
