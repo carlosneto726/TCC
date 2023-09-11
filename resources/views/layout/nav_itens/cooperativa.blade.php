@@ -1,4 +1,4 @@
-<div class="dropdown text-start ms-2">
+<div class="dropdown text-start ms-2 mt-1">
     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="{{asset("/storage/".$_COOKIE["perfil_img"])}}" alt="mdo" width="32" height="32" class="rounded-circle object-fit-cover">
     </a>

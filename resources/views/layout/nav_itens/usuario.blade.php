@@ -1,4 +1,4 @@
-<div class="dropdown text-start ms-2">
+<div class="dropdown text-start ms-2 mt-2">
     <a href="#" class="d-block link-body-emphasis text-decoration-none text-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         Olá {{$_COOKIE["nome_usuario"]}}
     </a>

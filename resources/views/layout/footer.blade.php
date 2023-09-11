@@ -12,10 +12,3 @@
         </ul>
     </div>
 </div>
-
-<style>
-    footer{
-        background-color: #009241;
-        color: white;
-    }
-</style>

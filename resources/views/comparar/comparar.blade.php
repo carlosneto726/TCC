@@ -31,7 +31,7 @@
                         @endif
                         <br/>
                         @if($produto1[0]->entrega) 
-                            <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> 
+                            <span class="text-success fw-bold">ENTREGA DISPONIVÉL</span> 
                         @else 
                             <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> 
                         @endif
@@ -79,7 +79,7 @@
                         @endif
                         <br/>
                         @if($produto2[0]->entrega) 
-                            <span class="text-success fw-bold">ENTREGA DISPONIVEL</span> 
+                            <span class="text-success fw-bold">ENTREGA DISPONIVÉL</span> 
                         @else 
                             <span class="text-danger fw-bold">ENTREGA INDISPONIVÉL</span> 
                         @endif

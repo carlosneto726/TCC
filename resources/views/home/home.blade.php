@@ -32,36 +32,35 @@
     </button>
 </div>
 
-<!-- Container com todos os produtos da cooperativa -->
-<div class="grid-container rounded container mt-4">
-    <!-- Listando os produtos do banco de dados -->
-    @foreach ($produtos as $produto)
-        <!-- Card dos produtos -->
-            <div class="card m-1 rounded border-0 shadow">
-                <!-- Imagem do produto com o botão de editar -->
-                <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
-                    <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
-                    <div class="card-body p-2 rounded">
-                        <!-- Iformações do produto -->
-                        <div class="w-100 text-truncate">
-                            <span class="fs-3">{{$produto->pnome}}</span>
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+        @foreach ($produtos as $produto)
+            <div class="col">
+                <!-- Card dos produtos -->
+                <div class="card m-1 rounded border-0 shadow">
+                    <!-- Imagem do produto com o botão de editar -->
+                    <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
+                        <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+                        <div class="card-body p-2 rounded">
+                            <!-- Iformações do produto -->
+                            <div class="w-100 text-truncate">
+                                <span class="fs-3">{{$produto->pnome}}</span>
+                            </div>
+                            <div class="w-100">
+                                <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
+                            </div>
+                            <div class="w-100 text-truncate">
+                                <span class="">{{$produto->descricao}}</span>
+                            </div>
                         </div>
-                        <div class="w-100">
-                            <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
-                        </div>
-                        <div class="w-100 text-truncate">
-                            <span class="">{{$produto->descricao}}</span>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
-    @endforeach
-</div>
+        @endforeach
+    </div>
 
-
-<div class="mt-5">
     <h3 class="mt-5 text-center">Categorias</h3>
-    <div class="container mx-auto d-flex justify-content-center p-3 mt-4 rounded shadow">
+    <div class="mx-auto d-flex justify-content-center p-3 mt-4 rounded shadow">
 
         <div class="flex-categoria p-3 ms-1 me-1">
             <a href="{{url("/pesquisa/agropecuaria")}}">
@@ -154,12 +153,6 @@
     .carousel {
         margin-top: 70px;
     }
-
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
 </style>
 
 @endsection

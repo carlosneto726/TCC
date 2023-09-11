@@ -1,3 +1,7 @@
+/*
+* Configurações gerais de estilo
+*/
+/* Definição das cores padrões do site */
 :root {
     --very-light-green: #deede5;
     --light-green: #00FF33;
@@ -7,4 +11,30 @@
     --dark-gray: #7E7E7E;
     --gray: #B6B1B2;
     --light-gray: #E6E6E6;
-  }
+}
+/* 
+* Definição o tamanho minimo do body 
+* para o footer ficar sempre em baixo 
+*/
+body{
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh;
+}
+/* Definição as cores do header */
+header{
+  background-color: var(--green);
+}
+/* 
+* Definindo as margens do conteúdo da página
+* para que o header não sobreponha a section
+*/
+section{
+  margin-top: 75px; 
+  margin-bottom: 55px;
+}
+/* Definindo as cores do footer*/
+footer{
+  background-color: var(--green);
+  color: white;
+}
