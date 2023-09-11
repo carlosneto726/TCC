@@ -19,7 +19,7 @@
                 @elseif (isset($_COOKIE["cooperativa"]))
                     @include('layout.nav_itens.cooperativa')
                 @else
-                    <a class="nav-link text-light ms-2 mt-1" href="{{url("/entrar")}}">Login/Cadastre-se</a>
+                    <a class="nav-link text-light ms-2 mt-2" href="{{url("/entrar")}}">Login/Cadastre-se</a>
                 @endif
             </div>
         </div>

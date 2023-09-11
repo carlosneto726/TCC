@@ -1,15 +1,36 @@
 @extends('templates.template')
 @section('content')
 
+<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
+    <div class="container">
+        <ul class="navbar-nav">
+            <a href="/chats/?orderby=data" class="text-decoration-none">
+                <li class="nav-link">Data</li>
+            </a>
+            <a href="/chats/?orderby=ordem_alfabetica" class="text-decoration-none">
+                <li class="nav-link">Ordem alfabética</li>
+            </a>
+        </ul>
+    </div>
+</div>
 
 <div class="container">
-    <div class="d-flex align-items-center p-3 my-5 rounded shadow-lg">
+    <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
         <img class="me-3" src="{{asset("icons/card-checklist.svg")}}" width="48" height="38">
         <div class="lh-1">
             <h1 class="h4 mb-0 lh-1">Seus pedidos</h1>
+            <small></small>
         </div>
     </div>
 
+    @if(count($pedidos) == 0)
+        <div class="d-flex align-items-center p-3 rounded shadow-lg">
+            <div class="lh-1">
+                <h1 class="h4 mb-0 lh-1">Você não tem nenhum pedido</h1>
+                <small>Veja o nosso <a href="{{url("/")}}">catálogo</a>.</small>
+            </div>
+        </div>
+    @endif
 
     @foreach ($pedidos as $pedido)
 

@@ -34,7 +34,7 @@
             <form class="card p-2 shadow" action="{{url("/carrinho/finalizar")}}" method="POST">
                 @csrf
                 @method("POST")
-                <button class="btn w-100" type="submit" style="background-color: var(--light-green);">Fazer Pedido</button>
+                <button class="btn btn-success w-100" type="submit">Fazer Pedido</button>
             </form>
         </div>
 

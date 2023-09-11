@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container-fluid">
+    <div class="container">
         <ul class="navbar-nav">
             <a href="/chats/?orderby=data" class="text-decoration-none">
                 <li class="nav-link">Data</li>

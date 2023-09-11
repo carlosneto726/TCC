@@ -1,19 +1,19 @@
 @extends('templates.template')
 @section('content')
-<div class="navbar navbar-expand-lg bg-body-tertiary w-100" style="margin-top: -25px; background-color: var(--light-gray);">
-    <div class="container-fluid">
+<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
+    <div class="container">
         <ul class="navbar-nav">
             <a href="{{url("/favoritos?orderby=preco")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'preco') active" aria-current='true' @endif">Preço</li>
+                <li class="nav-link @if(request("orderby") == 'preco') active @endif">Preço</li>
             </a>
             <a href="{{url("/favoritos?orderby=avaliacao-produto")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'avaliacao-produto') active" aria-current='true' @endif">Avaliação do produto</li>
+                <li class="nav-link @if(request("orderby") == 'avaliacao-produto') active @endif">Avaliação do produto</li>
             </a>
             <a href="{{url("/favoritos?orderby=cooperativa")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'cooperativa') active" aria-current='true' @endif">Cooperativa</li>
+                <li class="nav-link @if(request("orderby") == 'cooperativa') active @endif">Cooperativa</li>
             </a>
             <a href="{{url("/favoritos?orderby=localizacao")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'localizacao') active" aria-current='true' @endif">Localização</li>
+                <li class="nav-link @if(request("orderby") == 'localizacao') active @endif">Localização</li>
             </a>
         </ul>
     </div>

@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container-fluid">
+    <div class="container">
         <ul class="navbar-nav">
             <a href="/foruns/?orderby=comentarios" class="text-decoration-none">
                 <li class="nav-link @if($orderby == 'comentarios') active" aria-current='true' @endif">Comentários</li>
@@ -53,7 +53,7 @@
 
     @foreach ($foruns as $forum)
         <a class="text-decoration-none" href="{{url("/forum/?forum=".$forum->fid)}}">
-            <div class="my-4 rounded p-2 shadow" style="background-color: var(--green); color: white;">
+            <div class="bg-success text-light my-4 rounded p-2 shadow">
                 <span class="fs-4 fw-bold">{{$forum->titulo}}</span>
 
                 <div class="d-flex flex-row mb-3">

@@ -1,8 +1,8 @@
 <div class="container">
     <div class="d-flex flex-wrap justify-content-between align-items-center p-5">
-        <p class="col-md-4 mb-0">&copy; 2023 Carlos Henrique Teixeira de Carvalho Neto</p>
+        <p class="col-md-4 mb-0 text-light">&copy; 2023 Carlos Henrique Neto</p>
 
-        <a href="#" class="btn btn-success">
+        <a href="#" class="btn btn-outline-light shadow">
             <h5 class="text-center text-light">Voltar para o topo</h5>
         </a>
 

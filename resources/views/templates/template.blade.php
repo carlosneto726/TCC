@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <header class="fixed-top shadow-lg">
+    <header class="fixed-top bg-success shadow-lg">
         @include('layout.navbar')
     </header>
 
@@ -34,7 +34,7 @@
         @yield('content')
     </section>
 
-    <footer class="footer mt-auto py-3">
+    <footer class="footer bg-success mt-auto py-3">
         @include('layout.footer')
     </footer>
 

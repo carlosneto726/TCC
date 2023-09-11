@@ -1,7 +1,8 @@
 @extends('templates.template')
 @section('content')
-<div class="navbar navbar-expand-lg bg-body-tertiary w-100 mb-5" style="margin-top: -25px; background-color: var(--light-gray);">
-    <div class="container-fluid">
+
+<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
+    <div class="container">
         <ul class="navbar-nav">
             <a href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=preco")}}" class="text-decoration-none">
                 <li class="nav-link @if($orderby == 'preco') active" aria-current='true' @endif">Preço</li>
@@ -42,19 +43,26 @@
     </div>
 </div>
 
-<h2 class="container">Exibindo resultados @if(request("categoria")) da categoria {{request("categoria")}} @endif para "<span class="fw-bold">{{request("pesquisa")}}"</span></h2>
-<div class="container mt-5">
-    <div class="mx-auto">
 
-        <div class="me-2 mb-auto p-3 w-25">
-            <h4>Ordernar por</h4>
-
+<div class="container">
+    <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
+        <img class="me-3" src="{{asset("icons/search.svg")}}" width="48" height="38">
+        <div class="lh-1">
+            <h1 class="h4 mb-0 lh-1">
+                Exibindo resultados para "<span class="fw-bold">{{request("pesquisa")}}"</span>
+            </h1>
+            <small>
+                @if(request("categoria")) Categoria: {{request("categoria")}} @endif
+                @if(request("orderby")) Ordenado por: {{request("orderby")}} @endif
+            </small>
         </div>
-        
-        <div class="grid-container container p-3 mb-auto rounded" style="background-color: var(--light-gray);">
-            @foreach ($produtos as $produto)
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @foreach ($produtos as $produto)
+            <div class="col">
                 <!-- Card dos produtos -->
-                <div class="card m-1 rounded">
+                <div class="card m-1 rounded border-0 shadow">
                     <!-- Imagem do produto com o botão de editar -->
                     <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
                     <div class="card-img-overlay" style="height: 200px;">
@@ -82,25 +90,24 @@
                             </div>
                         </div>
                     </a>
+
+
+                    <div class="list-group">
+                        <a href="{{url("/cooperativa/abc123")}}" class="list-group-item list-group-item-action d-flex gap-3 py-1 border-0" aria-current="true">
+                            <img class="rounded-circle flex-shrink-0 object-fit-cover" src="{{asset("storage/default_template.jpg")}}" width="64" height="64">
+                            <div class="d-flex gap-2 w-100 justify-content-between">
+                                <div>
+                                    <h6 class="mb-0">abc123</h6>
+                                    <p class="mb-0 opacity-75">abc123</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
 </div>
-
-
-<style>
-
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(340px, 5fr));
-    }
-
-    #btn-comprar{
-        background-color: #00FF33;
-    }
-
-</style>
-
-
 @endsection

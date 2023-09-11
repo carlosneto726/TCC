@@ -2,7 +2,7 @@
 @section('content')
 
 <article class="blog-post container">
-    <h2 class="display-5 link-body-emphasis mb-1">Termos de Licença para o Site do TCC</h2>
+    <h2 class="display-5 link-body-emphasis mb-1">Termos, Política de Privacidade e Política de Cookies.</h2>
     <p class="blog-post-meta">10 Setembro, 2023 por <a href="https://github.com/carlosneto726">Carlos Henrique Neto</a></p>
 
     <h3>1. Concessão de Licença</h3> 

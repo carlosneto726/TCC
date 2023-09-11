@@ -40,14 +40,20 @@
 
             <div class="mb-3">
                 <label for="inputSenha" class="form-label">Senha</label>
-                <input type="password" name="senha" class="form-control shadow" id="inputSenha" placeholder="Digite a seu senha">
+                <div class="input-group">
+                    <input type="password" class="form-control shadow" placeholder="Senha" id="inputSenha" name="senha" required>
+                    <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" onclick="verSenha()">
+                    <label class="btn btn-outline-secondary shadow h-50" for="btn-check"><img src="{{asset("icons/eye.svg")}}" width="16" height="16"></label>
+                </div>
             </div>
             
             <div class="col-md-4">
-                <button type="submit" class="btn mt-2 shadow" style="background-color: var(--light-green);">Atualizar</button>
+                <button type="submit" class="btn btn-success mt-2 shadow">Atualizar</button>
             </div>
         </form>
     </div>
 
 </div>
+
+<script src="{{asset("js/cadastro.js")}}"></script>
 @endsection

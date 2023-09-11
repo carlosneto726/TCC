@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <!-- Div com o preço do produto e o botão de comprar -->
+        <!-- Div com o preço do produto e o botão de adicionar ao carrinho -->
         <div class="col-md-5 col-lg-4 order-md-last">
             <ul class="list-group mb-3 shadow">
                 <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -85,8 +85,7 @@
             </ul>
 
             <span class="card p-2 shadow">
-                <a class="btn w-100  @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false) d-none @endif" id="btn-comprar" @if(!isset($_COOKIE['usuario'])) href="{{url("/entrar")}}" @else href="{{url("/carrinho/add?id_produto=".$id_produto)}}" @endif
-                    style="background-color: var(--light-green);">
+                <a class="btn btn-success w-100  @if($produto[0]->quantidade <= 0 && $produto[0]->quantidade != false) d-none @endif" id="btn-comprar" @if(!isset($_COOKIE['usuario'])) href="{{url("/entrar")}}" @else href="{{url("/carrinho/add?id_produto=".$id_produto)}}" @endif>
                     Adicionar ao carrinho
                 </a>
             </form>

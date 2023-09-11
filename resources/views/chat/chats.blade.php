@@ -1,13 +1,13 @@
 @extends('templates.template')
 @section('content')
 <div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container-fluid">
+    <div class="container">
         <ul class="navbar-nav">
             <a href="/chats/?orderby=data" class="text-decoration-none">
-                <li class="nav-link  @if($orderby == 'data') active" aria-current='true' @endif">Data</li>
+                <li class="nav-link  @if($orderby == 'data') active @endif">Data</li>
             </a>
             <a href="/chats/?orderby=ordem_alfabetica" class="text-decoration-none">
-                <li class="nav-link  @if($orderby == 'ordem_alfabetica') active" aria-current='true' @endif">Ordem alfabética</li>
+                <li class="nav-link  @if($orderby == 'ordem_alfabetica') active @endif">Ordem alfabética</li>
             </a>
         </ul>
     </div>
@@ -29,8 +29,8 @@
     
     @foreach ($chats as $chat)
         <a class="text-decoration-none" href="{{url("/chat/".$chat->chid)}}#footer">
-            <div class="my-4 rounded p-2 shadow" style="background-color: var(--green); color: white;">
-                <span class="fs-3 fw-bold">@if(isset($_COOKIE['cooperativa'])) {{$chat->unome}} @elseif(isset($_COOKIE['usuario'])) {{$chat->cnome}} @endif</span>
+            <div class="my-4 rounded p-3 bg-success text-light shadow">
+                <span class="fs-4 fw-bold">@if(isset($_COOKIE['cooperativa'])) {{$chat->unome}} @elseif(isset($_COOKIE['usuario'])) {{$chat->cnome}} @endif</span>
             </div>
         </a>
     @endforeach
