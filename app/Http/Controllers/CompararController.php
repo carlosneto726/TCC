@@ -25,6 +25,7 @@ class CompararController extends Controller
             tb_cooperativas.id as cid,
             tb_cooperativas.nome as cnome,
             tb_produtos.id as pid,
+            tb_produtos.descricao as pdesc,
             tb_produtos.nome as pnome
             FROM tb_produtos 
             INNER JOIN tb_cooperativas ON tb_cooperativas.id = tb_produtos.id_cooperativa
@@ -34,6 +35,7 @@ class CompararController extends Controller
             tb_cooperativas.id as cid,
             tb_cooperativas.nome as cnome,
             tb_produtos.id as pid,
+            tb_produtos.descricao as pdesc,
             tb_produtos.nome as pnome
             FROM tb_produtos 
             INNER JOIN tb_cooperativas ON tb_cooperativas.id = tb_produtos.id_cooperativa

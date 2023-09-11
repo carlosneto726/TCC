@@ -32,6 +32,7 @@ use App\Http\Controllers\TestsController;
 // HomeController
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/sobre', [HomeController::class, 'viewSobre']);
+Route::get('/termos', [HomeController::class, 'viewTermos']);
 // PesquisaController
 Route::get('/pesquisa', [PesquisaController::class, 'viewPesquisa']);
 Route::get('/pesquisa/{categoria}', [PesquisaController::class, 'viewPesquisaCategoria']);
@@ -42,6 +43,7 @@ Route::get('/favoritos', [ProdutoController::class, 'viewFavoritos']);
 Route::get('/produto/{produto}/favoritar/{favorito}', [ProdutoController::class, 'favorito']);
 // CooperativaController
 Route::get('/cooperativa/{cooperativa}', [CooperativaController::class, 'viewCooperativa']);
+Route::get('/meusprodutos', [CooperativaController::class, 'viewProdutos']);
 Route::post('/cadastrar/produto', [CooperativaController::class, 'addProduto']);
 Route::post('/atualizar/produto', [CooperativaController::class, 'updateProduto']);
 Route::post('/atualizar/cooperativa', [CooperativaController::class, 'updateCooperativa']);

@@ -73,6 +73,7 @@ class ContaController extends Controller
                 if(Hash::check($senha, $cooperativas[0]->senha)){
                     setcookie("cooperativa", $cooperativas[0]->id, time() + (86400 * 30), "/");
                     setcookie("nome_cooperativa", $cooperativas[0]->nome, time() + (86400 * 30), "/");
+                    setcookie("perfil_img", $cooperativas[0]->perfil, time() + (86400 * 30), "/");
                     AlertController::alert("Login efetuado com sucesso!", "success");
                     return redirect("/");
                 }else{

@@ -59,4 +59,8 @@ class HomeController extends Controller
     public function viewSobre(){
         return view("home.sobre");
     }
+
+    public function viewTermos(){
+        return view("home.termos");
+    }
 }
