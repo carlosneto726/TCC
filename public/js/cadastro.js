@@ -29,3 +29,13 @@ if (cep.length === 8) {
     });
 }
 });
+
+
+function verSenha() {
+    var inputSenha = document.getElementById("inputSenha");
+    if (inputSenha.type === "password") {
+        inputSenha.type = "text";
+    } else {
+        inputSenha.type = "password";
+    }
+}
