@@ -27,6 +27,14 @@
             <small>@if(request("orderby")) Ordenado por <span class="fw-bold">"{{request("orderby")}}"</span> @endif</small>
         </div>
     </div>
+    @if(count($produtos) == 0)
+    <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
+        <div class="lh-1">
+            <h1 class="h5 mb-0 lh-1">Você ainda não tem nenhum produto favorito</h1>
+            <small>Veja o nosso <a href="{{url("/")}}">catálogo</a></small>
+        </div>
+    </div>
+    @endif
 
     <div class="grid-container">
         @foreach ($produtos as $produto)

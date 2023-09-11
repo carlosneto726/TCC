@@ -40,6 +40,14 @@
             <input type="password" name="senha" class="form-control" id="inputSenha" placeholder="Digite a seu senha" required>
             <input type="checkbox" class="ms-1" onclick="verSenha()"> Ver senha
         </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="aceito" required>
+            <label class="form-check-label fw-bold" for="aceito">Eu Aceito</label><br>
+            <small>
+                Ao clicar em <strong>Eu Aceito</strong>, você concorda com nossos <a href="{{("/termos")}}" target="_blank">Termos, Política de Privacidade e Política de Cookies</a>. Você poderá receber E-mails.
+            </small>
+        </div>
         
         <button type="submit" id="submit" class="btn mt-2" style="background-color: var(--light-green);">Cadastrar</button>
     </form>
