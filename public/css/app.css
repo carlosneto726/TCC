@@ -21,10 +21,6 @@ body{
   flex-direction: column; 
   min-height: 100vh;
 }
-/* Definição as cores do header */
-header{
-  background-color: var(--green);
-}
 /* 
 * Definindo as margens do conteúdo da página
 * para que o header não sobreponha a section
@@ -34,7 +30,6 @@ section{
   margin-bottom: 55px;
 }
 /* Definindo as cores do footer*/
-footer{
-  background-color: var(--green);
-  color: white;
+footer .nav-link:hover{
+  text-decoration: underline;
 }
