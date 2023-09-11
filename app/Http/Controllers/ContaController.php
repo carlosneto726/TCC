@@ -51,7 +51,7 @@ class ContaController extends Controller
             if(count($usuarios) > 0){
                 if(Hash::check($senha, $usuarios[0]->senha)){
                     setcookie("usuario", $usuarios[0]->id, time() + (86400 * 30), "/");
-                    setcookie("nome_usuario", $usuarios[0]->nome, time() + (86400 * 30), "/");
+                    setcookie("nome_usuario", explode(" ", $usuarios[0]->nome)[0], time() + (86400 * 30), "/");
                     AlertController::alert("Login efetuado com sucesso!", "success");
                     return redirect("/");
 
