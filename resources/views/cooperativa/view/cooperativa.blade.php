@@ -13,7 +13,9 @@
     =========================== Disponibilização de informações sobre cooperativas ===========================
 -->
 <!-- Imagem do outdoor -->
-<img class="d-block container mx-auto m-5 img-fluid" src="{{asset("storage/".$cooperativa[0]->outdoor)}}">
+@if($cooperativa[0]->outdoor != "")
+    <img class="d-block container mx-auto m-5 img-fluid" src="{{asset("storage/".$cooperativa[0]->outdoor)}}">
+@endif
 <!-- Container que engloba as informações sobre a cooperativa -->
 @include('cooperativa.view.sobre')
 
