@@ -33,5 +33,20 @@
         <h6 class="fw-bold text-center">Ainda não tem uma conta?</h6>
         <a class="mt-2 btn btn-secondary w-100" href="{{url("/cadastrar")}}">Cadastre-se</a>
     </main>
+
+    @if(@$_SESSION['mensagem'] != "")
+        <div class="w-100 z-3 position-absolute top-0 start-50 translate-middle-x">
+            <div id="alerta">
+                <div class="alert alert-{{@$_SESSION['tipo']}} alert-dismissible" role="alert">
+                    <div>{{$_SESSION['mensagem']}}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        @php
+            @$_SESSION['mensagem'] = "";
+            @$_SESSION['tipo'] = "";
+        @endphp
+    @endif
 </body>
 </html>
