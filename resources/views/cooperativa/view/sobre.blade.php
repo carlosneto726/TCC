@@ -109,15 +109,14 @@
                             @if (@$cooperativa[0]->tel2)
                                 <p class="col-md-12">Telefone 2: {{@$cooperativa[0]->tel2}}</p>
                             @endif
-                            @if (@$cooperativa[0]->whatsapp)
-                                <p class="col-md-12"><a href="{{@$cooperativa[0]->whatsapp}}">WhatsApp</a></p>
-                            @endif
-                            @if (@$cooperativa[0]->instagram)
-                                <p class="col-md-12"><a href="{{@$cooperativa[0]->instagram}}">Instagram</a></p>
-                            @endif
-                            @if (@$cooperativa[0]->facebook)
-                                <p class="col-md-12"><a href="{{@$cooperativa[0]->facebook}}">Facebook</a></p>
-                            @endif
+                            <p class="col-md-12"><a href="https://wa.me/55{{@$cooperativa[0]->tel1}}"><img src="{{asset("icons/whatsapp.svg")}}"></a>                        
+                                @if (@$cooperativa[0]->instagram)
+                                    <a href="{{@$cooperativa[0]->instagram}}"><img src="{{asset("icons/instagram.svg")}}"></a>
+                                @endif
+                                @if (@$cooperativa[0]->facebook)
+                                    <a href="{{@$cooperativa[0]->facebook}}"><img src="{{asset("icons/facebook.svg")}}"></a>
+                                @endif
+                            </p>
                         </div>
                     </div>
                 </div>

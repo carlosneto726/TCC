@@ -9,6 +9,10 @@
 
     <p>
         Contate o vendedor por este <a href="{{$dados['chat']}}">link</a>
+        <br>
+        ou
+        <br>
+        Contate por <a href="{{$dados['whatsapp']}}">whatsapp</a>
     </p>
 
     <h3>Seu pedido</h3>

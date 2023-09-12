@@ -3,7 +3,7 @@
 
 @if (isset($_COOKIE["cooperativa"]))
     <div class="container">
-        <button class="btn btn-editar my-4" data-bs-toggle="modal" data-bs-target="#perfilModal">Configurar perfil</button>
+        <button class="btn btn-success my-4 shadow" data-bs-toggle="modal" data-bs-target="#perfilModal">Configurar perfil</button>
     </div>
     <!-- Modal para editar perfil -->
     @include('cooperativa.view.editarModal')
@@ -52,10 +52,7 @@
     .grid-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-    .btn-editar{
-        background-color: var(--light-green);
-    }        
+    } 
 </style>
 
 @endsection

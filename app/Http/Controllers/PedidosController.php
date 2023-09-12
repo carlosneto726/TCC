@@ -57,7 +57,8 @@ class PedidosController extends Controller
         DB::insert("INSERT INTO tb_vendas (id_pedido, data, preco_total) VALUES (?, NOW(), ?);", [$id_pedido, $pedido[0]->preco_total]);
 
         AlertController::alert("Pedido concluído.".$alerta, $tipo_alerta);
-        $this->enviarEmail($id_pedido, "finalizarPedido", "Concluído");
+        $numero = DB::select("SELECT tel1 FROM tb_cooperativas WHERE id = ?", [$_COOKIE['cooperativa']])[0]->tel1;
+        $this->enviarEmail($id_pedido, $numero, "finalizarPedido", "Concluído");
         return redirect("/pedidos");
     }
 
@@ -66,7 +67,8 @@ class PedidosController extends Controller
         DB::update("UPDATE tb_pedidos SET status = ? WHERE id = ?", [2, $id_pedido]);
 
         AlertController::alert("Produto cancelado.", "warning");
-        $this->enviarEmail($id_pedido, "finalizarPedido", "Cancelado");
+        $numero = DB::select("SELECT tel1 FROM tb_cooperativas WHERE id = ?", [$_COOKIE['cooperativa']])[0]->tel1;
+        $this->enviarEmail($id_pedido, $numero, "finalizarPedido", "Cancelado");
         return redirect("/pedidos");
         
     }
@@ -172,7 +174,7 @@ class PedidosController extends Controller
     }
 
 
-    public function enviarEmail($id_pedido, $tipo, $status){
+    public function enviarEmail($id_pedido, $numero, $tipo, $status){
         $id_cooperativa = $_COOKIE['cooperativa'];
 
         $email_usuario = DB::select("   SELECT tb_usuarios.email 
@@ -200,6 +202,7 @@ class PedidosController extends Controller
         $dados = [
         'nome' => $nome_cooperativa[0]->nome,
         'chat' => 'https://cooperativasunidas.online/pedidos/chat/'.$id_pedido,
+        'whatsapp' => 'https://wa.me/55'.$numero,
         'status' => $status,
         'produtos_pedido' => $produtos_pedido,
         ];

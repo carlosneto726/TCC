@@ -38,7 +38,7 @@
             <h6 class="border-bottom pb-2 mb-0">
                 <div class="d-flex">
                     <span>ID: {{$pedido->id}}</span>
-                    <a class="btn btn btn-sm ms-auto" href="{{url("/pedidos/concluir?id_pedido=".$pedido->id)}}" style="background-color: var(--light-green);">Concluir pedido</a>
+                    <a class="btn btn-success btn-sm ms-auto" href="{{url("/pedidos/concluir?id_pedido=".$pedido->id)}}">Concluir pedido</a>
                     <a class="btn btn-danger btn-sm ms-1" href="{{url("/pedidos/cancelar?id_pedido=".$pedido->id)}}">Cancelar pedido</a>
                 </div>
             </h6>
