@@ -111,8 +111,8 @@ Distribuido sobre a Licença MIT. Veja `LICENSE` para mais informções.
 [Pusher]: https://img.shields.io/badge/Pusher-white?style=for-the-badge&logo=Pusher&logoColor=300D4F
 [Pusher-url]: https://pusher.com/
 
-[QuickChart]: https://img.shields.io/badge/QuickChart-0B97D7?style=for-the-badge
-[QuickChart-url]: https://quickchart.io/
+[QuickChart]: https://img.shields.io/badge/CanvasJS-5A55A3?style=for-the-badge
+[QuickChart-url]: https://canvasjs.com/
 
 [ViaCEP]: https://img.shields.io/badge/ViaCEP-008000?style=for-the-badge
 [ViaCEP-url]: https://viacep.com.br/

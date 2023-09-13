@@ -1,7 +1,7 @@
 @extends('templates.template')
 @section('content')
 
-<div id="carouselAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div id="carouselAutoplaying" class="carousel carousel-dark slide container" data-bs-ride="carousel">
     <div class="carousel-inner">
 
         <div class="carousel-item active">
@@ -33,31 +33,51 @@
 </div>
 
 <div class="container mt-5">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-        @foreach ($produtos as $produto)
-            <div class="col">
-                <!-- Card dos produtos -->
-                <div class="card m-1 rounded border-0 shadow">
-                    <!-- Imagem do produto com o botão de editar -->
-                    <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
-                        <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
-                        <div class="card-body p-2 rounded">
-                            <!-- Iformações do produto -->
-                            <div class="w-100 text-truncate">
-                                <span class="fs-3">{{$produto->pnome}}</span>
-                            </div>
-                            <div class="w-100">
-                                <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
-                            </div>
-                            <div class="w-100 text-truncate">
-                                <span class="">{{$produto->descricao}}</span>
-                            </div>
-                        </div>
-                    </a>
+
+
+
+    @foreach ($produtos_categorias as $categoria)
+
+        @if(count($categoria) != 0)
+
+            @if(count($categoria) > 4)
+                <div class="mt-5 pt-2 shadow rounded">
+                    <h4 class="m-3">produtos_categorias</h4>
+                    <div class="d-flex overflow-x-auto">
+                        @foreach ($categoria as $produto)
+                            <a class="text-decoration-none ms-1 me-1" href="{{url("/produto/".$produto->pid)}}">
+                                <img class="object-fit-contain" src="{{asset("storage/".$produto->imagem)}}" style="height: 200px;">
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+
+            @elseif(count($categoria)  <= 5)
+                <div class="mt-5 pt-2 pb-2 shadow rounded">
+                    <h4 class="m-3">produtos_categorias</h4>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{{count($categoria)}} g-3">
+                        @foreach ($categoria as $produto)
+                            <div class="col">
+                                <a class="text-decoration-none d-flex p-2" href="{{url("/produto/".$produto->pid)}}">
+                                    <img class="mx-auto object-fit-contain" src="{{asset("storage/".$produto->imagem)}}" style="height: 200px;">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+            
+        @endif
+    @endforeach
+
+
+
+
+
+
+
+
+
 
     <h3 class="mt-5 text-center">Categorias</h3>
     <div class="mx-auto d-flex justify-content-center p-3 mt-4 rounded shadow">

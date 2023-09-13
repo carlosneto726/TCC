@@ -14,7 +14,24 @@ class HomeController extends Controller
         if(isset($_COOKIE["usuario"])){
             $id_usuario = $_COOKIE["usuario"];
             $cep = substr(DB::select("SELECT cep FROM tb_usuarios WHERE id = ?", [$id_usuario])[0]->cep, 0, 3);
+            $produtos_categorias = [];
 
+            for ($i=1; $i < 14; $i++) { 
+                $produtos_categoria = DB::select("    SELECT *, 
+                                                        tb_produtos.id as pid,
+                                                        tb_produtos.nome as pnome,
+                                                        tb_cooperativas.id as cid,
+                                                        tb_cooperativas.nome as cnome
+                                                        FROM tb_produtos
+                                                        INNER JOIN tb_cooperativas ON tb_produtos.id_cooperativa = tb_cooperativas.id
+                                                        WHERE tb_produtos.id_cooperativa 
+                                                        IN (SELECT tb_cooperativas.id FROM tb_cooperativas WHERE tipo = $i) 
+                                                        AND quantidade > 100 
+                                                        AND status = 1 
+                                                        ORDER BY likes DESC, cep LIKE '%".$cep."%' LIMIT 30
+                ");
+                array_push($produtos_categorias, $produtos_categoria);
+            }
             $produtos = DB::select("SELECT *,
                                     tb_produtos.id as pid,
                                     tb_produtos.nome as pnome,
@@ -31,17 +48,28 @@ class HomeController extends Controller
                 if($produto->likes > 9){
                     array_push($produtos_carrossel, $produto);
                 }
-                
             }
-            
+            return view('home.home', compact('produtos_categorias', 'produtos_carrossel'));
+
         }else{
-            $produtos = DB::select("    SELECT *,
-                                        tb_produtos.id as pid,
-                                        tb_produtos.nome as pnome
-                                        FROM tb_produtos 
-                                        WHERE quantidade > 100 
-                                        AND status = 1 
-                                        ORDER BY likes DESC");
+
+            $produtos_categorias = [];
+            for ($i=1; $i < 14; $i++) { 
+                $produtos_categoria = DB::select("    SELECT *, 
+                                                        tb_produtos.id as pid,
+                                                        tb_produtos.nome as pnome,
+                                                        tb_cooperativas.id as cid,
+                                                        tb_cooperativas.nome as cnome
+                                                        FROM tb_produtos
+                                                        INNER JOIN tb_cooperativas ON tb_produtos.id_cooperativa = tb_cooperativas.id
+                                                        WHERE tb_produtos.id_cooperativa 
+                                                        IN (SELECT tb_cooperativas.id FROM tb_cooperativas WHERE tipo = $i) 
+                                                        AND quantidade > 100 
+                                                        AND status = 1 
+                                                        ORDER BY likes DESC LIMIT 30
+                ");
+                array_push($produtos_categorias, $produtos_categoria);
+            }
 
             $produtos_carrossel  = DB::select(" SELECT *,
                                                 tb_produtos.id as pid,
@@ -50,10 +78,11 @@ class HomeController extends Controller
                                                 WHERE quantidade > 100 
                                                 AND status = 1 
                                                 AND likes > 9 
-                                                ORDER BY likes DESC");
+                                                ORDER BY likes DESC"
+            );
+
+            return view('home.home', compact('produtos_categorias', 'produtos_carrossel'));
         }
-        
-        return view('home.home', compact('produtos', 'produtos_carrossel'));
     }
 
     public function viewSobre(){
