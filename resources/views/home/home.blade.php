@@ -1,6 +1,27 @@
 @extends('templates.template')
 @section('content')
 
+<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
+    <div class="container">
+        <ul class="navbar-nav">
+            <a class="text-decoration-none" href="{{url("/pesquisa/agropecuaria")}}"><li class="nav-link">Agropecuária</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/consumo")}}"><li class="nav-link">Consumo</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/credito")}}"><li class="nav-link">Crédito</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/educacao")}}"><li class="nav-link">Educação</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/especial")}}"><li class="nav-link">Especial</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/moradia")}}"><li class="nav-link">Moradia</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/minerios")}}"><li class="nav-link">Minérios</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/producao")}}"><li class="nav-link">Produção</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/infraestrutura")}}"><li class="nav-link">Infraestrutura</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/trabalho")}}"><li class="nav-link">Trabalho</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/saude")}}"><li class="nav-link">Saúde</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/transporte")}}"><li class="nav-link">Transporte</li></a>
+            <a class="text-decoration-none" href="{{url("/pesquisa/turismo-e-lazer")}}"><li class="nav-link">Turismo elazer</li></a>
+        </ul>
+    </div>
+</div>
+
+
 <div id="carouselAutoplaying" class="carousel carousel-dark slide container" data-bs-ride="carousel">
     <div class="carousel-inner">
 
@@ -8,10 +29,10 @@
             <img src="{{asset("images/carrossel_active.png")}}" class="carrosel-img card-img d-block w-50 mx-auto">
         </div>
 
-        @foreach ($produtos_carrossel as $carrossel)
+        @foreach ($home_data['carrosel'] as $carrossel)
             <div class="carousel-item">
-                <a class="text-decoration-none text-dark" href="{{url("/produto/".$carrossel->pid)}}">                
-                    <img src="{{asset("storage/".$carrossel->imagem)}}" class="carrosel-img card-img d-block w-50 mx-auto" style="width: fit-content;">
+                <a class="text-decoration-none text-dark" href="{{url('/produto/'.$carrossel->pid)}}">                
+                    <img src="{{asset('storage/'.$carrossel->imagem)}}" class="carrosel-img card-img d-block w-50 mx-auto" style="width: fit-content;">
                     <div class="card-img-overlay mx-auto d-flex flex-column" style="width: fit-content;">
                         <h3 class="card-title me-5">{{$carrossel->nome}}</h3>
                         <p class="card-text mt-auto text-end fw-bold">R$ {{number_format($carrossel->preco,2,",",".")}}</p>
@@ -34,32 +55,30 @@
 
 <div class="container mt-5">
 
+    @foreach ($home_data['produtos'] as $categoria)
 
+        @if(count($categoria['produtos']) != 0)
 
-    @foreach ($produtos_categorias as $categoria)
-
-        @if(count($categoria) != 0)
-
-            @if(count($categoria) > 4)
+            @if(count($categoria['produtos']) > 4)
                 <div class="mt-5 pt-2 shadow rounded">
-                    <h4 class="m-3">produtos_categorias</h4>
-                    <div class="d-flex overflow-x-auto">
-                        @foreach ($categoria as $produto)
-                            <a class="text-decoration-none ms-1 me-1" href="{{url("/produto/".$produto->pid)}}">
-                                <img class="object-fit-contain" src="{{asset("storage/".$produto->imagem)}}" style="height: 200px;">
+                    <h4 class="m-3">{{$categoria['categoria']}}</h4>
+                    <div class="d-flex overflow-x-auto h-scroll">
+                        @foreach ($categoria['produtos'] as $produto)
+                            <a class="text-decoration-none ms-1 me-1" href="{{url('/produto/'.$produto->pid)}}">
+                                <img class="object-fit-contain" src="{{asset('storage/'.$produto->imagem)}}" style="height: 200px; width: 200px;">
                             </a>
                         @endforeach
                     </div>
                 </div>
 
-            @elseif(count($categoria)  <= 5)
+            @elseif(count($categoria['produtos'])  <= 5)
                 <div class="mt-5 pt-2 pb-2 shadow rounded">
-                    <h4 class="m-3">produtos_categorias</h4>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{{count($categoria)}} g-3">
-                        @foreach ($categoria as $produto)
+                    <h4 class="m-3">{{$categoria['categoria']}}</h4>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{{count($categoria['produtos'])}} g-3">
+                        @foreach ($categoria['produtos'] as $produto)
                             <div class="col">
-                                <a class="text-decoration-none d-flex p-2" href="{{url("/produto/".$produto->pid)}}">
-                                    <img class="mx-auto object-fit-contain" src="{{asset("storage/".$produto->imagem)}}" style="height: 200px;">
+                                <a class="text-decoration-none d-flex p-2" href="{{url('/produto/'.$produto->pid)}}">
+                                    <img class="mx-auto object-fit-contain" src="{{asset('storage/'.$produto->imagem)}}" style="height: 200px;">
                                 </a>
                             </div>
                         @endforeach
@@ -69,97 +88,6 @@
             
         @endif
     @endforeach
-
-
-
-
-
-
-
-
-
-
-    <h3 class="mt-5 text-center">Categorias</h3>
-    <div class="mx-auto d-flex justify-content-center p-3 mt-4 rounded shadow">
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/agropecuaria")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/farming-tractor.svg")}}" title="Agropecuária">
-            </a>
-        </div>
-        
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/consumo")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/cup-straw.svg")}}" title="Consumo">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/credito")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/cash-coin.svg")}}" title="Crédito">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/educacao")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/book.svg")}}" title="Educação">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/especial")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/universal-access-circle.svg")}}" title="Especial">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/moradia")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/house-door.svg")}}" title="Moradia">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/minerios")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/minecart-loaded.svg")}}" title="Minérios">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/producao")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/factory.svg")}}" title="Produção">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/infraestrutura")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/building.svg")}}" title="Infraestrutura">
-            </a>            
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/trabalho")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/person-workspace.svg")}}" title="Trabalho">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/saude")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/bandaid.svg")}}" title="Saúde">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/transporte")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/bus-front.svg")}}" title="Transporte">
-            </a>
-        </div>
-
-        <div class="flex-categoria p-3 ms-1 me-1">
-            <a href="{{url("/pesquisa/turismo-e-lazer")}}">
-                <img class="categoria-img img-fluid" src="{{asset("icons/emoji-sunglasses.svg")}}" title="Turismo e lazer">
-            </a>
-        </div>
-    </div>
 </div>
 
 

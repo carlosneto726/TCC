@@ -30,7 +30,7 @@ use App\Http\Controllers\TestsController;
 */
 
 // HomeController
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'viewHome']);
 Route::get('/sobre', [HomeController::class, 'viewSobre']);
 Route::get('/termos', [HomeController::class, 'viewTermos']);
 // PesquisaController

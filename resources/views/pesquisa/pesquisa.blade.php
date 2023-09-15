@@ -63,37 +63,33 @@
             <div class="col">
                 <!-- Card dos produtos -->
                 <div class="card m-1 rounded border-0 shadow">
-                    <!-- Imagem do produto com o botão de editar -->
-                    <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
-                    <div class="card-img-overlay" style="height: 200px;">
-                        <div class="d-flex" style="height: 170px;">            
-                            <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
-                                <img src="{{asset("icons/thumbs-up.svg")}}">
-                                <span class="me-1">{{$produto->likes}}</span>
-                                <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
-                                <span>{{$produto->deslikes}}</span>
-                            </div>
-                        </div>    
-                    </div>
-        
                     <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
+                        <!-- Imagem do produto com o botão de editar -->
+                        <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+                        <div class="card-img-overlay" style="height: 200px;">
+                            <div class="d-flex" style="height: 170px;">            
+                                <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
+                                    <img src="{{asset("icons/thumbs-up.svg")}}">
+                                    <span class="me-1">{{$produto->likes}}</span>
+                                    <img class="ms-1" src="{{asset("icons/thumbs-down.svg")}}">
+                                    <span>{{$produto->deslikes}}</span>
+                                </div>
+                            </div>    
+                        </div>
+
                         <div class="card-body p-2 rounded">
-                            <!-- Iformações do produto -->
-                            <div class="w-100 text-truncate">
-                                <span class="fs-3">{{$produto->nome}}</span>
-                            </div>
-                            <div class="w-100">
-                                <span class="fw-bold text-wrap">R$ {{number_format($produto->preco,2,",",".")}}</span>
-                            </div>
-                            <div class="w-100 text-truncate">
-                                <span class="">{{$produto->descricao}}</span>
+                            <div class="d-flex text-body-secondary pt-3">
+                                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                    <div class="d-flex justify-content-between">
+                                        <strong class="h5 text-gray-dark">{{$produto->nome}}</strong>
+                                        <span class="h6">R$ {{number_format($produto->preco,2,",",".")}}</span>
+                                    </div>
+                                    <span class="h6 d-block">{{$produto->descricao}}</span>
+                                </div>
                             </div>
                         </div>
-                    </a>
-
-
-                    <div class="list-group">
-                        <a href="{{url("/cooperativa/abc123")}}" class="list-group-item list-group-item-action d-flex gap-3 py-1 border-0" aria-current="true">
+                        
+                        <div class="d-flex gap-3 p-2 border-0" aria-current="true">
                             <img class="rounded-circle flex-shrink-0 object-fit-cover" src="{{asset("storage/default_template.jpg")}}" width="64" height="64">
                             <div class="d-flex gap-2 w-100 justify-content-between">
                                 <div>
@@ -101,11 +97,10 @@
                                     <p class="mb-0 opacity-75">abc123</p>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                        
                     </div>
-
-
-                </div>
+                </a>
             </div>
         @endforeach
     </div>
