@@ -1,6 +1,8 @@
 @extends('templates.template')
 @section('content')
 
+<link rel="stylesheet" href="{{asset('css/home.css')}}">
+
 <div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
     <div class="container">
         <ul class="navbar-nav">
@@ -26,16 +28,16 @@
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <img src="{{asset("images/carrossel_active.png")}}" class="carrosel-img card-img d-block w-50 mx-auto">
+            <img src="{{asset("images/carrossel_active.png")}}" class="carrosel-img d-block w-50 mx-auto">
         </div>
 
         @foreach ($home_data['carrosel'] as $carrossel)
             <div class="carousel-item">
-                <a class="text-decoration-none text-dark" href="{{url('/produto/'.$carrossel->pid)}}">                
-                    <img src="{{asset('storage/'.$carrossel->imagem)}}" class="carrosel-img card-img d-block w-50 mx-auto" style="width: fit-content;">
-                    <div class="card-img-overlay mx-auto d-flex flex-column" style="width: fit-content;">
-                        <h3 class="card-title me-5">{{$carrossel->nome}}</h3>
-                        <p class="card-text mt-auto text-end fw-bold">R$ {{number_format($carrossel->preco,2,",",".")}}</p>
+                <a class="text-dark-emphasis" href="{{url('/produto/'.$carrossel->pid)}}">
+                    <div class="produto-container position-relative d-block w-50 mx-auto">
+                        <img src="{{asset('storage/'.$carrossel->imagem)}}" class="carrosel-img">
+                        <h3 class="p-2 rounded bg-light shadow position-absolute top-0 start-0">{{$carrossel->nome}}</h3>
+                        <p class="p-2 rounded bg-light shadow position-absolute bottom-0 end-0 fw-bold">R$ {{number_format($carrossel->preco,2,",",".")}}</p>
                     </div>
                 </a>
             </div>
@@ -59,26 +61,30 @@
 
         @if(count($categoria['produtos']) != 0)
 
-            @if(count($categoria['produtos']) > 4)
+            @if(count($categoria['produtos']) > 5)
                 <div class="mt-5 pt-2 shadow rounded">
-                    <h4 class="m-3">{{$categoria['categoria']}}</h4>
+                    <h4 class="m-3 text-dark-emphasis">{{$categoria['categoria']}}</h4>
                     <div class="d-flex overflow-x-auto h-scroll">
                         @foreach ($categoria['produtos'] as $produto)
-                            <a class="text-decoration-none ms-1 me-1" href="{{url('/produto/'.$produto->pid)}}">
-                                <img class="object-fit-contain" src="{{asset('storage/'.$produto->imagem)}}" style="height: 200px; width: 200px;">
+                            <a class="position-relative text-dark-emphasis ms-2 me-1" href="{{url('/produto/'.$produto->pid)}}">
+                                <img class="produto-img mt-4" src="{{asset('storage/'.$produto->imagem)}}">
+                                <small class="p-2 rounded bg-light shadow position-absolute top-0 start-0 fw-bold">{{$produto->nome}}</small>
+                                <small class="p-2 rounded bg-light shadow position-absolute bottom-0 end-0 fw-bold">R$ {{number_format($produto->preco,2,",",".")}}</small>
                             </a>
                         @endforeach
                     </div>
                 </div>
 
-            @elseif(count($categoria['produtos'])  <= 5)
+            @elseif(count($categoria['produtos'])  < 6)
                 <div class="mt-5 pt-2 pb-2 shadow rounded">
-                    <h4 class="m-3">{{$categoria['categoria']}}</h4>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-{{count($categoria['produtos'])}} g-3">
+                    <h4 class="m-3 dark-emphasis">{{$categoria['categoria']}}</h4>
+                    <div class="row row-cols-2 row-cols-sm-{{intval(count($categoria['produtos']) / 2)}} row-cols-md-{{count($categoria['produtos'])}} g-3">
                         @foreach ($categoria['produtos'] as $produto)
                             <div class="col">
-                                <a class="text-decoration-none d-flex p-2" href="{{url('/produto/'.$produto->pid)}}">
-                                    <img class="mx-auto object-fit-contain" src="{{asset('storage/'.$produto->imagem)}}" style="height: 200px;">
+                                <a class="produto-container position-relative text-dark-emphasis d-flex mx-auto p-2" href="{{url('/produto/'.$produto->pid)}}">
+                                    <img class="produto-img my-auto mt-3" src="{{asset('storage/'.$produto->imagem)}}">
+                                    <small class="p-2 rounded bg-light shadow position-absolute top-0 start-0 fw-bold">{{$produto->nome}}</small>
+                                    <small class="p-2 rounded bg-light shadow position-absolute bottom-0 end-0 fw-bold">R$ {{number_format($produto->preco,2,",",".")}}</small>
                                 </a>
                             </div>
                         @endforeach
@@ -89,18 +95,4 @@
         @endif
     @endforeach
 </div>
-
-
-<style>
-    .carrosel-img {
-        object-fit: contain;
-        width: 100%;
-        height: 275px;
-    }
-
-    .carousel {
-        margin-top: 70px;
-    }
-</style>
-
 @endsection
