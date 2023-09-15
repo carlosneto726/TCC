@@ -16,16 +16,31 @@
                     @csrf
                     @method("POST")
                     <input type="text" name="id_produto" value="{{$id_produto}}" hidden>
-                    <div class="mt-2 form-check">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="avaliacao" id="inlineRadio1" value="like">
-                            <label class="form-check-label" for="inlineRadio1">Like</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="avaliacao" id="inlineRadio2" value="deslike">
-                            <label class="form-check-label" for="inlineRadio2">Deslike</label>
-                        </div>
+                                        
+                    <div class="form-check-inline mb-3">
+                        <input 
+                        class="rounded btn-check" 
+                        id="btn-check-like" 
+                        type="radio" 
+                        name="avaliacao" 
+                        value="like" 
+                        autocomplete="off">
+                        <label class="btn btn-outline-success shadow h-50" for="btn-check-like">
+                            <img src="{{asset("icons/thumbs-up.svg")}}" width="16" height="16">
+                        </label>
+                        
+                        <input 
+                        class="btn-check" 
+                        id="btn-check-deslike" 
+                        type="radio" 
+                        name="avaliacao" 
+                        value="deslike" 
+                        autocomplete="off">
+                        <label class="btn btn-outline-danger shadow h-50" for="btn-check-deslike">
+                            <img src="{{asset("icons/thumbs-down.svg")}}" width="16" height="16">
+                        </label>
                     </div>
+                    
                     <div class="mt-2">
                         <label for="titulo">Escreva um título</label>
                         <input class="form-control" id="titulo" name="titulo" placeholder="Escreva um título sobre o seu comentário" required>
@@ -35,9 +50,9 @@
                         <label for="comentarioTextarea">Escreva um comentário</label>
                     </div>
                     @if(!isset($_COOKIE['usuario']))
-                        <a href="{{url("/entrar")}}" class="btn w-100 mt-3" style="background-color: var(--light-green);">Enviar avaliação</a>
+                        <a href="{{url("/entrar")}}" class="btn btn-success w-100 mt-3">Enviar avaliação</a>
                     @else
-                        <button type="submit" class="btn w-100 mt-3" style="background-color: var(--light-green);">Enviar avaliação</button>
+                        <button type="submit" class="btn btn-success w-100 mt-3">Enviar avaliação</button>
                     @endif
                 </form>
             </div>

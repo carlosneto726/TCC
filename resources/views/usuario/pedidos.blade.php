@@ -47,7 +47,7 @@
                         <span class="text-warning">PENDENTE</span> 
                     @endif 
                 </span>
-                <a class="btn btn btn-sm ms-3" href="{{url("/pedidos/chat/".$pedido->id)}}" style="background-color: var(--light-green);">Conversar</a>
+                <a class="btn btn-success btn-sm ms-3" href="{{url("/pedidos/chat/".$pedido->id)}}">Chat</a>
             </h6>
 
             @foreach ($pedido->produtos as $produto)

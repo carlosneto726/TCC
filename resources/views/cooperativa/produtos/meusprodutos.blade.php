@@ -16,7 +16,7 @@
 
 <div class="container">
     <div class="d-flex align-items-center p-3 my-3 rounded shadow">
-        <img class="me-3" src="{{asset("icons/bag.svg")}}" width="48" height="38">
+        <img class="me-3" src="{{asset("icons/shop.svg")}}" width="48" height="38">
         <div class="lh-1">
             <h1 class="h4 mb-0 lh-1">Meus Produtos</h1>
             <small>@if(request("orderby")) Ordenado por <span class="fw-bold">"{{request("orderby")}}"</span> @endif</small>
@@ -62,8 +62,7 @@
                     @endif
                 </span>
                 <button type="button" 
-                        class="btn btn btn-sm ms-3" 
-                        style="background-color: var(--light-green);"
+                        class="btn btn-success btn-sm ms-3" 
                         data-bs-toggle="modal" 
                         data-bs-target="#produtoModal{{$produto->id}}">
                         Editar

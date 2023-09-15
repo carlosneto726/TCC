@@ -16,7 +16,7 @@
 
 <div class="container">
     <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
-        <img class="me-3" src="{{asset("icons/list-check.svg")}}" width="48" height="38">
+        <img class="me-3" src="{{asset("icons/hourglass-split.svg")}}" width="48" height="38">
         <div class="lh-1">
             <h1 class="h4 mb-0 lh-1">Pedidos Pendentes</h1>
             <small></small>
@@ -73,7 +73,7 @@
     <hr> <!-- =============================================================================================================== -->
 
     <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
-        <img class="me-3" src="{{asset("icons/list-check.svg")}}" width="48" height="38">
+        <img class="me-3" src="{{asset("icons/check.svg")}}" width="48" height="38">
         <div class="lh-1">
             <h1 class="h4 mb-0 lh-1">Pedidos Encerrados</h1>
             <small></small>
