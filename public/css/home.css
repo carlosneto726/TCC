@@ -1,0 +1,28 @@
+/* Customizando a barra de rolagem horizontal das categorias da pagina incial */
+.h-scroll::-webkit-scrollbar {
+    height: 7px;
+}
+  .h-scroll::-webkit-scrollbar-track {
+    background: white;
+}
+  .h-scroll::-webkit-scrollbar-thumb {
+    background-color: #198754;
+    border-radius: 20px;
+}
+
+.carrosel-img {
+    object-fit: contain;
+    width: 100%;
+    height: 275px;
+}
+.carousel {
+    margin-top: 70px;
+}
+.produto-img{
+    width: 200px; 
+    height: 200px;
+    object-fit: contain;
+}
+.produto-container{
+    width: fit-content;
+}
