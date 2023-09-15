@@ -63,9 +63,9 @@
             <div class="col">
                 <!-- Card dos produtos -->
                 <div class="card m-1 rounded border-0 shadow">
-                    <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->id)}}">
+                    <a class="text-decoration-none text-dark" href="{{url("/produto/".$produto->pid)}}">
                         <!-- Imagem do produto com o botão de editar -->
-                        <img src="{{asset("storage/".$produto->imagem)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
+                        <img src="{{asset("storage/".$produto->pimg)}}" class="rounded card-img-top" style="height: 200px; object-fit: contain;">
                         <div class="card-img-overlay" style="height: 200px;">
                             <div class="d-flex" style="height: 170px;">            
                                 <div class="d-inline-flex p-1 rounded ms-auto mt-auto" style="background-color: white;">
@@ -81,20 +81,20 @@
                             <div class="d-flex text-body-secondary pt-3">
                                 <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                                     <div class="d-flex justify-content-between">
-                                        <strong class="h5 text-gray-dark">{{$produto->nome}}</strong>
+                                        <strong class="h5 text-gray-dark">{{$produto->pnome}}</strong>
                                         <span class="h6">R$ {{number_format($produto->preco,2,",",".")}}</span>
                                     </div>
-                                    <span class="h6 d-block">{{$produto->descricao}}</span>
+                                    <span class="h6 d-block">{{$produto->pdesc}}</span>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="d-flex gap-3 p-2 border-0" aria-current="true">
-                            <img class="rounded-circle flex-shrink-0 object-fit-cover" src="{{asset("storage/default_template.jpg")}}" width="64" height="64">
+                            <img class="rounded-circle flex-shrink-0 object-fit-cover" src="{{asset("storage/".$produto->cimg)}}" width="64" height="64">
                             <div class="d-flex gap-2 w-100 justify-content-between">
                                 <div>
-                                    <h6 class="mb-0">abc123</h6>
-                                    <p class="mb-0 opacity-75">abc123</p>
+                                    <h6 class="mb-0">{{$produto->cnome}}</h6>
+                                    <p class="mb-0 opacity-75">{{$produto->endereco}}</p>
                                 </div>
                             </div>
                         </div>

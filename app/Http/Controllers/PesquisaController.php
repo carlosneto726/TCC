@@ -60,12 +60,22 @@ class PesquisaController extends Controller
             $orderby = "likes DESC";
         }
 
-        $produtos = DB::select("SELECT * 
-                                FROM tb_produtos 
+        $produtos = DB::select("SELECT tb_produtos.nome as pnome,
+                                tb_produtos.id as pid,
+                                tb_produtos.descricao as pdesc,
+                                tb_produtos.imagem as pimg,
+                                tb_produtos.likes,
+                                tb_produtos.deslikes,
+                                tb_produtos.preco,
+                                tb_cooperativas.perfil as cimg,
+                                tb_cooperativas.nome as cnome,
+                                tb_cooperativas.endereco
+                                FROM tb_produtos
+                                INNER JOIN tb_cooperativas ON tb_cooperativas.id = tb_produtos.id_cooperativa
                                 WHERE ".$query."
                                 quantidade > 100 
                                 AND status = 1 
-                                AND nome LIKE '%".$pesquisa."%' 
+                                AND tb_produtos.nome LIKE '%".$pesquisa."%' 
                                 ORDER BY ".$orderby);
         return $produtos;
     }
