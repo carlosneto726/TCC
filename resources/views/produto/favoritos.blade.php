@@ -1,22 +1,13 @@
 @extends('templates.template')
 @section('content')
-<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container">
-        <ul class="navbar-nav">
-            <a href="{{url("/favoritos?orderby=preco")}}" class="text-decoration-none">
-                <li class="nav-link @if(request("orderby") == 'preco') active @endif">Preço</li>
-            </a>
-            <a href="{{url("/favoritos?orderby=avaliacao-produto")}}" class="text-decoration-none">
-                <li class="nav-link @if(request("orderby") == 'avaliacao-produto') active @endif">Avaliação do produto</li>
-            </a>
-            <a href="{{url("/favoritos?orderby=cooperativa")}}" class="text-decoration-none">
-                <li class="nav-link @if(request("orderby") == 'cooperativa') active @endif">Cooperativa</li>
-            </a>
-            <a href="{{url("/favoritos?orderby=localizacao")}}" class="text-decoration-none">
-                <li class="nav-link @if(request("orderby") == 'localizacao') active @endif">Localização</li>
-            </a>
-        </ul>
-    </div>
+
+<div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
+    <nav class="nav container" aria-label="Secondary navigation">
+        <a class="nav-link text-decoration-none" href="{{url("/favoritos?orderby=preco")}}">Preço</a>
+        <a class="nav-link text-decoration-none" href="{{url("/favoritos?orderby=avaliacao-produto")}}">Avaliação do produto</a>
+        <a class="nav-link text-decoration-none" href="{{url("/favoritos?orderby=cooperativa")}}">Cooperativa</a>
+        <a class="nav-link text-decoration-none" href="{{url("/favoritos?orderby=localizacao")}}">Localização</a>
+    </nav>
 </div>
 
 <div class="container">

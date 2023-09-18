@@ -1,17 +1,16 @@
 @extends('templates.template')
 @section('content')
 
-<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container">
-        <ul class="navbar-nav">
-            <a href="/chats/?orderby=data" class="text-decoration-none">
-                <li class="nav-link">Data</li>
-            </a>
-            <a href="/chats/?orderby=ordem_alfabetica" class="text-decoration-none">
-                <li class="nav-link">Ordem alfabética</li>
-            </a>
-        </ul>
-    </div>
+<div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
+    <nav class="nav container" aria-label="Secondary navigation">
+        <a class="nav-link text-decoration-none" href="#">Mais recente</a>
+        <a class="nav-link text-decoration-none" href="#">Mais Antigo</a>
+        <a class="nav-link text-decoration-none" href="#">Mais caro</a>
+        <a class="nav-link text-decoration-none" href="#">Mais barato</a>
+        <a class="nav-link text-decoration-none" href="#">Concluído</a>
+        <a class="nav-link text-decoration-none" href="#">Pendente</a>
+        <a class="nav-link text-decoration-none" href="#">Cancelado</a>
+    </nav>
 </div>
 
 <div class="container">
