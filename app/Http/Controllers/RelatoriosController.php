@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class RelatoriosController extends Controller
 {
+    public $id_cooperativa;
+    public function __construct() {
+        $this->id_cooperativa = $_COOKIE['cooperativa'];
+    }
+
     public function viewVendas(){
         
-        $id_cooperativa = $_COOKIE['cooperativa'];
+        $id_cooperativa = $this->id_cooperativa;
         $tipo = "Vendas";
     
         $labels = DB::select("  SELECT tb_vendas.data as vdata,
@@ -33,7 +38,7 @@ class RelatoriosController extends Controller
 
 
     public function viewMaisVendidos(){
-        $id_cooperativa = $_COOKIE['cooperativa'];
+        $id_cooperativa = $this->id_cooperativa;
         $labels = [];
         $data = [];
         $tipo = "Produtos Mais Vendidos";
@@ -74,7 +79,7 @@ class RelatoriosController extends Controller
 
 
     public function viewLocaisVendidos(){
-        $id_cooperativa = $_COOKIE['cooperativa'];
+        $id_cooperativa = $this->id_cooperativa;
         $labels = [];
         $data = [];
         $tipo = "Locais Mais Vendidos";
@@ -123,7 +128,7 @@ class RelatoriosController extends Controller
 
 
     public function viewReceita(){
-        $id_cooperativa = $_COOKIE["cooperativa"];
+        $id_cooperativa = $this->id_cooperativa;
         $tipo = "Receita";
         $data = 0;
         $labels = DB::select("  SELECT * 

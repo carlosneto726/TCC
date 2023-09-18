@@ -74,9 +74,9 @@
             <div class="mb-2">
                 <label for="basic-url" class="form-label">Imagem de perfil</label>
                 <div class="input-group">
-                    <input class="form-control shadow" type="file" name="perfil" id="formFile">
+                    <input class="form-control shadow" type="file" name="perfil" id="formFile" accept=".png, .jpg, .jpeg, .webp, .avif, .jfif">
                 </div>
-                <div class="form-text" id="basic-addon4">.png, .jpeg, .jpg, .webp</div>
+                <div class="form-text" id="basic-addon4">.png, .jpg, .jpeg, .webp, .avif, .jfif</div>
             </div>
             <hr>
             <button class="btn btn-success mt-2 w-100 shadow" type="submit" id="submit">Criar conta</button>

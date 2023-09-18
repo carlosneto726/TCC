@@ -65,11 +65,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="formFileMultiple" class="form-label">Alterar imagem de perfil</label>
-                        <input class="form-control" type="file" name="perfil" id="formFileMultiple">
+                        <input class="form-control" type="file" name="perfil" id="formFileMultiple" accept=".png, .jpg, .jpeg, .webp, .avif, .jfif">
                     </div>
                     <div class="mb-3">
                         <label for="formFileMultiple" class="form-label">Alterar do Outdoor</label>
-                        <input class="form-control" type="file" name="outdoor" id="formFileMultiple">
+                        <input class="form-control" type="file" name="outdoor" id="formFileMultiple" accept=".png, .jpg, .jpeg, .webp, .avif, .jfif">
                     </div>
 
                 </div>

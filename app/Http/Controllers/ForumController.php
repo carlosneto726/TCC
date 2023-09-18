@@ -31,6 +31,12 @@ class Messages {
 
 class ForumController extends Controller{
     public $messages = array();
+    public $id_cooperativa;
+    public function __construct() {
+        $this->id_cooperativa = $_COOKIE['cooperativa'];
+    }
+
+
     public function addMessage($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId = null) {        
         $message = new Messages($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId);
         $this->messages[$id] = $message;
@@ -81,7 +87,6 @@ class ForumController extends Controller{
         return $topLevelMessages;
     }
 
-
     public function viewForum(){
         $id_forum = request("forum");
         $forum_info = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id AND tb_forum.id = ?", [$id_forum]);
@@ -100,11 +105,10 @@ class ForumController extends Controller{
         return view("forum.forum", compact('id_forum', 'comments', 'forum_info', 'nome_cooperativa'));
     }
 
-
     public function viewForuns(){
         $orderby = request("orderby");
         $pesquisa = request("pesquisa");
-        $id_cooperativa = $_COOKIE['cooperativa'];
+        $id_cooperativa = $this->id_cooperativa;
 
         if($orderby == "comentarios"){
             $foruns = DB::select("  SELECT *, 
@@ -164,20 +168,17 @@ class ForumController extends Controller{
         return view("forum.foruns", compact('foruns', 'orderby'));
     }
 
-
     public function createTopic(){
         $titulo = request("titulo");
         $descricao = request("descricao");
         $data = date("Y-m-d");
 
         DB::insert("INSERT INTO tb_forum (titulo, descricao, id_cooperativa, data) VALUES (?, ?, ?, ?)", 
-        [$titulo, $descricao, $_COOKIE["cooperativa"], $data]);
+        [$titulo, $descricao, $this->id_cooperativa, $data]);
 
         AlertController::alert("Tópico criado com sucesso.", "success");
         return redirect("/foruns");
     }
-
-
 
     public function addComment(){
         $comentario = request("comentario");
@@ -190,7 +191,4 @@ class ForumController extends Controller{
         [$comentario, $id_forum, $id_cooperativa, $id_parent, $data]);
         return redirect("/forum?forum=".$id_forum);
     }
-
-
 }
-

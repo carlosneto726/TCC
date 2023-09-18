@@ -13,7 +13,6 @@ use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\RelatoriosController;
 use App\Http\Controllers\CooperativaController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CaixaController;
 
 
 use App\Http\Controllers\TestsController;
@@ -48,7 +47,7 @@ Route::post('/cadastrar/produto', [CooperativaController::class, 'addProduto']);
 Route::post('/atualizar/produto', [CooperativaController::class, 'updateProduto']);
 Route::post('/atualizar/cooperativa', [CooperativaController::class, 'updateCooperativa']);
 Route::post('/cadastrar/cooperativa', [CooperativaController::class, 'addCooperativa']);
-Route::get('/cadastrar/cooperativa', [CooperativaController::class, 'viewCadastroUsuario']);
+Route::get('/cadastrar/cooperativa', [CooperativaController::class, 'viewCadastroCooperativa']);
 // ContaController
 Route::get('/sair', [ContaController::class, 'sair']);
 Route::get('/entrar', [ContaController::class, 'entrar']);

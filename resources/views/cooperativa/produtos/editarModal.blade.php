@@ -34,7 +34,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="formFile" class="form-label">Insira uma imagem do produto</label>
-                        <input class="form-control" type="file" name="imagem" id="formFile">
+                        <input class="form-control" type="file" name="imagem" id="formFile" accept=".png, .jpg, .jpeg, .webp, .avif, .jfif">
                     </div>
 
                     <div class="mb-3">

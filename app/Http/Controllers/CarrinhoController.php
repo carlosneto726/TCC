@@ -13,8 +13,20 @@ session_start();
 
 class CarrinhoController extends Controller
 {
+
+    public $id_usuario;
+
+    public function __construct() {
+        $this->id_usuario = $_COOKIE['usuario'];
+
+        if(isset($_COOKIE["cooperativa"])){
+            AlertController::alert("Por favor, entre como usuário comum para comprar o produto", "warning");
+            redirect("/entrar");
+        }
+    }
+
     public function viewCarrinho(){
-        $id_usuario = $_COOKIE['usuario'];
+        $id_usuario = $this->id_usuario;
         $produtos = DB::select("    SELECT *, 
                                     tb_carrinhos.quantidade as qtd, 
                                     tb_carrinhos.id as carrinhoid, 
@@ -37,11 +49,7 @@ class CarrinhoController extends Controller
 
     public function addProduto(){
         $id_produto = request("id_produto");
-        if(isset($_COOKIE["cooperativa"])){
-            AlertController::alert("Por favor, entre como usuário comum para comprar o produto", "warning");
-            return redirect("/produto/".$id_produto);
-        }
-        $id_usuario = $_COOKIE['usuario'];
+        $id_usuario = $this->id_usuario;
         $flag = true;
 
         $produtos = DB::select("SELECT * FROM tb_carrinhos WHERE id_usuario = ?", [$id_usuario]);
@@ -64,7 +72,7 @@ class CarrinhoController extends Controller
 
     public function updateQuantidade(){
         $id_produto = request("id_produto");
-        $id_usuario = $_COOKIE['usuario'];
+        $id_usuario = $this->id_usuario;
         $quantidade = request("quantidade");
             
         DB::update("UPDATE tb_carrinhos SET quantidade = ? WHERE id_produto = ? AND id_usuario = ?", 
@@ -75,7 +83,7 @@ class CarrinhoController extends Controller
 
     public function delProduto(){
         $id_produto = request("id_produto");
-        $id_usuario = $_COOKIE['usuario'];
+        $id_usuario = $this->id_usuario;
 
         DB::delete("DELETE FROM tb_carrinhos WHERE id_produto = ? AND id_usuario = ?", [$id_produto, $id_usuario]);
         AlertController::alert("Produto deletado do carrinho com sucesso.", "warning");
@@ -84,7 +92,7 @@ class CarrinhoController extends Controller
     }
 
     public function endCarrinho(){
-        $id_usuario = $_COOKIE['usuario'];
+        $id_usuario = $this->id_usuario;
 
         $id_cooperativas = DB::select(" SELECT tb_cooperativas.id
                                         FROM tb_cooperativas

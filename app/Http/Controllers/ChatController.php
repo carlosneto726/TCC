@@ -9,9 +9,17 @@ use App\Http\Controllers\AlertController;
 
 class ChatController extends Controller
 {    
+    public $id_cooperativa;
+    public $id_usuario;
+
+    public function __construct() {
+        $this->id_cooperativa = @$_COOKIE['cooperativa'];
+        $this->id_usuario = @$_COOKIE['usuario'];
+    }
+
     public function viewChats(){
-        @$id_cooperativa = $_COOKIE['cooperativa'];
-        @$id_usuario = $_COOKIE['usuario'];
+        $id_cooperativa = $this->id_cooperativa;
+        $id_usuario = $this->id_usuario;
         $id = null;
         $query_param = null;
         $orderby = request("orderby");
@@ -24,9 +32,9 @@ class ChatController extends Controller
         }else if($orderby == "data"){
             $orderbyQuery = " ORDER BY tb_chats.id DESC";
         }else if($pesquisa){
-            if(isset($_COOKIE['cooperativa'])){
+            if(isset($id_cooperativa)){
                 $nome = "tb_usuarios.nome";
-            }else if(isset($_COOKIE['usuario'])){
+            }else if(isset($id_usuario)){
                 $nome = "tb_cooperativas.nome";
             }
             $searchQuery = " AND ".$nome." LIKE '%".$pesquisa."%' ";
@@ -58,12 +66,12 @@ class ChatController extends Controller
         $id_chat = request("chat");
         $query = "";
         $id_cookie = "";
-        if(isset($_COOKIE['cooperativa'])){
-            $id_cookie = $_COOKIE['cooperativa'];
+        if(isset($this->id_cooperativa)){
+            $id_cookie = $this->id_cooperativa;
             $query = "AND tb_cooperativas.id = ".$id_cookie;
 
-        }else if(isset($_COOKIE['usuario'])){
-            $id_cookie = $_COOKIE['usuario'];
+        }else if(isset($this->id_usuario)){
+            $id_cookie = $this->id_usuario;
             $query = "AND tb_usuarios.id = ".$id_cookie;
 
         }else{
@@ -89,7 +97,6 @@ class ChatController extends Controller
     }
 
     public function addMessage(){
-
         $id_chat = request("id_chat");
         $canal = "chat-_".$id_chat;
         $evento = "mensagem";
@@ -97,15 +104,11 @@ class ChatController extends Controller
         $id_usuario = request("id_usuario");
         $mensagem = request("mensagem");
         $data = date("Y-m-d");
-
         DB::insert("   INSERT INTO tb_mensagens (id_chat, id_cooperativa, id_usuario, mensagem, data) 
                                 VALUES (?, ?, ?, ?, ?)
         ",
         [$id_chat, $id_cooperativa, $id_usuario, $mensagem, $data]);
-
         event(new Message($mensagem, $canal, $evento));
-        
-
         return redirect("/chat/".$id_chat."#footer");
 
     }

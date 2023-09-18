@@ -2,7 +2,7 @@
 <div class="modal fade" id="produtoModal" tabindex="-1" aria-labelledby="produtoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/cadastrar/produto" method="POST" enctype="multipart/form-data">
+            <form action="{{url('/cadastrar/produto')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("POST")
 
@@ -31,7 +31,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="formFile" class="form-label">Insira uma imagem do produto</label>
-                        <input class="form-control" type="file" name="imagem" id="formFile">
+                        <input class="form-control" type="file" name="imagem" id="formFile" accept=".png, .jpg, .jpeg, .webp, .avif, .jfif" required>
                         <div class="form-text">Recomendamos uma imagem quadrada com fundo branco</div>
                     </div>
 
