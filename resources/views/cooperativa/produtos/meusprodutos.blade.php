@@ -1,17 +1,14 @@
 @extends('templates.template')
 @section('content')
 
-<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container">
-        <ul class="navbar-nav">
-            <a href="/?orderby=data" class="text-decoration-none">
-                <li class="nav-link active" aria-current='true'>Data</li>
-            </a>
-            <a href="/?orderby=ordem_alfabetica" class="text-decoration-none">
-                <li class="nav-link  active" aria-current='true'>Ordem alfabética</li>
-            </a>
-        </ul>
-    </div>
+<div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
+    <nav class="nav container" aria-label="Secondary navigation">
+        <a class="nav-link text-decoration-none" href="#">Recente</a>
+        <a class="nav-link text-decoration-none" href="#">Antigo</a>
+        <a class="nav-link text-decoration-none" href="#">Mais caro</a>
+        <a class="nav-link text-decoration-none" href="#">Mais barato</a>
+        <a class="nav-link text-decoration-none" href="#">Ordem alfabética</a>
+    </nav>
 </div>
 
 <div class="container">

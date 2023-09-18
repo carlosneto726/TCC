@@ -16,12 +16,10 @@
     </header>
 
     @if(@$_SESSION['mensagem'] != "")
-        <div class="mt-5 w-100 z-3 position-absolute top-0 start-50 translate-middle-x">
-            <div id="alerta">
-                <div class="alert alert-{{@$_SESSION['tipo']}} alert-dismissible" role="alert">
-                    <div>{{$_SESSION['mensagem']}}</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+        <div class="z-3 position-fixed top-0 end-0" id="alerta">            
+            <div class="alert alert-{{@$_SESSION['tipo']}} alert-dismissible" role="alert">
+                <div>{{$_SESSION['mensagem']}}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
         @php

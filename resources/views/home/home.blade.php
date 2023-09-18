@@ -3,24 +3,23 @@
 
 <link rel="stylesheet" href="{{asset('css/home.css')}}">
 
-<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container">
-        <ul class="navbar-nav">
-            <a class="text-decoration-none" href="{{url("/pesquisa/agropecuaria")}}"><li class="nav-link">Agropecuária</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/consumo")}}"><li class="nav-link">Consumo</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/credito")}}"><li class="nav-link">Crédito</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/educacao")}}"><li class="nav-link">Educação</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/especial")}}"><li class="nav-link">Especial</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/moradia")}}"><li class="nav-link">Moradia</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/minerios")}}"><li class="nav-link">Minérios</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/producao")}}"><li class="nav-link">Produção</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/infraestrutura")}}"><li class="nav-link">Infraestrutura</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/trabalho")}}"><li class="nav-link">Trabalho</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/saude")}}"><li class="nav-link">Saúde</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/transporte")}}"><li class="nav-link">Transporte</li></a>
-            <a class="text-decoration-none" href="{{url("/pesquisa/turismo-e-lazer")}}"><li class="nav-link">Turismo elazer</li></a>
-        </ul>
-    </div>
+
+<div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
+    <nav class="nav container" aria-label="Secondary navigation">
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/agropecuaria")}}">Agropecuária</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/consumo")}}">Consumo</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/credito")}}">Crédito</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/educacao")}}">Educação</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/especial")}}">Especial</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/moradia")}}">Moradia</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/minerios")}}">Minérios</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/producao")}}">Produção</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/infraestrutura")}}">Infraestrutura</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/trabalho")}}">Trabalho</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/saude")}}">Saúde</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/transporte")}}">Transporte</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/turismo-e-lazer")}}">Turismo e lazer</a>
+    </nav>
 </div>
 
 

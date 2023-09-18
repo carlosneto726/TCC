@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg container">
+<nav class="navbar navbar-expand-lg container" aria-label="Main navigation">
     <div class="container-fluid">
         <a href="{{url("/")}}" class="navbar-brand link-body-emphasis text-decoration-none text-light fw-bold">Cooperativas Unidas</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation" data-bs-target="#navbarsExampleDefault">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
             <div class="d-flex">
                 <form class="d-flex" role="search" method="GET" action="{{url("/pesquisa/".request("categoria"))}}">

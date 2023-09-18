@@ -18,14 +18,16 @@
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
 <div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -20px;">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{url("/cooperativa/".$_COOKIE['nome_cooperativa'])}}">{{$_COOKIE['nome_cooperativa']}}</a>
-    <ul class="navbar-nav flex-row d-md-none">
-        <li class="nav-item text-nowrap">
-            <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-            </button>
-        </li>
-    </ul>
+    <div class="container">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="{{url("/cooperativa/".$_COOKIE['nome_cooperativa'])}}">{{$_COOKIE['nome_cooperativa']}}</a>
+        <ul class="navbar-nav flex-row d-md-none">
+            <li class="nav-item text-nowrap">
+                <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="container-fluid">

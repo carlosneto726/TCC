@@ -1,31 +1,17 @@
 @extends('templates.template')
 @section('content')
 
-<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container">
-        <ul class="navbar-nav">
-            <a href="/foruns/?orderby=comentarios" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'comentarios') active" aria-current='true' @endif">Comentários</li>
-            </a>
-            <a href="/foruns/?orderby=cooperativas" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'cooperativas') active" aria-current='true' @endif">Cooperativas</li>
-            </a>
-            <a href="/foruns/?orderby=data" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'data') active" aria-current='true' @endif">Data</li>
-            </a>
-            <a href="/foruns/?orderby=ordem_alfabetica" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'ordem_alfabetica') active" aria-current='true' @endif">Ordem alfabética</li>
-            </a>
-            <a href="/foruns/?orderby=foruns_usuario" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'foruns_usuario') active" aria-current='true' @endif">Seus Fóruns</li>
-            </a>
-            <a class="text-decoration-none" href="#forumModal" data-bs-toggle="modal">
-                <li class="nav-link">Criar um tópico</li>
-            </a>
-        </ul>
-    </div>
-</div>
 
+<div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
+    <nav class="nav container" aria-label="Secondary navigation">
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=comentarios')}}">Comentários</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=cooperativas')}}">Cooperativas</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=data')}}">Data</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=ordem_alfabetica')}}">Ordem alfabética</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=foruns_usuario')}}">Seus Fóruns</a>
+        <a class="nav-link text-decoration-none" href="#forumModal" data-bs-toggle="modal">Criar um tópico</a>
+    </nav>
+</div>
 
 <div class="container">
     <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
@@ -36,7 +22,7 @@
         </div>
     </div>
 
-    <form class="mt-3 d-flex" role="search" method="GET" action="/foruns">
+    <form class="mt-3 d-flex" role="search" method="GET" action="{{url('/foruns')}}">
         <input class="form-control me-2 shadow" name="pesquisa" type="search" placeholder="Pesquise por um fórum" aria-label="Search">
         <button class="btn btn-outline-success shadow" type="submit">Buscar</button>
     </form>
@@ -68,9 +54,6 @@
 
 </div>
 
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="forumModal" tabindex="-1" aria-labelledby="forumModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -94,7 +77,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn" style="background-color: var(--light-green);">Criar</button>
+                    <button type="submit" class="btn btn-success">Criar Tópico</button>
                 </div>
             </form>
         </div>
