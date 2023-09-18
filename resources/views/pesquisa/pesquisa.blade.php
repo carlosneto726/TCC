@@ -1,48 +1,28 @@
 @extends('templates.template')
 @section('content')
 
-<div class="navbar navbar-expand-lg bg-dark w-100" data-bs-theme="dark" style="margin-top: -25px;">
-    <div class="container">
-        <ul class="navbar-nav">
-            <a href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=preco")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'preco') active" aria-current='true' @endif">Preço</li>
-            </a>
-            <a href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=avaliacao-produto")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'avaliacao-produto') active" aria-current='true' @endif">Avaliação do produto</li>
-            </a>
-            <a href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=cooperativa")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'cooperativa') active" aria-current='true' @endif">Cooperativa</li>
-            </a>
-            <a href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=localizacao")}}" class="text-decoration-none">
-                <li class="nav-link @if($orderby == 'localizacao') active" aria-current='true' @endif">Localização</li>
-            </a>
 
-            <div class="dropdown dropend">
-                <a class="text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <li class="nav-link @if($orderby == 'data') active" aria-current='true' @endif">
-                        Categoria
-                    </li>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/agropecuaria?pesquisa=".request("pesquisa"))}}">Agropecuária</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/consumo?pesquisa=".request("pesquisa"))}}">Consumo</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/credito?pesquisa=".request("pesquisa"))}}">Crédito</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/educacao?pesquisa=".request("pesquisa"))}}">Educação</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/especial?pesquisa=".request("pesquisa"))}}">Especial</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/moradia?pesquisa=".request("pesquisa"))}}">Moradia</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/minerios?pesquisa=".request("pesquisa"))}}">Minérios</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/producao?pesquisa=".request("pesquisa"))}}">Produção</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/infraestrutura?pesquisa=".request("pesquisa"))}}">Infraestrutura</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/trabalho?pesquisa=".request("pesquisa"))}}">Trabalho</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/saude?pesquisa=".request("pesquisa"))}}">Saúde</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/transporte?pesquisa=".request("pesquisa"))}}">Transporte</a></li>
-                    <li><a class="dropdown-item" href="{{url("/pesquisa/turismo-e-lazer?pesquisa=".request("pesquisa"))}}">Turismo e lazer</a></li>
-                </ul>
-            </div>
-        </ul>
-    </div>
+<div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
+    <nav class="nav container" aria-label="Secondary navigation">
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=preco")}}">Preço</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=avaliacao-produto")}}">Avaliação do produto</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=cooperativa")}}">Cooperativa</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=localizacao")}}">Localização</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/agropecuaria?pesquisa=".request("pesquisa"))}}">Agropecuária</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/consumo?pesquisa=".request("pesquisa"))}}">Consumo</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/credito?pesquisa=".request("pesquisa"))}}">Crédito</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/educacao?pesquisa=".request("pesquisa"))}}">Educação</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/especial?pesquisa=".request("pesquisa"))}}">Especial</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/moradia?pesquisa=".request("pesquisa"))}}">Moradia</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/minerios?pesquisa=".request("pesquisa"))}}">Minérios</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/producao?pesquisa=".request("pesquisa"))}}">Produção</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/infraestrutura?pesquisa=".request("pesquisa"))}}">Infraestrutura</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/trabalho?pesquisa=".request("pesquisa"))}}">Trabalho</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/saude?pesquisa=".request("pesquisa"))}}">Saúde</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/transporte?pesquisa=".request("pesquisa"))}}">Transporte</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/turismo-e-lazer?pesquisa=".request("pesquisa"))}}">Turismo e lazer</a>
+    </nav>
 </div>
-
 
 <div class="container">
     <div class="d-flex align-items-center p-3 my-3 rounded shadow-lg">
