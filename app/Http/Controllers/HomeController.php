@@ -60,7 +60,7 @@ class HomeController extends Controller
                                         INNER JOIN tb_cooperativas ON tb_produtos.id_cooperativa = tb_cooperativas.id
                                         WHERE tb_produtos.id_cooperativa 
                                         IN (SELECT tb_cooperativas.id FROM tb_cooperativas WHERE tipo = $i) 
-                                        AND quantidade > 100 
+                                        AND quantidade > 25
                                         AND status = 1 
                                         ORDER BY likes DESC".$query." LIMIT 30;
             ");
