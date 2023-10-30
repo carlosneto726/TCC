@@ -112,7 +112,7 @@ trait PedidosCoopTrait {
         
         $this->enviarEmail($email, "Pedido ".$this->nome_cooperativa, $dados, "finalizarPedido"); // EmailsTrait
         AlertController::alert("Pedido concluído.".$alerta, $tipo_alerta);
-        return redirect("/pedidos");
+        return redirect("/pedidos/cooperativa");
     }
     
     public function chatCliente(){

@@ -11,7 +11,6 @@
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
-
     @if(@$_SESSION['mensagem'] != "")
         <div class="z-3 position-fixed top-0 end-0" id="alerta">            
             <div class="alert alert-{{@$_SESSION['tipo']}} alert-dismissible" role="alert">
