@@ -51,7 +51,10 @@ class PesquisaController extends Controller
             $orderby = "id_cooperativa DESC";
         }else if($orderby == "localizacao"){
             $orderby = "likes DESC";
-            $cep = substr(DB::select("SELECT cep FROM tb_usuarios WHERE id = ?", [$_COOKIE['usuario']])[0]->cep, 0, 3);
+            isset($_COOKIE['usuario']) ? $cep = substr(DB::select("SELECT cep FROM tb_usuarios WHERE id = ?", [$_COOKIE['usuario']])[0]->cep, 0, 3) : $cep = substr(DB::select("SELECT cep FROM tb_cooperativas WHERE id = ?", [$_COOKIE['cooperativa']])[0]->cep, 0, 3);
+
+            
+            
             $query = $query." tb_produtos.id_cooperativa IN 
                             (SELECT tb_cooperativas.id 
                             FROM tb_cooperativas 

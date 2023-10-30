@@ -13,11 +13,12 @@
                     <button class="btn btn-outline-light" type="submit"><img src="{{asset("icons/search.svg")}}"></button>
                 </form>
 
-                @if (isset($_COOKIE["usuario"]))
-                    @include('layout.nav_itens.usuario')
-
+                @if (isset($_COOKIE["usuario"]) && isset($_COOKIE["associado"]))
+                    @include('layout.nav_itens.associado')
                 @elseif (isset($_COOKIE["cooperativa"]))
                     @include('layout.nav_itens.cooperativa')
+                @elseif (isset($_COOKIE["usuario"]))
+                    @include('layout.nav_itens.usuario')
                 @else
                     <a class="nav-link text-light ms-2 mt-2" href="{{url("/entrar")}}">Login/Cadastre-se</a>
                 @endif

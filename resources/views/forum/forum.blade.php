@@ -26,7 +26,7 @@
                         <a class='mt-2 text-light' href='#modal".$message['id']."' data-bs-toggle='modal' role='button' aria-controls='modal".$message['id']."'>Responder</a>
                         <div class='ms-auto' style='width: fit-content;'>
                             <div class='ms-auto' style='width: fit-content;'>
-                                <span style='font-size: 12px;'><a class='text-light' href='/cooperativa/".$message['author']."'>".$message['author']."</a></span>
+                                <span class='text-light' style='font-size: 12px;'>".$message['author']."</span>
                                 <div class='vr'></div>
                                 <span style='font-size: 12px;'>".$message['created']."</span>
                             </div>
@@ -73,7 +73,13 @@
     <form class="d-flex" action="{{url("/api/coments")}}" method="POST">
         @csrf
         @method("POST")
-        <input type="text" name="id_cooperativa" value="{{$_COOKIE['cooperativa']}}" hidden>
+
+        @if( isset($_COOKIE['associado']) )
+            <input type="text" name="id_associado" value="{{$_COOKIE['usuario']}}" hidden>
+        @elseif( isset($_COOKIE['cooperativa']) && isset($_COOKIE['nome_cooperativa']) )
+            <input type="text" name="id_cooperativa" value="{{$_COOKIE['cooperativa']}}" hidden>
+        @endif
+
         <input type="text" name="id_forum" value="{{$id_forum}}" hidden>
         <input type="text" name="id_parent" value="" hidden>
         <input class="form-control me-2 shadow" type="text" name="comentario" placeholder="Envie um comentário" required>

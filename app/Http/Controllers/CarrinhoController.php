@@ -6,7 +6,7 @@ use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AlertController;
-use App\Mail\PedidoEmail;
+use App\Mail\EnviarEmail;
 use Illuminate\Support\Facades\Mail;
 
 session_start();
@@ -18,11 +18,6 @@ class CarrinhoController extends Controller
 
     public function __construct() {
         $this->id_usuario = $_COOKIE['usuario'];
-
-        if(isset($_COOKIE["cooperativa"])){
-            AlertController::alert("Por favor, entre como usuário comum para comprar o produto", "warning");
-            redirect("/entrar");
-        }
     }
 
     public function viewCarrinho(){
@@ -160,6 +155,6 @@ class CarrinhoController extends Controller
             'produtos_pedido' => [$produtos_pedido],
         ];
 
-        Mail::to($email_cooperativa)->send(new PedidoEmail($dados, 'enviarPedido'));
+        Mail::to($email_cooperativa)->send(new EnviarEmail("Pedido do Cliente", $dados, 'enviarPedido'));
     }
 }

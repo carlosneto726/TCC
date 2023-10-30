@@ -33,7 +33,6 @@ class HomeController extends Controller
     }
 
     public function getProdutos($query=NULL){
-        error_log($query);
         $categorias = [
             1 => "Agropecuária",
             2 => "Consumo",

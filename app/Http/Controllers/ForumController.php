@@ -2,43 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Message;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\AlertController;
-
-session_start();
-class Messages {
-    public $id;
-    public $id_cooperativa;
-    public $id_forum;
-    public $content;
-    public $author;
-    public $created;
-    public $parentId;
-    public $children = array();
-
-    public function __construct($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId = null) {
-        $this->id = $id;
-        $this->id_cooperativa = $id_cooperativa;
-        $this->id_forum = $id_forum;
-        $this->content = $content;
-        $this->author = $author;
-        $this->created = $created;
-        $this->parentId = $parentId;
-    }
-}
+use App\Classes\Messages;
 
 class ForumController extends Controller{
-    public $messages = array();
+    public $id;
+    public $nome;
     public $id_cooperativa;
     public function __construct() {
-        $this->id_cooperativa = $_COOKIE['cooperativa'];
+        if(  isset($_COOKIE['associado']) && isset($_COOKIE['usuario']) && isset($_COOKIE['nome_usuario'])  ){
+            $this->id = $_COOKIE['usuario'];
+            $this->nome = $_COOKIE['nome_usuario'];
+            $this->id_cooperativa = $_COOKIE['cooperativa'];
+        }else if( isset($_COOKIE['cooperativa']) && isset($_COOKIE['nome_cooperativa']) ){
+            $this->id = $_COOKIE['cooperativa'];
+            $this->nome = $_COOKIE['nome_cooperativa'];
+            $this->id_cooperativa = $_COOKIE['cooperativa'];
+
+        }
     }
 
 
-    public function addMessage($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId = null) {        
-        $message = new Messages($id, $id_cooperativa, $id_forum, $content, $author, $created, $parentId);
+
+
+    public function addComment(){
+        $comentario = request("comentario");
+        $id_forum = request("id_forum");
+        $id_cooperativa = NULL;
+        $id_associado = NULL;
+
+        if( isset($_COOKIE['cooperativa']) && isset($_COOKIE['nome_cooperativa']) ){
+            $id_cooperativa = request("id_cooperativa");
+        }
+        
+        if(isset($_COOKIE['associado']) && isset($_COOKIE['usuario']) && isset($_COOKIE['nome_usuario'])){
+            $id_associado = request("id_associado");
+        }
+        $id_parent = request("id_parent");
+        $data = date("Y-m-d");
+
+        DB::insert("INSERT INTO tb_comentarios (comentario, id_forum, id_cooperativa, id_associado, id_parent, data) VALUES (?, ?, ?, ?, ?, ?)",
+        [$comentario, $id_forum, $id_cooperativa, $id_associado, $id_parent, $data]);
+        return redirect("/forum/".$id_forum);
+    }
+
+
+
+    public $messages = array();
+
+    public function addMessage($id, $id_autor, $id_forum, $content, $author, $created, $parentId = null) {        
+        $message = new Messages($id, $id_autor, $id_forum, $content, $author, $created, $parentId);
         $this->messages[$id] = $message;
         
         if ($parentId !== null) {
@@ -60,7 +73,7 @@ class ForumController extends Controller{
     private function formatMessageAndReplies($message) {
         $formattedMessage = array(
             'id' => $message->id,
-            'id_cooperativa' => $message->id_cooperativa,
+            'id_autor' => $message->id_autor,
             'id_forum' => $message->id_forum,
             'content' => $message->content,
             'author' => $message->author,
@@ -83,12 +96,90 @@ class ForumController extends Controller{
                 $topLevelMessages[] = $message;
             }
         }
-        
         return $topLevelMessages;
     }
 
+    // public function viewForuns(){
+    //     $orderby = request("orderby");
+    //     $pesquisa = request("pesquisa");
+
+    //     if($orderby == "comentarios"){
+    //         $foruns = DB::select("  SELECT *, 
+    //                                 tb_forum.id as fid, 
+    //                                 tb_forum.descricao as fdescricao, 
+    //                                 COUNT(tb_comentarios.id_forum) AS total_mensagens 
+    //                                 FROM tb_forum 
+    //                                 INNER JOIN tb_cooperativas ON tb_forum.id_cooperativa = tb_cooperativas.id 
+    //                                 INNER JOIN tb_comentarios ON tb_forum.id = tb_comentarios.id_forum
+    //                                 WHERE id_cooperativa = ? 
+    //                                 GROUP BY tb_forum.id, tb_forum.titulo ORDER BY total_mensagens ASC;", [$this->id]);
+
+    //     }else if($orderby == "data"){
+    //         $foruns = DB::select("  SELECT *, 
+    //                                 tb_forum.id as fid, 
+    //                                 tb_forum.descricao as fdescricao 
+    //                                 FROM tb_forum 
+    //                                 INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+    //                                 WHERE id_cooperativa = ?
+    //                                 ORDER BY tb_forum.data;", [$this->id]);
+
+    //     }else if($orderby == "ordem_alfabetica"){
+    //         $foruns = DB::select("  SELECT *, 
+    //                                 tb_forum.id as fid, 
+    //                                 tb_forum.descricao as fdescricao 
+    //                                 FROM tb_forum 
+    //                                 INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+    //                                 WHERE id_cooperativa = ?
+    //                                 ORDER BY tb_forum.titulo ASC;", [$this->id]);
+
+    //     }else if($pesquisa){
+    //         $foruns = DB::select("  SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao 
+    //                                 FROM tb_forum INNER JOIN tb_cooperativas 
+    //                                 WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
+    //                                 AND id_cooperativa = ?
+    //                                 AND titulo LIKE '%".$pesquisa."%';", [$this->id]);
+    //     }else{
+    //         $foruns = DB::select("  SELECT *, 
+    //                                 tb_forum.id as fid, 
+    //                                 tb_forum.descricao as fdescricao 
+    //                                 FROM tb_forum 
+    //                                 INNER JOIN tb_cooperativas ON tb_forum.id_cooperativa = tb_cooperativas.id 
+    //                                 WHERE tb_forum.id_cooperativa = ?
+    //                                 ORDER BY tb_forum.data DESC;", [$this->id]);
+    //     }
+    //     return view("forum.foruns", compact('foruns', 'orderby'));
+    // }
+
+
+
+
+
+
+
+
+    public function viewForuns(){
+        $orderby = request("orderby");
+        $pesquisa = request("pesquisa");
+
+        $foruns = DB::select("  SELECT *, 
+                                tb_forum.id as fid, 
+                                tb_forum.descricao as fdescricao 
+                                FROM tb_forum 
+                                INNER JOIN tb_cooperativas ON tb_forum.id_cooperativa = tb_cooperativas.id 
+                                WHERE tb_forum.id_cooperativa = ?
+                                ORDER BY tb_forum.data DESC;", [$this->id_cooperativa]);
+
+        return view("forum.foruns", compact('foruns', 'orderby'));
+    }
+
+
+
+
+
+
+
     public function viewForum(){
-        $id_forum = request("forum");
+        $id_forum = request("id_forum");
         $forum_info = DB::select("SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao FROM tb_forum INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id AND tb_forum.id = ?", [$id_forum]);
 
         $nome_cooperativa = $forum_info[0]->nome;
@@ -96,99 +187,40 @@ class ForumController extends Controller{
         foreach ($comentarios as $comentario) {
             $id = $comentario->id;
             $content = $comentario->comentario;
-            $author = DB::select("SELECT * FROM tb_cooperativas WHERE id = ?", [$comentario->id_cooperativa])[0]->nome;
+
+            $usuario = DB::select("SELECT nome FROM tb_usuarios WHERE id = ?;", [$comentario->id_associado]);
+            $cooperativa = DB::select("SELECT nome FROM tb_cooperativas WHERE id = ?;", [$comentario->id_cooperativa]);
+            $author = "";
+
+
+            if(count($usuario) == 1){
+                $author = $usuario[0]->nome;
+            }else if(count($cooperativa) == 1){
+                $author = $cooperativa[0]->nome;
+            }else{
+                $author = "???";
+            }
+
             $created = $comentario->data;
             $id_parente = $comentario->id_parent;
-            $this->addMessage($id, $comentario->id_cooperativa, $id_forum, $content, $author, $created, $id_parente);
+            $this->addMessage($id, $author, $id_forum, $content, $author, $created, $id_parente);
         }
         $comments = $this->displayMessages();
         return view("forum.forum", compact('id_forum', 'comments', 'forum_info', 'nome_cooperativa'));
     }
 
-    public function viewForuns(){
-        $orderby = request("orderby");
-        $pesquisa = request("pesquisa");
-        $id_cooperativa = $this->id_cooperativa;
 
-        if($orderby == "comentarios"){
-            $foruns = DB::select("  SELECT *, 
-                                    tb_forum.id as fid, 
-                                    tb_forum.descricao as fdescricao, 
-                                    COUNT(tb_comentarios.id_forum) AS total_mensagens 
-                                    FROM tb_forum 
-                                    INNER JOIN tb_cooperativas ON tb_forum.id_cooperativa = tb_cooperativas.id 
-                                    INNER JOIN tb_comentarios ON tb_forum.id = tb_comentarios.id_forum 
-                                    GROUP BY tb_forum.id, tb_forum.titulo ORDER BY total_mensagens ASC;");
+        // Criar um Forum
+        public function createTopic(){
+            $titulo = request("titulo");
+            $descricao = request("descricao");
+            $data = date("Y-m-d");
+    
+            DB::insert("INSERT INTO tb_forum (titulo, descricao, id_cooperativa, data) VALUES (?, ?, ?, ?)", 
+            [$titulo, $descricao, $this->id, $data]);
+    
+            AlertController::alert("Tópico criado com sucesso.", "success");
+            return redirect("/foruns");
+        }
 
-        }else if($orderby == "cooperativas"){
-            $foruns = DB::select("  SELECT *, 
-                                    tb_forum.id as fid, 
-                                    tb_forum.descricao as fdescricao 
-                                    FROM tb_forum 
-                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
-                                    ORDER BY tb_forum.id_cooperativa");
-
-        }else if($orderby == "data"){
-            $foruns = DB::select("  SELECT *, 
-                                    tb_forum.id as fid, 
-                                    tb_forum.descricao as fdescricao 
-                                    FROM tb_forum 
-                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
-                                    ORDER BY tb_forum.data");
-
-        }else if($orderby == "ordem_alfabetica"){
-            $foruns = DB::select("  SELECT *, 
-                                    tb_forum.id as fid, 
-                                    tb_forum.descricao as fdescricao 
-                                    FROM tb_forum 
-                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
-                                    ORDER BY tb_forum.titulo ASC");
-
-        }else if($orderby == "foruns_usuario"){
-            $foruns = DB::select("  SELECT *, 
-                                    tb_forum.id as fid, 
-                                    tb_forum.descricao as fdescricao 
-                                    FROM tb_forum 
-                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
-                                    AND id_cooperativa = ?", [$id_cooperativa]);
-
-        }else if($pesquisa){
-            $foruns = DB::select("  SELECT *, tb_forum.id as fid, tb_forum.descricao as fdescricao 
-                                    FROM tb_forum INNER JOIN tb_cooperativas 
-                                    WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
-                                    AND titulo LIKE '%".$pesquisa."%'");
-        }else{
-            $foruns = DB::select("  SELECT *, 
-                                    tb_forum.id as fid, 
-                                    tb_forum.descricao as fdescricao 
-                                    FROM tb_forum 
-                                    INNER JOIN tb_cooperativas WHERE tb_forum.id_cooperativa = tb_cooperativas.id 
-                                    ORDER BY tb_forum.data DESC");
-        }        
-        return view("forum.foruns", compact('foruns', 'orderby'));
-    }
-
-    public function createTopic(){
-        $titulo = request("titulo");
-        $descricao = request("descricao");
-        $data = date("Y-m-d");
-
-        DB::insert("INSERT INTO tb_forum (titulo, descricao, id_cooperativa, data) VALUES (?, ?, ?, ?)", 
-        [$titulo, $descricao, $this->id_cooperativa, $data]);
-
-        AlertController::alert("Tópico criado com sucesso.", "success");
-        return redirect("/foruns");
-    }
-
-    public function addComment(){
-        $comentario = request("comentario");
-        $id_forum = request("id_forum");
-        $id_cooperativa = request("id_cooperativa");
-        $id_parent = request("id_parent");
-        $data = date("Y-m-d");
-
-        DB::insert("INSERT INTO tb_comentarios (comentario, id_forum, id_cooperativa, id_parent, data) VALUES (?, ?, ?, ?, ?)",
-        [$comentario, $id_forum, $id_cooperativa, $id_parent, $data]);
-        return redirect("/forum?forum=".$id_forum);
-    }
 }

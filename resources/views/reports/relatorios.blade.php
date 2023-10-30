@@ -65,31 +65,7 @@
                             </a>
                         </li>
                     </ul>
-
                     <hr class="my-3">
-
-                    <ul class="nav flex-column mb-auto">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" onclick="semana()">
-                                Semana Atual
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                Mês atual
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                Ano atual
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                Visão geral
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

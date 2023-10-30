@@ -4,12 +4,11 @@
 
 <div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
     <nav class="nav container" aria-label="Secondary navigation">
-        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=comentarios')}}">Comentários</a>
-        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=cooperativas')}}">Cooperativas</a>
-        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=data')}}">Data</a>
-        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=ordem_alfabetica')}}">Ordem alfabética</a>
-        <a class="nav-link text-decoration-none" href="{{url('/foruns/?orderby=foruns_usuario')}}">Seus Fóruns</a>
-        <a class="nav-link text-decoration-none" href="#forumModal" data-bs-toggle="modal">Criar um tópico</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/cooperativa/?orderby=comentarios')}}">Comentários</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/cooperativa/?orderby=cooperativas')}}">Cooperativas</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/cooperativa/?orderby=data')}}">Data</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/cooperativa/?orderby=ordem_alfabetica')}}">Ordem alfabética</a>
+        <a class="nav-link text-decoration-none" href="{{url('/foruns/cooperativa/?orderby=foruns_usuario')}}">Seus Fóruns</a>
     </nav>
 </div>
 
@@ -18,7 +17,7 @@
         <img class="me-3" src="{{asset("icons/chat-left-text.svg")}}" width="48" height="38">
         <div class="lh-1">
             <h1 class="h4 mb-0 lh-1">Fóruns</h1>
-            <small>@if(request("orderby")) Ordenado por <span class="fw-bold">"{{request("orderby")}}"</span> @endif</small>
+            <small> @if(!isset($_COOKIE['associado']))<a href="#forumModal" data-bs-toggle="modal">Criar um tópico</a>@endif @if(request("orderby")) Ordenado por <span class="fw-bold">"{{request("orderby")}}"</span> @endif</small>
         </div>
     </div>
 
@@ -38,7 +37,7 @@
     @endif
 
     @foreach ($foruns as $forum)
-        <a class="text-decoration-none" href="{{url("/forum/?forum=".$forum->fid)}}">
+        <a class="text-decoration-none" href="{{url("/forum/".$forum->fid)}}">
             <div class="bg-success text-light my-4 rounded p-2 shadow">
                 <span class="fs-4 fw-bold">{{$forum->titulo}}</span>
 
