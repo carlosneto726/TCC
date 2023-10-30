@@ -74,7 +74,7 @@ class CooperativaController extends Controller
         $types = array("png", "jpg", "jpeg", "webp", "avif", "jfif");
 
         if($request->file('outdoor')){
-            if(!in_array($request->file('outdoor')->extension(), $types)){
+            if(in_array($request->file('outdoor')->extension(), $types)){
                 $img = DB::select("SELECT outdoor FROM tb_cooperativas WHERE id = ?;", [$id])[0]->outdoor;
                 @unlink("storage/".$img);
                 $outdoor = $request->file('outdoor')->storeAs('images/coopertivas', "outdoor".$nome.".".$request->file('outdoor')->extension(), 'public');
@@ -84,7 +84,7 @@ class CooperativaController extends Controller
             }
         }
         if($request->file('perfil')){
-            if(!in_array($request->file('perfil')->extension(), $types)){
+            if(in_array($request->file('perfil')->extension(), $types)){
                 $img = DB::select("SELECT perfil FROM tb_cooperativas WHERE id = ?;", [$id])[0]->perfil;
                 @unlink("storage/".$img);
                 $perfil = $request->file('perfil')->storeAs('images/coopertivas', "perfil".$nome.".".$request->file('perfil')->extension(), 'public');
