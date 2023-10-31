@@ -131,13 +131,13 @@ class RelatoriosController extends Controller
         $id_cooperativa = $this->id_cooperativa;
         $tipo = "Receita";
         $data = 0;
-        $labels = DB::select("  SELECT * 
+        $labels = DB::select("  SELECT *, DATE(data) as data, SUM(preco_total) as preco_total 
                                 FROM tb_vendas
                                 WHERE tb_vendas.id_pedido IN 
                                 (SELECT tb_pedidos.id FROM tb_pedidos WHERE tb_pedidos.id IN 
                                     (SELECT tb_itens_pedido.id_pedido FROM tb_itens_pedido WHERE tb_itens_pedido.id_produto IN 
                                         (SELECT tb_produtos.id FROM tb_produtos WHERE tb_produtos.id_cooperativa = ?)))
-                                ORDER BY tb_vendas.data DESC;",
+                                GROUP BY DATE(data) ORDER BY tb_vendas.data DESC;",
                                         [$id_cooperativa]);
         foreach($labels as $venda){
             $data += $venda->preco_total;

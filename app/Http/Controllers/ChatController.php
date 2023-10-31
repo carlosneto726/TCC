@@ -68,11 +68,11 @@ class ChatController extends Controller
         $id_cookie = "";
         if(isset($this->id_cooperativa)){
             $id_cookie = $this->id_cooperativa;
-            $query = "AND tb_cooperativas.id = ".$id_cookie;
+            $query = "AND tb_cooperativas.id = '".$id_cookie."'";
 
         }else if(isset($this->id_usuario)){
             $id_cookie = $this->id_usuario;
-            $query = "AND tb_usuarios.id = ".$id_cookie;
+            $query = "AND tb_usuarios.id = '".$id_cookie."'";
 
         }else{
             AlertController::alert("Faça o login", "danger");

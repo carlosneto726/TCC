@@ -53,12 +53,12 @@ function renderPlanilha(){
                         "<tr>" +
                         "   <td>"+ labels[j]['id_pedido'] +"</td>" +
                         "   <td>"+ labels[j]['data'] +"</td>" +
-                        "   <td>"+ labels[j]['preco_total'] +"</td>" +
+                        "   <td>"+ formatReais(labels[j]['preco_total']) +"</td>" +
                         "</tr>";
     }
     tbBody.innerHTML +=
         "<tr>" +
-        "   <td colspan='3' align='center'>Total (R$): "+data+"</td>" +
+        "   <td colspan='3' align='center'>Total: "+formatReais(data)+"</td>" +
         "</tr>";
 }
 // Função chamada pelo o botão de baixar a planilha
@@ -73,4 +73,9 @@ function exportTableToExcel(nomeArquivo) {
     var filename = nomeArquivo.toLowerCase().replace(" ", "") + data.getDate() +"-"+ (parseInt(data.getMonth()) + 1) +"-"+ data.getFullYear();
     a.download = filename+'.xls';
     a.click();
+}
+
+function formatReais(valor){
+    const valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    return valorFormatado;
 }
