@@ -76,7 +76,7 @@ class PesquisaController extends Controller
                                 FROM tb_produtos
                                 INNER JOIN tb_cooperativas ON tb_cooperativas.id = tb_produtos.id_cooperativa
                                 WHERE ".$query."
-                                quantidade > 100 
+                                quantidade > 5 
                                 AND status = 1 
                                 AND tb_produtos.nome LIKE '%".$pesquisa."%' 
                                 ORDER BY ".$orderby);
