@@ -20,7 +20,7 @@ class PesquisaController extends Controller
     public function viewPesquisaCategoria(){
         $categoria = request("categoria");
         $orderby = request("orderby");
-        if($categoria == "agropecuaria"){ $pesquisa = 1; }
+        if($categoria == "frutas-verduras"){ $pesquisa = 1; }
         else if($categoria == "consumo"){ $pesquisa = 2; }
         else if($categoria == "credito"){ $pesquisa = 3; }
         else if($categoria == "educacao"){ $pesquisa = 4; }

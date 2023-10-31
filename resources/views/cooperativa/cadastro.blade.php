@@ -55,7 +55,7 @@
             <div class="input-group mb-2">
                 <label class="input-group-text shadow" for="inputTipo">Tipo</label>
                 <select class="form-select shadow" name="tipo" id="inputTipo" aria-label="Tipo de cooperativa">
-                    <option value="1">Agropecuárias</option>
+                    <option value="1">Frutas e Verduras</option>
                     <option value="2">Consumo</option>
                     <option value="3">Crédito</option>
                     <option value="4">Educacionais</option>

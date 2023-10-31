@@ -8,7 +8,7 @@
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=avaliacao-produto")}}">Avaliação do produto</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=cooperativa")}}">Cooperativa</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa?pesquisa=".request("pesquisa")."&orderby=localizacao")}}">Localização</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/agropecuaria?pesquisa=".request("pesquisa"))}}">Agropecuária</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/frutas-verduras?pesquisa=".request("pesquisa"))}}">Frutas e Verduras</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa/consumo?pesquisa=".request("pesquisa"))}}">Consumo</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa/credito?pesquisa=".request("pesquisa"))}}">Crédito</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa/educacao?pesquisa=".request("pesquisa"))}}">Educação</a>

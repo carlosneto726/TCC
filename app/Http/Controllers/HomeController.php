@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function getProdutos($query=NULL){
         $categorias = [
-            1 => "Agropecuária",
+            1 => "Frutas e verduras",
             2 => "Consumo",
             3 => "Crédito",
             4 => "Educação",
@@ -66,7 +66,7 @@ class HomeController extends Controller
             ");
 
             foreach ($produtos as $produto) {
-                if($produto->likes > 1){
+                if($produto->likes > 0){
                     array_push($carrossel, $produto);
                 }
             }

@@ -6,7 +6,7 @@
 
 <div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
     <nav class="nav container" aria-label="Secondary navigation">
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/agropecuaria")}}">Agropecuária</a>
+        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/frutas-verduras")}}">Frutas e verduras</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa/consumo")}}">Consumo</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa/credito")}}">Crédito</a>
         <a class="nav-link text-decoration-none" href="{{url("/pesquisa/educacao")}}">Educação</a>
