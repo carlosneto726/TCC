@@ -66,7 +66,7 @@ class HomeController extends Controller
             ");
 
             foreach ($produtos as $produto) {
-                if($produto->likes > 3){
+                if($produto->likes > 1){
                     array_push($carrossel, $produto);
                 }
             }
