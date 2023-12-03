@@ -6,19 +6,19 @@
 
 <div class="nav-scroller bg-dark shadow-sm" data-bs-theme="dark" style="margin-top: -19px;">
     <nav class="nav container" aria-label="Secondary navigation">
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/frutas-verduras")}}">Frutas e verduras</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/consumo")}}">Consumo</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/credito")}}">Crédito</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/educacao")}}">Educação</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/especial")}}">Especial</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/moradia")}}">Moradia</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/minerios")}}">Minérios</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/producao")}}">Produção</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/infraestrutura")}}">Infraestrutura</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/trabalho")}}">Trabalho</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/saude")}}">Saúde</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/transporte")}}">Transporte</a>
-        <a class="nav-link text-decoration-none" href="{{url("/pesquisa/turismo-e-lazer")}}">Turismo e lazer</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/frutas-verduras")}}">Frutas e verduras</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/consumo")}}">Consumo</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/credito")}}">Crédito</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/educacao")}}">Educação</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/especial")}}">Especial</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/moradia")}}">Moradia</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/minerios")}}">Minérios</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/producao")}}">Produção</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/infraestrutura")}}">Infraestrutura</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/trabalho")}}">Trabalho</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/saude")}}">Saúde</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/transporte")}}">Transporte</a>
+        <a class="nav-link text-decoration-none text-light" href="{{url("/pesquisa/turismo-e-lazer")}}">Turismo e lazer</a>
     </nav>
 </div>
 
